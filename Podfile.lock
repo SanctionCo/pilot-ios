@@ -1,18 +1,30 @@
 PODS:
   - Alamofire (4.5.0)
   - HTTPStatusCodes (3.1.2)
+  - SwiftHash (2.0.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5.0)
   - HTTPStatusCodes (~> 3.1.2)
+  - SwiftHash (from `https://github.com/onmyway133/SwiftHash`)
   - SwiftyJSON (~> 3.1.4)
+
+EXTERNAL SOURCES:
+  SwiftHash:
+    :git: https://github.com/onmyway133/SwiftHash
+
+CHECKOUT OPTIONS:
+  SwiftHash:
+    :commit: 501d56d454e164e9e69e87fd1268af09e8922bbd
+    :git: https://github.com/onmyway133/SwiftHash
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   HTTPStatusCodes: 88155ba36826366a898a7b4f34d311f49083d546
+  SwiftHash: 52faa311aa5ccd128989fb701637f1c981e69447
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 0d47465568f487c9f40d8758d4a005c9d278328f
+PODFILE CHECKSUM: 74e03373e9252c40d048cb01db4b2dde3521a846
 
 COCOAPODS: 1.2.1
