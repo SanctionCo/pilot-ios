@@ -12,6 +12,9 @@ import UIKit
 extension UIColor {
     
     static let PilotBlue = UIColor.fromRGB(red: 114.0, green: 192.0, blue: 228.0)
+    static let ButtonBlue = UIColor.fromRGB(red: 55, green: 139, blue: 251)
+    static let RainBlue = UIColor.fromRGB(red: 71, green: 178, blue: 230)
+    static let RainDropBlue = UIColor.fromRGB(red: 20, green: 102, blue: 152)
     static let PilotBrownBackground = UIColor.fromRGB(red: 242.0, green: 242.0, blue: 242.0)
     static let PilotBrownText = UIColor.fromRGB(red: 173.0, green: 173.0, blue: 173.0)
     static let ErrorRed = UIColor.fromRGB(red: 242, green: 71, blue: 15)

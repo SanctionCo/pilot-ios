@@ -15,9 +15,10 @@ import SwiftHash
 
 struct LoginViewModel {
     
-    var delegate: LoginViewDelegate!
+    var delegate: LoginViewModelDelegate!
     
     let pilotUserService = PilotUserService()
+    var pilotUser: PilotUser!
     
     func login(email: String?, password: String?) {
         
@@ -31,9 +32,9 @@ struct LoginViewModel {
             let hashedPassword = MD5(password).lowercased()
 
             pilotUserService.getPilotUser(email, password: hashedPassword, completion: { pilotUser in
-                self.delegate?.loginCallComplete(success: true, errorMessage: "")
+                self.delegate?.loginCallComplete(pilotUser: pilotUser)
             }, failure: { httpStatusCode in
-                self.delegate?.loginCallComplete(success: false, errorMessage: httpStatusCode.description)
+                self.delegate?.error(message: httpStatusCode.description)
             })
         }
     }
@@ -41,7 +42,7 @@ struct LoginViewModel {
     fileprivate func validate(email: String, password: String) -> Bool {
         
         if email.isEmpty || password.isEmpty {
-            delegate?.loginCallComplete(success: false, errorMessage: "Cannot have empty fields")
+            delegate?.error(message: "Cannot have empty fields")
             
             return false
         }

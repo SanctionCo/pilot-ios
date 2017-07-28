@@ -20,4 +20,16 @@ struct PilotConfiguration {
         static let userKey = "application"
         static let userSecret = "secret"
     }
+    
+    struct Platforms {
+        static let facebook = Platform(type: .facebook)
+        static let twitter = Platform(type: .twitter)
+        
+        static func allPlatforms() -> [PlatformViewModel] {
+            return [
+                PlatformViewModel(platform: facebook),
+                PlatformViewModel(platform: twitter)
+            ]
+        }
+    }
 }

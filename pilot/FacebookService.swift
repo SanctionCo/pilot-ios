@@ -9,10 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import HTTPStatusCodes
 
-// Service class for making API calls to Facebook
-
-class FacebookService {
+class FacebookService: FileService {
+    let photosEndpoint = PilotConfiguration.Lightning.endpoint + "/facebook/photos"
+    let videosEndpoint = PilotConfiguration.Lightning.endpoint + "/facebook/videos"
+    
+    var pilotUser: PilotUser!
+    
+    internal var basicCredentials: String
+    
+    required init(pilotUser: PilotUser) {
+        self.pilotUser = pilotUser
+        
+        basicCredentials = "\(PilotConfiguration.Lightning.userKey):\(PilotConfiguration.Lightning.userSecret)"
+            .data(using: String.Encoding.utf8)!.base64EncodedString(options: [])
+    }
     
 }
