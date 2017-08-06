@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, LoginViewDelegate {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -22,25 +22,35 @@ class LoginViewController: UIViewController, LoginViewDelegate {
         loginViewModel.delegate = self
         
         emailField.becomeFirstResponder()
+        
+        // TEMPORARY for faster login
+        loginViewModel.login(email: "Testy@gmail.com", password: "password")
     }
     
     @IBAction func login(_ sender: UIButton) {
         loginViewModel.login(email: emailField.text, password: passwordField.text)
     }
     
-    func loginCallComplete(success: Bool, errorMessage: String) {
-        if success {
-            performSegue(withIdentifier: "LoginSegue", sender: self)
-        } else {
-            errorField.text = errorMessage
-        }
-    }
+}
 
+extension LoginViewController: LoginViewModelDelegate {
     
-     // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func loginCallComplete(pilotUser: PilotUser) {
         
+        let composeViewStoryBoard = UIStoryboard(name: "ComposeView", bundle: nil)
+        
+        guard let destinationNavigationController = composeViewStoryBoard.instantiateViewController(withIdentifier: "ComposeNavigationController") as? UINavigationController else {
+            return
+        }
+        
+        let homeViewController = destinationNavigationController.topViewController as! HomeViewController
+        homeViewController.homeViewModel = HomeViewModel(pilotUser: pilotUser)
+        
+        present(destinationNavigationController, animated: true, completion: nil)
+    }
+    
+    func error(message: String) {
+        errorField.text = message
     }
     
 }

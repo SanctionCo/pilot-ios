@@ -8,6 +8,9 @@
 
 import Foundation
 
-protocol LoginViewDelegate {
-    func loginCallComplete(success: Bool, errorMessage: String)
+protocol LoginViewModelDelegate {
+    
+    func loginCallComplete(pilotUser: PilotUser)
+    func error(message: String)
+
 }

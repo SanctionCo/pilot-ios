@@ -10,6 +10,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="3L8-IV-Ta8">
+            <objects>
+                <navigationController id="uc1-HF-0q4" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gbO-TA-u5n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OOc-8d-OeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1586" y="431"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="Bx8-AP-yib">
             <objects>
@@ -105,20 +118,11 @@
                         <outlet property="emailField" destination="FxX-Em-Sn0" id="dpC-V8-8pO"/>
                         <outlet property="errorField" destination="yL1-KU-3TD" id="4du-M5-yae"/>
                         <outlet property="passwordField" destination="yw3-Ji-QbW" id="iJR-Ck-ryX"/>
-                        <segue destination="UHA-SN-s8u" kind="show" identifier="LoginSegue" id="x4M-rY-jCX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iz3-ZS-4iI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="85.599999999999994" y="205.54722638680661"/>
-        </scene>
-        <!--HomeNavigationController-->
-        <scene sceneID="XrJ-n4-3pI">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="HomeViewController" storyboardName="Main" referencedIdentifier="HomeNavigationController" id="UHA-SN-s8u" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KD8-lG-ARa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1153" y="205"/>
         </scene>
     </scenes>
 </document>
