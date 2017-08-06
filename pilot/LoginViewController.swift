@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, LoginViewModelDelegate {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -23,6 +23,7 @@ class LoginViewController: UIViewController, LoginViewModelDelegate {
         
         emailField.becomeFirstResponder()
         
+        // TEMPORARY for faster login
         loginViewModel.login(email: "Testy@gmail.com", password: "password")
     }
     
@@ -30,20 +31,20 @@ class LoginViewController: UIViewController, LoginViewModelDelegate {
         loginViewModel.login(email: emailField.text, password: passwordField.text)
     }
     
+}
+
+extension LoginViewController: LoginViewModelDelegate {
+    
     func loginCallComplete(pilotUser: PilotUser) {
-        // Segue to a navigation controller with composeViewController as its root viewController!
         
         let composeViewStoryBoard = UIStoryboard(name: "ComposeView", bundle: nil)
-//        guard let composeViewController = composeViewStoryBoard.instantiateViewController(withIdentifier: "ComposeViewController") as? ComposeViewController else {
-//            return
-//        }
         
         guard let destinationNavigationController = composeViewStoryBoard.instantiateViewController(withIdentifier: "ComposeNavigationController") as? UINavigationController else {
             return
         }
         
-        let composeViewController = destinationNavigationController.topViewController as! ComposeViewController
-        composeViewController.composeViewModel = ComposeViewModel(pilotUser: pilotUser)
+        let homeViewController = destinationNavigationController.topViewController as! HomeViewController
+        homeViewController.homeViewModel = HomeViewModel(pilotUser: pilotUser)
         
         present(destinationNavigationController, animated: true, completion: nil)
     }

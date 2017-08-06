@@ -8,30 +8,28 @@
 
 import UIKit
 
-class AddPlatformViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var platformListViewModel: PlatformListViewModel!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return platformListViewModel.platformList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AddPlatformViewCell") as! AddPlatformViewCell
-        
-        cell.platformViewModel = platformListViewModel.platformList[indexPath.row]
-        
-        return cell
-    }
-
-}
+//class AddPlatformViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        
+//    }
+//    
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return platformListViewModel.platformList.count
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "AddPlatformViewCell") as! AddPlatformViewCell
+//        
+//        cell.platformViewModel = platformListViewModel.platformList[indexPath.row]
+//        
+//        return cell
+//    }
+//
+//}

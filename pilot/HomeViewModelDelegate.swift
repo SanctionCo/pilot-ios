@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-protocol ComposeViewModelDelegate {
-    func didSetImage(image: UIImage)
+protocol HomeViewModelDelegate {
+    
     func error(message: String)
+
 }

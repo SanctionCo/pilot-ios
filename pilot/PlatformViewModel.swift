@@ -9,13 +9,10 @@
 import Foundation
 import UIKit
 
-struct PlatformViewModel: Hashable {
+struct PlatformViewModel {
     
-    var platform: Platform!
-    
-    var hashValue: Int {
-        return platform.type.hashValue
-    }
+    var platform: Platform
+    var delegate: PlatformViewModelDelegate?
     
     var name: String {
         let type = platform.type
@@ -30,21 +27,21 @@ struct PlatformViewModel: Hashable {
         self.platform = platform
     }
     
-    func publish(text: String?, image: UIImage?) {
-        guard let platform = platform else {
-            return
-        }
-        
+    mutating func setPlatformImage() {
         switch platform.type {
-        case .facebook:
-            break
-        case .twitter:
-            break
+        case PlatformType.facebook:
+            guard let facebookImage = UIImage(named: "facebook") else {
+                return
+            }
+            
+            platform.image = facebookImage
+        case PlatformType.twitter:
+            guard let twitterImage = UIImage(named: "twitter") else {
+                return
+            }
+            
+            platform.image = twitterImage
         }
     }
-    
-    static func ==(lhs: PlatformViewModel, rhs: PlatformViewModel) -> Bool {
-        return lhs.platform.type == rhs.platform.type
-    }
-    
 }
+

@@ -15,30 +15,36 @@ import SwiftHash
 
 struct LoginViewModel {
     
-    var delegate: LoginViewModelDelegate!
+    var delegate: LoginViewModelDelegate?
     
     let pilotUserService = PilotUserService()
-    var pilotUser: PilotUser!
     
+    /// Logs a user in using and email and password
+    ///
+    /// - Parameters:
+    ///   - email: email associated with a user account
+    ///   - password: password associated with a user account
     func login(email: String?, password: String?) {
         
-        guard let email = email, let password = password else {
-            // Display an error here
-            
-            return
-        }
+        guard let delegate = delegate, let email = email, let password = password else { return }
         
         if validate(email: email, password: password) {
             let hashedPassword = MD5(password).lowercased()
 
             pilotUserService.getPilotUser(email, password: hashedPassword, completion: { pilotUser in
-                self.delegate?.loginCallComplete(pilotUser: pilotUser)
+                delegate.loginCallComplete(pilotUser: pilotUser)
             }, failure: { httpStatusCode in
-                self.delegate?.error(message: httpStatusCode.description)
+                delegate.error(message: httpStatusCode.description)
             })
         }
     }
     
+    /// Validates that a user email and password are not empty or of invalid format
+    ///
+    /// - Parameters:
+    ///   - email: email associated with a user account
+    ///   - password: password associated with a user account
+    /// - Returns: wether or not the email or password are valid
     fileprivate func validate(email: String, password: String) -> Bool {
         
         if email.isEmpty || password.isEmpty {

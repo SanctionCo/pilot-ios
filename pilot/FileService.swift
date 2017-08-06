@@ -9,6 +9,12 @@
 import Foundation
 import Alamofire
 
+enum FileType: String {
+    case text = "text"
+    case photo = "photo"
+    case video = "video"
+}
+
 protocol FileService {
     var pilotUser: PilotUser! { get set }
     var basicCredentials: String { get }
@@ -18,37 +24,31 @@ protocol FileService {
 
 extension FileService {
     
-    func upload(_ files: [URL], to url: String) {
-        for file in files {
-            upload(file, to: url)
-        }
-    }
-    
-    func upload(_ file: URL, to url: String) {
+    func upload(text: String, image: UIImage, to url: String) {
         // Build the authorization headers for the request
-        let headers = ["Authorization": "Basic \(basicCredentials)",
-            "password": "\(pilotUser.password)"]
+//        let headers = ["Authorization": "Basic \(basicCredentials)",
+//            "password": "\(pilotUser.password)"]
+//        
+//        let fileURL = Bundle.main.url(forResource: "video", withExtension: "mov")
         
-        // TODO: get type from file
-        let type = "photo"
         
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(file, withName: "file")
-        },
-            to: "\(url)?email=\(pilotUser.email)&type=\(type)",
-            headers: headers,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseString { response in
-                        debugPrint(response)
-                    }
-                case .failure(let encodingError):
-                    print(encodingError)
-                }
-        }
-        )
+//        Alamofire.upload(
+//            multipartFormData: { multipartFormData in
+//                multipartFormData.append("", withName: "file")
+//            },
+//            to: "\(url)?email=\(pilotUser.email)&type=\(type)",
+//            headers: headers,
+//            encodingCompletion: { encodingResult in
+//                switch encodingResult {
+//                case .success(let upload, _, _):
+//                    upload.responseString { response in
+//                        debugPrint(response)
+//                    }
+//                case .failure(let encodingError):
+//                    print(encodingError)
+//                }
+//            }
+//        )
     }
     
 }

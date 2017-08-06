@@ -9,6 +9,8 @@
 import Foundation
 
 protocol LoginViewModelDelegate {
+    
     func loginCallComplete(pilotUser: PilotUser)
     func error(message: String)
+
 }
