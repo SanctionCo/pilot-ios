@@ -26,8 +26,8 @@ struct PilotUser {
         self.twitterAccessSecret = twitterAccessSecret
     }
     
-    func loadPlatforms() -> [PlatformViewModel] {
-        var platforms = [PlatformViewModel]()
+    func loadPlatforms() -> [Platform] {
+        var platforms = [Platform]()
         
         if !facebookAccessToken.isEmpty {
             platforms.append(PilotConfiguration.Platforms.facebook)

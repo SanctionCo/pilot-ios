@@ -18,4 +18,21 @@ struct Platform: PlatformProtocol {
         self.type = type
     }
     
+    mutating func setPlatformImage() {
+        switch type {
+        case PlatformType.facebook:
+            guard let facebookImage = UIImage(named: "facebook") else {
+                return
+            }
+            
+            image = facebookImage
+        case PlatformType.twitter:
+            guard let twitterImage = UIImage(named: "twitter") else {
+                return
+            }
+            
+            image = twitterImage
+        }
+    }
+    
 }

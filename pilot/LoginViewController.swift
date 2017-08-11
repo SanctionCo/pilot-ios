@@ -7,50 +7,76 @@
 //
 
 import UIKit
+import SwiftHash
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var errorField: UILabel!
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     
-    var loginViewModel = LoginViewModel()
+    let pilotUserService = PilotUserService() // TODO: Injection?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginViewModel.delegate = self
-        
         emailField.becomeFirstResponder()
         
         // TEMPORARY for faster login
-        loginViewModel.login(email: "Testy@gmail.com", password: "password")
+        self.login(email: "Testy@gmail.com", password: "password")
     }
     
     @IBAction func login(_ sender: UIButton) {
-        loginViewModel.login(email: emailField.text, password: passwordField.text)
+        login(email: emailField.text, password: passwordField.text)
+    }
+    
+    /// Logs a user in using and email and password
+    ///
+    /// - Parameters:
+    ///   - email: email associated with a user account
+    ///   - password: password associated with a user account
+    func login(email: String?, password: String?) {
+        
+        guard let email = email, let password = password else { return }
+        
+        if validate(email: email, password: password) {
+            let hashedPassword = MD5(password).lowercased()
+            
+            activitySpinner.startAnimating()
+            pilotUserService.getPilotUser(email, password: hashedPassword, completion: { [weak self] pilotUser in
+                let homeStoryBoard = UIStoryboard.init(name: "HomeView", bundle: nil)
+                let destinationNavigationController = homeStoryBoard.instantiateViewController(withIdentifier: "HomeNavigationController") as! UINavigationController
+                
+                DispatchQueue.main.async {
+                    self?.activitySpinner.stopAnimating()
+                    self?.present(destinationNavigationController, animated: true, completion: nil)
+                }
+            }, failure: { [weak self] httpStatusCode in
+                DispatchQueue.main.async { [weak self] in
+                    self?.activitySpinner.stopAnimating()
+                    self?.errorField.text = httpStatusCode.description
+                }
+            })
+        }
+    }
+    
+    /// Validates that a user email and password are not empty or of invalid format
+    ///
+    /// - Parameters:
+    ///   - email: email associated with a user account
+    ///   - password: password associated with a user account
+    /// - Returns: wether or not the email or password are valid
+    fileprivate func validate(email: String, password: String) -> Bool {
+        
+        if email.isEmpty || password.isEmpty {
+            errorField.text = "Cannot have empty email or password fields"
+            
+            return false
+        }
+        
+        return true
     }
     
 }
 
-extension LoginViewController: LoginViewModelDelegate {
-    
-    func loginCallComplete(pilotUser: PilotUser) {
-        
-        let composeViewStoryBoard = UIStoryboard(name: "ComposeView", bundle: nil)
-        
-        guard let destinationNavigationController = composeViewStoryBoard.instantiateViewController(withIdentifier: "ComposeNavigationController") as? UINavigationController else {
-            return
-        }
-        
-        let homeViewController = destinationNavigationController.topViewController as! HomeViewController
-        homeViewController.homeViewModel = HomeViewModel(pilotUser: pilotUser)
-        
-        present(destinationNavigationController, animated: true, completion: nil)
-    }
-    
-    func error(message: String) {
-        errorField.text = message
-    }
-    
-}
