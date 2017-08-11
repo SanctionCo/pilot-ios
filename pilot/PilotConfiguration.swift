@@ -22,10 +22,10 @@ struct PilotConfiguration {
     }
     
     struct Platforms {
-        static let facebook = PlatformViewModel(platform: Platform(type: .facebook))
-        static let twitter = PlatformViewModel(platform: Platform(type: .twitter))
+        static let facebook = Platform(type: .facebook)
+        static let twitter = Platform(type: .twitter)
         
-        static func allPlatforms() -> [PlatformViewModel] {
+        static func allPlatforms() -> [Platform] {
             return [facebook, twitter]
         }
     }

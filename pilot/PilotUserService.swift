@@ -46,7 +46,6 @@ class PilotUserService: NSObject {
         Alamofire.request(endpoint, parameters: parameters, headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
-                print("Successfully retrieved user \(email).")
                 
                 // Error handling
                 if response.result.isFailure {

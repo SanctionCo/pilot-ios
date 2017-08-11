@@ -14,19 +14,15 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var chosenImage: UIImageView!
     @IBOutlet weak var publishButton: UIButton!
     
-    var imagePicker = UIImagePickerController()
-    
-    // View Models
-    var homeViewModel: HomeViewModel?
-    var userPlatforms = [PlatformViewModel]()
+    var imagePicker = UIImagePickerController() // TODO: Injection?
+    var availablePlatforms = [Platform]()       // Platforms the user has to choose from
+    var selectedPlatforms = [Platform]()        // Platforms the user has selected to upload to
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         styleUI() // Put all styling properties unavailable in interface builder here
-        loadUI()  // Request all data needed to immedietly deisplay the UI
         
-        homeViewModel?.delegate = self
         imagePicker.delegate = self
         postText.delegate = self
     }
@@ -37,7 +33,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         
         present(imagePicker, animated: true, completion: nil)
     }
-
+    
     @IBAction func takeImage(_ sender: UIButton) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
@@ -46,7 +42,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func publish(_ sender: UIButton) {
-        
+        //publish(postText.text, chosenImage.image)
     }
     
     @IBAction func clear(_ sender: UIBarButtonItem) {
@@ -67,30 +63,53 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     
-    func loadUI() {
-//        if let userPlatforms = homeViewModel?.userPlatforms {
-//            self.userPlatforms = userPlatforms
-//        }
+    /// Upload data to provided destination platroms
+    ///
+    /// - Parameters:
+    ///   - text: User text
+    ///   - image: User selected image
+    ///   - platforms: List of destination platforms
+    func publish(text: String, image: UIImage?, platforms: [Platform]) {
+        
+        // Validate that at least one field is not empty
+        if validate() && !platforms.isEmpty {
+            
+        }
+        
     }
-
+    
+    
+    /// Validates that the user has provided sufficient information to publish
+    ///
+    /// - Parameters:
+    /// - Returns: boolean indicating valid or invalid fields
+    fileprivate func validate() -> Bool {
+        
+        // NOTE: Text is not optional because the field will be empty by default thus always having a value
+        
+        if postText.text.isEmpty && chosenImage.image == nil {
+            // Write error message to view
+            
+            return false
+        }
+        
+        return true
+    }
+    
     // MARK: Segue to SettingsViewController or AddPlatformViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // Pass information to the settingsViewController here
-//        if let destinationViewController = segue.destination as? AddPlatformViewController {
-//            destinationViewController.platformListViewModel = PlatformListViewModel(platformList: composeViewModel.platformsToChoose())
-//        }
+        //        if let destinationViewController = segue.destination as? AddPlatformViewController {
+        //            destinationViewController.platformListViewModel = PlatformListViewModel(platformList: composeViewModel.platformsToChoose())
+        //        }
         
         // Pass list of current platforms to AddPlatformViewModel in the AddPlatformViewController
         
     }
     
 }
-
-// MARK: SettingViewModelDelegate
-
-extension HomeViewController: SettingsViewModelDelegate {}
 
 // MARK: UITableView Methods
 
@@ -99,7 +118,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userPlatforms.count
+        return availablePlatforms.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -119,23 +138,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ComposeTableViewCell") as! ComposeTableViewCell
-        
-        cell.platformViewModel = userPlatforms[indexPath.row]
+        cell.platform = availablePlatforms[indexPath.row]
         
         return cell
-    }
-    
-}
-
-// MARK: ComposeViewModelDelegate
-
-extension HomeViewController: HomeViewModelDelegate {
-    
-    func error(message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
 }

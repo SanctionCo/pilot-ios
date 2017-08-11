@@ -13,7 +13,7 @@
         <!--Navigation Controller-->
         <scene sceneID="6Mb-53-6Sv">
             <objects>
-                <navigationController storyboardIdentifier="ComposeNavigationController" id="Wh8-FZ-ufs" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigationController" id="Wh8-FZ-ufs" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FQT-ua-Gr7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -29,7 +29,7 @@
         <!--Compose-->
         <scene sceneID="In9-HC-sOt">
             <objects>
-                <viewController storyboardIdentifier="ComposeViewController" id="GWP-UG-0kC" customClass="ComposeViewController" customModule="pilot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="GWP-UG-0kC" customClass="HomeViewController" customModule="pilot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fht-JJ-NOe"/>
                         <viewControllerLayoutGuide type="bottom" id="LUH-ha-xm9"/>
@@ -225,11 +225,7 @@
                                 <action selector="clear:" destination="GWP-UG-0kC" id="A3D-ce-s3A"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="settings" width="25" style="plain" id="cjo-LG-Nql">
-                            <connections>
-                                <segue destination="oLP-SR-RMm" kind="presentation" identifier="SettingsSegue" id="fZN-4g-cTT"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="settings" width="25" style="plain" id="cjo-LG-Nql"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -242,22 +238,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y70-L4-kH5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5.5999999999999996" y="80.50974512743629"/>
-        </scene>
-        <!--SettingsNavigationController-->
-        <scene sceneID="n2X-Cv-Dlq">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SettingsNavigationController" storyboardName="Settings" referencedIdentifier="SettingsNavigationController" id="oLP-SR-RMm" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LkI-3F-X8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="711" y="80"/>
-        </scene>
-        <!--AddPlatformViewController-->
-        <scene sceneID="K3F-YE-uBT">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="AddPlatformViewController" storyboardName="AddPlatformViewController" referencedIdentifier="AddPlatformViewController" id="c1Q-PP-N57" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pDW-1K-jnW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="710" y="146"/>
         </scene>
     </scenes>
     <resources>

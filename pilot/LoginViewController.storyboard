@@ -10,19 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="3L8-IV-Ta8">
-            <objects>
-                <navigationController id="uc1-HF-0q4" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gbO-TA-u5n">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OOc-8d-OeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1586" y="431"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="Bx8-AP-yib">
             <objects>
@@ -105,16 +92,27 @@
                                     <constraint firstAttribute="height" constant="271.5" id="mOF-4k-dWP"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2tk-DF-cdW">
+                                <rect key="frame" x="177" y="441" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Wun-2i-QNT"/>
+                                    <constraint firstAttribute="width" constant="20" id="nlz-V8-I5E"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2tk-DF-cdW" firstAttribute="leading" secondItem="f9t-9K-DZg" secondAttribute="leadingMargin" constant="161" id="70J-Ud-col"/>
                             <constraint firstItem="lUh-4E-JEl" firstAttribute="leading" secondItem="f9t-9K-DZg" secondAttribute="leadingMargin" constant="38" id="QtJ-Yk-JYC"/>
-                            <constraint firstItem="Pec-F9-2E0" firstAttribute="top" secondItem="lUh-4E-JEl" secondAttribute="bottom" constant="266.5" id="j6s-Q1-BaY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2tk-DF-cdW" secondAttribute="trailing" constant="162" id="RZT-Um-vRA"/>
+                            <constraint firstItem="Pec-F9-2E0" firstAttribute="top" secondItem="2tk-DF-cdW" secondAttribute="bottom" constant="206" id="Y4w-Ka-UQs"/>
                             <constraint firstItem="lUh-4E-JEl" firstAttribute="top" secondItem="XPy-sg-Izz" secondAttribute="bottom" constant="109" id="kg9-rf-7nT"/>
+                            <constraint firstItem="2tk-DF-cdW" firstAttribute="top" secondItem="lUh-4E-JEl" secondAttribute="bottom" constant="40.5" id="qjq-ba-jBe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lUh-4E-JEl" secondAttribute="trailing" constant="38" id="rPt-8S-OkH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activitySpinner" destination="2tk-DF-cdW" id="fom-AK-PpF"/>
                         <outlet property="emailField" destination="FxX-Em-Sn0" id="dpC-V8-8pO"/>
                         <outlet property="errorField" destination="yL1-KU-3TD" id="4du-M5-yae"/>
                         <outlet property="passwordField" destination="yw3-Ji-QbW" id="iJR-Ck-ryX"/>

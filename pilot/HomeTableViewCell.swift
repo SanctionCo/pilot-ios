@@ -11,15 +11,12 @@ import UIKit
 class ComposeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var platformImage: UIImageView!
+    @IBOutlet weak var platformImage: UIImageView?
     
-    var platformViewModel: PlatformViewModel? {
+    var platform: Platform! {
         didSet {
-            title.text = platformViewModel?.name
-            
-            if let image = platformViewModel?.image {
-                platformImage.image = image
-            }
+            title.text = platform.type.rawValue
+            platformImage?.image = platform.image
         }
     }
 
@@ -31,6 +28,7 @@ class ComposeTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
+        // Custom cell animations/UI when selected
     }
-
+    
 }
