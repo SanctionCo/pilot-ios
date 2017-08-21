@@ -9,16 +9,34 @@
 import Foundation
 import UIKit
 
-struct Platform: PlatformProtocol {
+// WARNING: Only one platform should exist per PlatformType otherwise you'll have multiple instances of each service! :o
+
+class Platform: PlatformProtocol, Equatable {
     
-    var type: PlatformType
-    var image: UIImage?
+    var type: PlatformType      // Enum type for the platform
+    var selected: Bool          // If the user has selected this platform as an upload target
+    var image: UIImage?         // Image to represent the platform
+    
+    var delegate: HomeTableViewCellDelegate? // Allows communication back to the cell view (Updating loading state)
     
     init(type: PlatformType) {
         self.type = type
+        self.selected = false // TODO: Pull this from config file to persist across app restart
+        
+        setPlatformImage()
     }
     
-    mutating func setPlatformImage() {
+    func validate(post: Post) -> Bool {
+        
+        // Each platform has it's own requirnments for what a post needs inorder to upload.
+        // Verify the post meets these requirnments here before the upload request is performed.
+        
+        // Validate that the post is ok to upload to it's specific platform
+        return true
+    }
+    
+    /// Sets the image used to represent the platform
+    func setPlatformImage() {
         switch type {
         case PlatformType.facebook:
             guard let facebookImage = UIImage(named: "facebook") else {
@@ -35,4 +53,8 @@ struct Platform: PlatformProtocol {
         }
     }
     
+}
+
+func == (left: Platform, right: Platform) -> Bool {
+    return left.type.hashValue == right.type.hashValue
 }

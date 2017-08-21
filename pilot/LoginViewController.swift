@@ -48,6 +48,13 @@ class LoginViewController: UIViewController {
                 let homeStoryBoard = UIStoryboard.init(name: "HomeView", bundle: nil)
                 let destinationNavigationController = homeStoryBoard.instantiateViewController(withIdentifier: "HomeNavigationController") as! UINavigationController
                 
+                // Create a new file service and initialize it with the fetched `PilotUser`
+                let uploadService = UploadService(pilotUser: pilotUser)
+                
+                let homeViewController = destinationNavigationController.topViewController as! HomeViewController
+                homeViewController.uploadService = uploadService
+                homeViewController.availablePlatforms = pilotUser.loadPlatforms()
+                
                 DispatchQueue.main.async {
                     self?.activitySpinner.stopAnimating()
                     self?.present(destinationNavigationController, animated: true, completion: nil)
@@ -79,4 +86,3 @@ class LoginViewController: UIViewController {
     }
     
 }
-

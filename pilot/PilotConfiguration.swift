@@ -9,6 +9,7 @@
 import Foundation
 
 struct PilotConfiguration {
+    
     struct Thunder {
         static let endpoint = "http://thunder.sanctionco.com"
         static let userKey = "lightning"
@@ -21,12 +22,4 @@ struct PilotConfiguration {
         static let userSecret = "secret"
     }
     
-    struct Platforms {
-        static let facebook = Platform(type: .facebook)
-        static let twitter = Platform(type: .twitter)
-        
-        static func allPlatforms() -> [Platform] {
-            return [facebook, twitter]
-        }
-    }
 }

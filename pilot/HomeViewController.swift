@@ -14,14 +14,16 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var chosenImage: UIImageView!
     @IBOutlet weak var publishButton: UIButton!
     
-    var imagePicker = UIImagePickerController() // TODO: Injection?
-    var availablePlatforms = [Platform]()       // Platforms the user has to choose from
-    var selectedPlatforms = [Platform]()        // Platforms the user has selected to upload to
+    var imagePicker = UIImagePickerController()                   // TODO: Injection?
+    var availablePlatforms: [Platform]?                           // Platforms the user has to choose from
+    
+    var uploadService: UploadService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         styleUI() // Put all styling properties unavailable in interface builder here
+        loadUI()  // Load all data needed immedietly by the view
         
         imagePicker.delegate = self
         postText.delegate = self
@@ -42,7 +44,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func publish(_ sender: UIButton) {
-        //publish(postText.text, chosenImage.image)
+        publish(text: postText.text, image: chosenImage.image)
     }
     
     @IBAction func clear(_ sender: UIBarButtonItem) {
@@ -61,6 +63,19 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         postText.text = "Write post here"
         postText.textColor = UIColor.lightGray
         
+        // TODO: Make this modular for any keyboard that needs this
+        // Set up the keyboard toolbar
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonClicked))
+        
+        let keyboardToolBar = UIToolbar()
+        keyboardToolBar.sizeToFit()
+        keyboardToolBar.setItems([doneButton], animated: true)
+        
+        postText.inputAccessoryView = keyboardToolBar
+    }
+    
+    func loadUI() {
+        
     }
     
     /// Upload data to provided destination platroms
@@ -68,16 +83,33 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     /// - Parameters:
     ///   - text: User text
     ///   - image: User selected image
-    ///   - platforms: List of destination platforms
-    func publish(text: String, image: UIImage?, platforms: [Platform]) {
+    func publish(text: String, image: UIImage?) {
+        
+        // TODO: Disable publish button while network call is active!
         
         // Validate that at least one field is not empty
-        if validate() && !platforms.isEmpty {
-            
+        guard let uploadService = uploadService, let availablePlatforms = availablePlatforms, validate() else {
+            print("VALIDATION FAILED!!!")
+            return
+        }
+        
+        // Create the post
+        // TODO: Create own object for images and videos that hold a PostType
+        let post = Post(text: postText.text, image: chosenImage.image, postType: PostType.photo)
+        
+        // Upload to the selected platforms
+        for platform in availablePlatforms {
+            if platform.selected && platform.validate(post: post) {
+                platform.delegate?.loading = true
+                uploadService.upload(post: post, to: platform.type) {
+                    DispatchQueue.main.async {
+                        platform.delegate?.loading = false
+                    }
+                }
+            }
         }
         
     }
-    
     
     /// Validates that the user has provided sufficient information to publish
     ///
@@ -88,7 +120,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         // NOTE: Text is not optional because the field will be empty by default thus always having a value
         
         if postText.text.isEmpty && chosenImage.image == nil {
-            // Write error message to view
+            // TODO: Write error message to view
             
             return false
         }
@@ -105,8 +137,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         //            destinationViewController.platformListViewModel = PlatformListViewModel(platformList: composeViewModel.platformsToChoose())
         //        }
         
-        // Pass list of current platforms to AddPlatformViewModel in the AddPlatformViewController
-        
     }
     
 }
@@ -116,29 +146,48 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: UITableViewDelegate
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availablePlatforms.count
+        return availablePlatforms!.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? HomeTableViewCell {
+            if cell.loading {
+                return
+            }
+            
             cell.tintColor = UIColor.green
             cell.accessoryType = .checkmark
+            
+            // Set platform as selected
+            let cellIndex = availablePlatforms?.index(of: cell.platform)!
+            availablePlatforms?[cellIndex!].selected = true
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? HomeTableViewCell {
+            if cell.loading {
+                return
+            }
+            
             cell.accessoryType = .none
+            
+            // Set platform as unselected
+            let cellIndex = availablePlatforms?.index(of: cell.platform)!
+            availablePlatforms?[cellIndex!].selected = false
         }
     }
     
     // MARK: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ComposeTableViewCell") as! ComposeTableViewCell
-        cell.platform = availablePlatforms[indexPath.row]
+        
+        // Cell entered memory
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
+        cell.platform = availablePlatforms?[indexPath.row]
+        cell.platform.delegate = cell
         
         return cell
     }
@@ -148,6 +197,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: TextViewDelegate
 
 extension HomeViewController: UITextViewDelegate {
+    
+    // TODO: The placeholder text is a little buggy, look into this.
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
@@ -161,8 +212,10 @@ extension HomeViewController: UITextViewDelegate {
             textView.text = "Write post here..."
             textView.textColor = UIColor.lightGray
         }
-        
+    }
     
+    func doneButtonClicked() {
+        view.endEditing(true)
     }
     
 }

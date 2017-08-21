@@ -12,11 +12,11 @@ import Foundation
 
 struct PilotUser {
     
-    var email: String!
-    var password: String!
-    var facebookAccessToken: String!
-    var twitterAccessToken: String!
-    var twitterAccessSecret: String!
+    var email: String
+    var password: String
+    var facebookAccessToken: String
+    var twitterAccessToken: String
+    var twitterAccessSecret: String
     
     init(email: String, password: String, facebookAccessToken: String, twitterAccessToken: String, twitterAccessSecret: String) {
         self.email = email
@@ -26,15 +26,19 @@ struct PilotUser {
         self.twitterAccessSecret = twitterAccessSecret
     }
     
+    
+    /// Calculates a list of platforms the user has based on AccessTokens.
+    ///
+    /// - Returns: List of platforms the user has.
     func loadPlatforms() -> [Platform] {
         var platforms = [Platform]()
         
         if !facebookAccessToken.isEmpty {
-            platforms.append(PilotConfiguration.Platforms.facebook)
+            platforms.append(Platform(type: .facebook))
         }
         
         if !twitterAccessToken.isEmpty {
-            platforms.append(PilotConfiguration.Platforms.twitter)
+            platforms.append(Platform(type: .twitter))
         }
         
         return platforms

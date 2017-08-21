@@ -15,18 +15,21 @@
 		941A438F1F1F0AE600D35777 /* pilotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A438E1F1F0AE600D35777 /* pilotUITests.swift */; };
 		941BA4F31F3B5F4800227C60 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BA4F21F3B5F4800227C60 /* Post.swift */; };
 		945A433F1F2BCA97000C3B86 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */; };
+		945E67C11F47414200E07290 /* LightningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C01F47414200E07290 /* LightningRouter.swift */; };
+		945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C21F475ACD00E07290 /* AuthAdapter.swift */; };
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
-		9468902F1F299FA0007E46DD /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9468902E1F299FA0007E46DD /* FileService.swift */; };
+		9468902F1F299FA0007E46DD /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9468902E1F299FA0007E46DD /* UploadService.swift */; };
 		946890341F29A1A9007E46DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890331F29A1A9007E46DD /* HomeViewController.swift */; };
 		949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E5DCD1F2813C8009EE3EB /* UIColor+PilotColors.swift */; };
 		949E5DD21F281E6A009EE3EB /* PilotUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E5DD11F281E6A009EE3EB /* PilotUserService.swift */; };
 		949E5DD41F281EEE009EE3EB /* PilotConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E5DD31F281EEE009EE3EB /* PilotConfiguration.swift */; };
-		94AF20E21F26F5ED009A1484 /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AF20E11F26F5ED009A1484 /* FacebookService.swift */; };
-		94AF20E41F26F60A009A1484 /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AF20E31F26F60A009A1484 /* TwitterService.swift */; };
+		94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A465EC1F4A470D004450D0 /* ThunderRouter.swift */; };
 		94AF20EA1F26F8EA009A1484 /* PilotUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AF20E91F26F8EA009A1484 /* PilotUser.swift */; };
 		94AF20F21F270698009A1484 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AF20F11F270698009A1484 /* LoginViewController.swift */; };
 		94AF20F91F271751009A1484 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94AF20F81F271751009A1484 /* LoginViewController.storyboard */; };
+		94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C092E51F3E427400BED0D4 /* PostProtocol.swift */; };
+		94C092E81F42505B00BED0D4 /* HomeTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C092E71F42505B00BED0D4 /* HomeTableViewCellDelegate.swift */; };
 		94E8F8491F2A5D1800B3D43C /* HomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -63,18 +66,21 @@
 		941A43901F1F0AE600D35777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		941BA4F21F3B5F4800227C60 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		945E67C01F47414200E07290 /* LightningRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningRouter.swift; sourceTree = "<group>"; };
+		945E67C21F475ACD00E07290 /* AuthAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAdapter.swift; sourceTree = "<group>"; };
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
-		9468902E1F299FA0007E46DD /* FileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		9468902E1F299FA0007E46DD /* UploadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		946890331F29A1A9007E46DD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		949E5DCD1F2813C8009EE3EB /* UIColor+PilotColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+PilotColors.swift"; sourceTree = "<group>"; };
 		949E5DD11F281E6A009EE3EB /* PilotUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PilotUserService.swift; sourceTree = "<group>"; };
 		949E5DD31F281EEE009EE3EB /* PilotConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PilotConfiguration.swift; sourceTree = "<group>"; };
-		94AF20E11F26F5ED009A1484 /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
-		94AF20E31F26F60A009A1484 /* TwitterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterService.swift; sourceTree = "<group>"; };
+		94A465EC1F4A470D004450D0 /* ThunderRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThunderRouter.swift; sourceTree = "<group>"; };
 		94AF20E91F26F8EA009A1484 /* PilotUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PilotUser.swift; sourceTree = "<group>"; };
 		94AF20F11F270698009A1484 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		94AF20F81F271751009A1484 /* LoginViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
+		94C092E51F3E427400BED0D4 /* PostProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostProtocol.swift; sourceTree = "<group>"; };
+		94C092E71F42505B00BED0D4 /* HomeTableViewCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeView.storyboard; sourceTree = "<group>"; };
 		FF5494EBA7DDB8DA3D477F21 /* Pods-pilot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pilot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pilot/Pods-pilot.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +180,7 @@
 			children = (
 				946890331F29A1A9007E46DD /* HomeViewController.swift */,
 				945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */,
+				94C092E71F42505B00BED0D4 /* HomeTableViewCellDelegate.swift */,
 				94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */,
 			);
 			name = HomeView;
@@ -195,6 +202,7 @@
 				946890261F295A67007E46DD /* Platform.swift */,
 				946890281F2960B9007E46DD /* PlatformProtocol.swift */,
 				941BA4F21F3B5F4800227C60 /* Post.swift */,
+				94C092E51F3E427400BED0D4 /* PostProtocol.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -202,10 +210,11 @@
 		94AF20DD1F26EB66009A1484 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				945E67C01F47414200E07290 /* LightningRouter.swift */,
+				94A465EC1F4A470D004450D0 /* ThunderRouter.swift */,
+				945E67C21F475ACD00E07290 /* AuthAdapter.swift */,
+				9468902E1F299FA0007E46DD /* UploadService.swift */,
 				949E5DD11F281E6A009EE3EB /* PilotUserService.swift */,
-				94AF20E11F26F5ED009A1484 /* FacebookService.swift */,
-				94AF20E31F26F60A009A1484 /* TwitterService.swift */,
-				9468902E1F299FA0007E46DD /* FileService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -426,16 +435,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				946890271F295A67007E46DD /* Platform.swift in Sources */,
+				94C092E81F42505B00BED0D4 /* HomeTableViewCellDelegate.swift in Sources */,
 				94AF20F21F270698009A1484 /* LoginViewController.swift in Sources */,
 				949E5DD41F281EEE009EE3EB /* PilotConfiguration.swift in Sources */,
 				949E5DD21F281E6A009EE3EB /* PilotUserService.swift in Sources */,
-				9468902F1F299FA0007E46DD /* FileService.swift in Sources */,
+				9468902F1F299FA0007E46DD /* UploadService.swift in Sources */,
+				945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */,
 				941BA4F31F3B5F4800227C60 /* Post.swift in Sources */,
+				945E67C11F47414200E07290 /* LightningRouter.swift in Sources */,
 				94AF20EA1F26F8EA009A1484 /* PilotUser.swift in Sources */,
 				946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */,
-				94AF20E41F26F60A009A1484 /* TwitterService.swift in Sources */,
-				94AF20E21F26F5ED009A1484 /* FacebookService.swift in Sources */,
+				94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */,
 				949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */,
+				94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */,
 				941A436F1F1F0AE600D35777 /* AppDelegate.swift in Sources */,
 				946890341F29A1A9007E46DD /* HomeViewController.swift in Sources */,
 				945A433F1F2BCA97000C3B86 /* HomeTableViewCell.swift in Sources */,
