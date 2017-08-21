@@ -7,15 +7,22 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
+import HTTPStatusCodes
 
 enum PlatformType: String {
-    case twitter = "facebook"
-    case facebook = "twitter"
+    case twitter = "twitter"
+    case facebook = "facebook"
 }
 
 protocol PlatformProtocol {
     
     var type: PlatformType { get }
+    var selected: Bool { get set }
+    var image: UIImage? { get set }
+    
+    func validate(post: Post) -> Bool
     
 }
 

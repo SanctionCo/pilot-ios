@@ -8,10 +8,21 @@
 
 import UIKit
 
-class ComposeTableViewCell: UITableViewCell {
+class HomeTableViewCell: UITableViewCell, HomeTableViewCellDelegate {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var platformImage: UIImageView?
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
+    
+    var loading: Bool = false {
+        didSet {
+            if loading {
+                activitySpinner.startAnimating()
+            } else {
+                activitySpinner.stopAnimating()
+            }
+        }
+    }
     
     var platform: Platform! {
         didSet {

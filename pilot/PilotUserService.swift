@@ -12,15 +12,15 @@ import SwiftyJSON
 import HTTPStatusCodes
 
 class PilotUserService: NSObject {
-    let endpoint = PilotConfiguration.Thunder.endpoint + "/users"
-    
-    fileprivate var basicCredentials: String
-    
-    /* Default init */
-    override init() {
-        basicCredentials = "\(PilotConfiguration.Thunder.userKey):\(PilotConfiguration.Thunder.userSecret)"
-            .data(using: String.Encoding.utf8)!.base64EncodedString(options: [])
-    }
+//    let endpoint = PilotConfiguration.Thunder.endpoint + "/users"
+//    
+//    fileprivate var basicCredentials: String
+//    
+//    // Default init
+//    override init() {
+//        basicCredentials = "\(PilotConfiguration.Thunder.userKey):\(PilotConfiguration.Thunder.userSecret)"
+//            .data(using: String.Encoding.utf8)!.base64EncodedString(options: [])
+//    }
     
     /// Retreives a `PilotUser` from Thunder for the given email.
     ///
@@ -36,14 +36,17 @@ class PilotUserService: NSObject {
                       completion: @escaping (PilotUser) -> Void,
                       failure: @escaping (HTTPStatusCode) -> Void) {
         
+        let basicCredentials = "\(PilotConfiguration.Thunder.userKey):\(PilotConfiguration.Thunder.userSecret)"
+            .data(using: String.Encoding.utf8)!.base64EncodedString(options: [])
+        
         // Build the authorization headers for the request
         let headers: [String: String] = ["Authorization": "Basic \(basicCredentials)",
             "password": "\(password)"]
         
-        // Build the parameters for the request
-        let parameters: [String: String] = ["email": email]
+        // Parameters
+        let parameters = ["email": email]
         
-        Alamofire.request(endpoint, parameters: parameters, headers: headers)
+        Alamofire.request(ThunderRouter.fetch(nil).url, method: ThunderRouter.fetch(nil).method, parameters: parameters, encoding: ThunderRouter.fetch(nil).encoding, headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 
@@ -77,6 +80,7 @@ class PilotUserService: NSObject {
                 
                 completion(user)
         }
+
     }
     
     /// Creates a new `PilotUser` with Thunder for the given email.
@@ -92,6 +96,10 @@ class PilotUserService: NSObject {
     func createPilotUser(_ email: String, password: String,
                          completion: @escaping (PilotUser) -> Void,
                          failure: @escaping (HTTPStatusCode) -> Void) {
+        
+        let basicCredentials = "\(PilotConfiguration.Thunder.userKey):\(PilotConfiguration.Thunder.userSecret)"
+            .data(using: String.Encoding.utf8)!.base64EncodedString(options: [])
+        
         // Build the authorization headers for the request
         let headers: [String: String] = ["Authorization": "Basic \(basicCredentials)",
             "password": "\(password)"]
@@ -101,7 +109,7 @@ class PilotUserService: NSObject {
             "password": password
         ]
         
-        Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        Alamofire.request(ThunderRouter.create(nil).url, method: ThunderRouter.create(nil).method, parameters: parameters, encoding: ThunderRouter.create(nil).encoding, headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 print("Successfully created user \(email).")
