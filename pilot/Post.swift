@@ -6,31 +6,29 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Foundation
+import ObjectMapper
 
 // Represents data that a user wishes to upload to a platform
 
-struct Post: Equatable {
+struct Post: Equatable, Publishable {
     
-    var text = ""        // Default empty string
-    var image: UIImage?
-    var postType: PostType
-    
-    init(text: String?, image: UIImage?, postType: PostType) {
-        if let text = text {
-            self.text = text
+    var text = ""                   // Default empty string
+    var thumbNailImage: UIImage? {  // Image displayed to the user that will be uploaded
+        didSet {
+            if let image = thumbNailImage {
+                delegate?.thumbNailDidUpdate(image: image)
+            }
         }
-        
-        if let image = image {
-            self.image = image
-        }
-        
-        self.postType = postType
     }
+    var fileURL: URL?                // URL of the image or video to be uploaded
+    var postType = PostType.text     // Type of data being uploaded (photo or video). Default text unless image is chosen.
+    
+    var delegate: HomeTableViewControllerDelegate?  // Allows updating of the view
     
 }
 
 func == (left: Post, right: Post) -> Bool {
-    return left.text.hashValue == right.text.hashValue && left.image?.hashValue == right.image?.hashValue
+    return left.text.hashValue == right.text.hashValue && left.thumbNailImage?.hashValue == right.thumbNailImage?.hashValue
 }

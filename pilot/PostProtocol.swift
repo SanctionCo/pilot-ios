@@ -11,12 +11,13 @@ import Foundation
 enum PostType: String {
     case photo = "photo"
     case video = "video"
+    case text = "text"
 }
 
 protocol PostProtocol {
     
     var type: PostType { get }
-    
+
 }
 
 extension PostProtocol {

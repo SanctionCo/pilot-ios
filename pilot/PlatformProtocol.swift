@@ -21,9 +21,7 @@ protocol PlatformProtocol {
     var type: PlatformType { get }
     var selected: Bool { get set }
     var image: UIImage? { get set }
-    
-    func validate(post: Post) -> Bool
-    
+        
 }
 
 extension PlatformProtocol {

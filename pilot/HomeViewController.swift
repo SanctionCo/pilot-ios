@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class HomeViewController: UIViewController, UINavigationControllerDelegate {
+class HomeViewController: UIViewController, UINavigationControllerDelegate, HomeTableViewControllerDelegate {
     
     @IBOutlet weak var postText: UITextView!
     @IBOutlet weak var chosenImage: UIImageView!
@@ -16,8 +17,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     
     var imagePicker = UIImagePickerController()                   // TODO: Injection?
     var availablePlatforms: [Platform]?                           // Platforms the user has to choose from
-    
-    var uploadService: UploadService?
+    var post = Post()                                             // Post object representing current user post state
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         styleUI() // Put all styling properties unavailable in interface builder here
         loadUI()  // Load all data needed immedietly by the view
         
+        post.delegate = self
         imagePicker.delegate = self
         postText.delegate = self
     }
@@ -32,6 +33,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     @IBAction func pickImage(_ sender: UIButton) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = ["public.image", "public.movie"]
         
         present(imagePicker, animated: true, completion: nil)
     }
@@ -57,7 +59,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         
         // Button Style Properties
         publishButton.layer.cornerRadius = 4
-        publishButton.layer.backgroundColor = UIColor.PilotBlue.cgColor
+        publishButton.layer.backgroundColor = UIColor.ButtonBlue.cgColor
         
         // TextView Style Properties
         postText.text = "Write post here"
@@ -72,6 +74,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         keyboardToolBar.setItems([doneButton], animated: true)
         
         postText.inputAccessoryView = keyboardToolBar
+        
     }
     
     func loadUI() {
@@ -88,24 +91,35 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         // TODO: Disable publish button while network call is active!
         
         // Validate that at least one field is not empty
-        guard let uploadService = uploadService, let availablePlatforms = availablePlatforms, validate() else {
-            print("VALIDATION FAILED!!!")
-            return
-        }
-        
-        // Create the post
-        // TODO: Create own object for images and videos that hold a PostType
-        let post = Post(text: postText.text, image: chosenImage.image, postType: PostType.photo)
+        guard let availablePlatforms = availablePlatforms, validate(post: post) else { return }
         
         // Upload to the selected platforms
         for platform in availablePlatforms {
-            if platform.selected && platform.validate(post: post) {
-                platform.delegate?.loading = true
-                uploadService.upload(post: post, to: platform.type) {
+            if platform.selected {
+                
+                let parameters = ["type": post.postType.rawValue, "message": post.text]
+
+                platform.delegate?.showProgressBar()
+                
+                // Make the request
+                Post.publish(post: post, with: LightningRouter.publish(platform, parameters), onProgress: { value in
+                    
                     DispatchQueue.main.async {
-                        platform.delegate?.loading = false
+                        platform.delegate?.setProgress(value: value)
                     }
-                }
+                    
+                }, onSuccess: {
+
+                    DispatchQueue.main.async {
+                        platform.delegate?.hideProgressBar()
+                    }
+                    
+                }, onError: { error in
+                    
+                    debugPrint(error)
+                
+                })
+                
             }
         }
         
@@ -115,17 +129,20 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     ///
     /// - Parameters:
     /// - Returns: boolean indicating valid or invalid fields
-    fileprivate func validate() -> Bool {
+    fileprivate func validate(post: Post) -> Bool {
         
-        // NOTE: Text is not optional because the field will be empty by default thus always having a value
-        
-        if postText.text.isEmpty && chosenImage.image == nil {
-            // TODO: Write error message to view
+        // The only time a post should fail is if both text and image are empty or if text is inly present and it's empty
+        if post.text.isEmpty && post.thumbNailImage == nil {
+            alert(message: "Cannot have empty text and image", title: "Invalid Input")
             
             return false
         }
         
         return true
+    }
+    
+    func thumbNailDidUpdate(image: UIImage) {
+        self.chosenImage.image = image
     }
     
     // MARK: Segue to SettingsViewController or AddPlatformViewController
@@ -153,11 +170,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? HomeTableViewCell {
-            if cell.loading {
-                return
-            }
-            
-            cell.tintColor = UIColor.green
+
+            cell.tintColor = UIColor.ButtonBlue
             cell.accessoryType = .checkmark
             
             // Set platform as selected
@@ -168,9 +182,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? HomeTableViewCell {
-            if cell.loading {
-                return
-            }
             
             cell.accessoryType = .none
             
@@ -212,6 +223,9 @@ extension HomeViewController: UITextViewDelegate {
             textView.text = "Write post here..."
             textView.textColor = UIColor.lightGray
         }
+        
+        // Update the model
+        post.text = textView.text
     }
     
     func doneButtonClicked() {
@@ -225,6 +239,39 @@ extension HomeViewController: UITextViewDelegate {
 extension HomeViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let mediaType = info[UIImagePickerControllerMediaType] as? String {
+
+            if mediaType == "public.image" {
+                // Image selected
+                
+                if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                    
+                    // Update the model
+                    self.post.thumbNailImage = pickedImage
+                    self.post.postType = .photo
+                }
+                
+            }
+            
+            if mediaType == "public.movie" {
+                // Video selected
+                
+                if let pickedVideoURL = info[UIImagePickerControllerMediaURL] as? URL {
+                    
+                    // TODO: Make this asynchronous and add a loding spinner to the thumbnail spot!
+                    let pickedVideoImage = generateThumnail(url: pickedVideoURL, fromTime: 0)
+                    
+                    // Update the model
+                    self.post.thumbNailImage = pickedVideoImage
+                    self.post.postType = .video
+                    
+                    print("Video URL: \(pickedVideoURL.absoluteString)")
+                    self.post.fileURL = pickedVideoURL.absoluteURL
+                }
+            }
+            
+        }
+        
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             chosenImage.contentMode = .scaleAspectFit
             
@@ -236,6 +283,31 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // Extracts an image from a video
+    func generateThumnail(url : URL, fromTime: Float64) -> UIImage? {
+        let asset = AVAsset(url: url)
+        let assetGenerator = AVAssetImageGenerator(asset: asset)
+        assetGenerator.appliesPreferredTrackTransform = true
+        
+        let time = CMTime(seconds: 1, preferredTimescale: 60)
+        if let image = try? assetGenerator.copyCGImage(at: time, actualTime: nil) {
+            return UIImage(cgImage: image)
+        }
+        
+        return nil
+    }
+    
+}
+
+extension UIViewController {
+    
+    func alert(message: String, title: String = "") {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

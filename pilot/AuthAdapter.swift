@@ -16,27 +16,24 @@ import HTTPStatusCodes
 /// NOTE: An adapter is nessissary to allow retrying connections since a Router is only called once at the beginning of a request
 class AuthAdapter: RequestAdapter {
     
-    private var pilotUser: PilotUser       // Pilot user used for authentication headers
+    private var authToken: AuthToken       // Token used for authentication headers and query parameters
     
-    init(pilotUser: PilotUser) {
-        self.pilotUser = pilotUser
+    init(authToken: AuthToken) {
+        self.authToken = authToken
     }
     
     // This is called each time Alamofire is going to make a request
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
         
-        let basicCredentials = "\(PilotConfiguration.Lightning.userKey):\(PilotConfiguration.Lightning.userSecret)"
-            .data(using: String.Encoding.utf8)!.base64EncodedString(options: [])
-        
         // Set dynamic request headers
-        //if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(PilotConfiguration.Lightning.endpoint) {
-            urlRequest.setValue(pilotUser.password, forHTTPHeaderField: "password")                 // Password header
-            urlRequest.setValue("Basic \(basicCredentials)", forHTTPHeaderField: "Authorization")   // Basic auth header
-        //}
+        if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(PilotConfiguration.Lightning.host) {
+            urlRequest.setValue(authToken.password, forHTTPHeaderField: "password")
+            urlRequest.setValue("Basic \(PilotConfiguration.Lightning.basicCredentials)", forHTTPHeaderField: "Authorization")
+        }
         
         // Set dynamic query parameters
-        return try URLEncoding(destination: .queryString).encode(urlRequest, with: ["email": pilotUser.email])
+        return try URLEncoding(destination: .queryString).encode(urlRequest, with: ["email": authToken.email])
     }
     
 }

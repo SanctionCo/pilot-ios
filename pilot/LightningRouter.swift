@@ -14,16 +14,11 @@ import HTTPStatusCodes
 /// The router builds static content related to the URL such as parameters, headers, etc..
 enum LightningRouter: URLRequestConvertible {
     
-    case users(PlatformType, [String: String]?)
-    case photos(PlatformType, [String: String]?)
-    case videos(PlatformType, [String: String]?)
-    case publish(PlatformType, [String: String]?)
-    case extendedToken(PlatformType, [String: String]?)
-    case oauthUrl(PlatformType, [String: String]?)
+    case publish(Platform, [String: String]?)
+    case extendToken(Platform)
+    case getOauthURL(Platform)
     
-    // TODO: Possibly return a tuple of needed values?
-
-    static let baseURLString = PilotConfiguration.Lightning.endpoint
+    static let baseURLString = PilotConfiguration.Lightning.host
     
     // HTTP Method used for each endpoint
     var method: HTTPMethod {
@@ -38,18 +33,12 @@ enum LightningRouter: URLRequestConvertible {
     // Path for each request type
     var path: String {
         switch self {
-        case .users(let type, _):
-            return "/\(type.rawValue)/users"
-        case .photos(let type, _):
-            return "/\(type.rawValue)/photos"
-        case .videos(let type, _):
-            return "/\(type.rawValue)/videos"
-        case .publish(let type, _):
-            return "/\(type.rawValue)/publish"
-        case .extendedToken(let type, _):
-            return "/\(type.rawValue)/extendedToken"
-        case .oauthUrl(let type, _):
-            return "/\(type.rawValue)/oauthUrl"
+        case .publish(let platform, _):
+            return "/\(platform.type.rawValue)/publish"
+        case .extendToken(let platform):
+            return "/\(platform.type.rawValue)/extendedToken"
+        case .getOauthURL(let platform):
+            return "/\(platform.type.rawValue)/oauthURL"
         }
     }
     
@@ -70,18 +59,10 @@ enum LightningRouter: URLRequestConvertible {
     // Paramers for the request
     var parameters: [String: String]? {
         switch self {
-        case .users( _, let params):
-            return params
-        case .photos( _, let params):
-            return params
-        case .videos( _, let params):
-            return params
-        case .publish( _, let params):
-            return params
-        case .extendedToken( _, let params):
-            return params
-        case .oauthUrl( _, let params):
-            return params
+        case .publish( _, let parameters):
+            return parameters
+        default:
+            return nil
         }
     }
     
@@ -90,13 +71,15 @@ enum LightningRouter: URLRequestConvertible {
     /// Builds a URLRequest based on enum values
     ///
     /// - Returns: A URLRequest
-    /// - Throws: Error or something idk
+    /// - Throws: Error or something id
     func asURLRequest() throws -> URLRequest {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         
-        return try encoding.encode(urlRequest, with: parameters)
+        let convertable = try URLEncoding(destination: .methodDependent).encode(urlRequest, with: ["file": ""])
+        
+        return try encoding.encode(convertable, with: parameters)
     }
 
 }
