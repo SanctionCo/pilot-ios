@@ -71,15 +71,13 @@ enum LightningRouter: URLRequestConvertible {
     /// Builds a URLRequest based on enum values
     ///
     /// - Returns: A URLRequest
-    /// - Throws: Error or something id
+    /// - Throws: A AFError.parameterEncodingFailed Error
     func asURLRequest() throws -> URLRequest {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         
-        let convertable = try URLEncoding(destination: .methodDependent).encode(urlRequest, with: ["file": ""])
-        
-        return try encoding.encode(convertable, with: parameters)
+        return try encoding.encode(urlRequest, with: parameters)
     }
 
 }

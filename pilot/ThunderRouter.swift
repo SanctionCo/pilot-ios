@@ -82,7 +82,7 @@ enum ThunderRouter: URLRequestConvertible {
     /// Builds a URLRequest based on enum values
     ///
     /// - Returns: A URLRequest
-    /// - Throws: Error or something idk
+    /// - Throws: A AFError.parameterEncodingFailed Error
     func asURLRequest() throws -> URLRequest {
         
         var urlRequest = URLRequest(url: url)

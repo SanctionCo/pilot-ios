@@ -14,7 +14,7 @@ import ObjectMapper
 import AlamofireObjectMapper
 import SwiftyJSON
 
-// The uploadable protocol will allowe an object to be uploaded to lightning as a JSON object.
+// The uploadable protocol will allow an object to be uploaded to lightning as a JSON object.
 // (mainly for a PilotUser object to update/create a new user)
 protocol Uploadable {
     

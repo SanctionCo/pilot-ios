@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-// Contains static instance of SessionManager used for all request
+// Contains static instance of SessionManager used for all requests
 struct NetworkManager {
     
     static let sharedInstance = Alamofire.SessionManager.default

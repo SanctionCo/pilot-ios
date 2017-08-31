@@ -12,7 +12,7 @@ import Foundation
 import Alamofire
 import AVFoundation
 
-// The publishable protocl allowes an object to be published through lightnins publish endpoint.
+// The publishable protocol allows an object to be published through lightning's publish endpoint.
 protocol Publishable {
     
 }

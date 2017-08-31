@@ -12,7 +12,7 @@ import ObjectMapper
 import AlamofireObjectMapper
 import SwiftyJSON
 
-// The fetchable protocl will allow an object to be capable of fetching date from a URL
+// The fetchable protocol will allow an object to be capable of fetching data from a URL
 protocol Fetchable {
     
 }

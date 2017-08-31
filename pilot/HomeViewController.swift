@@ -131,7 +131,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, Home
     /// - Returns: boolean indicating valid or invalid fields
     fileprivate func validate(post: Post) -> Bool {
         
-        // The only time a post should fail is if both text and image are empty or if text is inly present and it's empty
+        // The only time a post should fail is if both text and image are empty or if text is only present and it's empty
         if post.text.isEmpty && post.thumbNailImage == nil {
             alert(message: "Cannot have empty text and image", title: "Invalid Input")
             
