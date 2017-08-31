@@ -12,6 +12,8 @@ import Foundation
 
 protocol HomeTableViewCellDelegate {
     
-    var loading: Bool { get set }
+    func setProgress(value: Double) -> ()
+    func showProgressBar() -> ()
+    func hideProgressBar() -> ()
     
 }

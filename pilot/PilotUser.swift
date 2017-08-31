@@ -7,41 +7,58 @@
 //
 
 import Foundation
+import ObjectMapper
 
 // Represents a pilot user fetched from thunder
 
-struct PilotUser {
+struct PilotUser: Fetchable, Mappable {
     
-    var email: String
-    var password: String
-    var facebookAccessToken: String
-    var twitterAccessToken: String
-    var twitterAccessSecret: String
+    var email: String?
+    var password: String?
+    var facebookAccessToken: String?
+    var twitterAccessToken: String?
+    var twitterAccessSecret: String?
     
-    init(email: String, password: String, facebookAccessToken: String, twitterAccessToken: String, twitterAccessSecret: String) {
-        self.email = email
-        self.password = password
-        self.facebookAccessToken = facebookAccessToken
-        self.twitterAccessToken = twitterAccessToken
-        self.twitterAccessSecret = twitterAccessSecret
-    }
+    var availablePlatforms = [Platform]()  // List of the platforms the user has
     
+    init?(map: Map) {
     
-    /// Calculates a list of platforms the user has based on AccessTokens.
-    ///
-    /// - Returns: List of platforms the user has.
-    func loadPlatforms() -> [Platform] {
-        var platforms = [Platform]()
-        
-        if !facebookAccessToken.isEmpty {
-            platforms.append(Platform(type: .facebook))
+        if let facebookAccessToken = map.JSON["facebookAccessToken"] as? String {
+            if !facebookAccessToken.isEmpty {
+                availablePlatforms.append(Platform(type: .facebook))
+            }
         }
         
-        if !twitterAccessToken.isEmpty {
-            platforms.append(Platform(type: .twitter))
+        if let twitterAccessToken = map.JSON["twitterAccessToken"] as? String {
+            if !twitterAccessToken.isEmpty {
+                availablePlatforms.append(Platform(type: .twitter))
+            }
         }
         
-        return platforms
     }
+    
+    mutating func mapping(map: Map) {
+        email <- map["email"]
+        password <- map["password"]
+        facebookAccessToken <- map["facebookAccessToken"]
+        twitterAccessToken <- map["twitterAccessToken"]
+        twitterAccessSecret <- map["twitterAccessSecret"]
+    }
+    
+}
+
+extension PilotUser {
+    
+//    var description: String {
+//        return "PilotUser {email=\(email))}"
+//    }
+//
+//    func isEqual(_ object: Any?) -> Bool {
+//        if let obj = object as? PilotUser {
+//            return self.type == obj.type
+//        }
+//        
+//        return false
+//    }
     
 }

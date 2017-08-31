@@ -14,24 +14,27 @@ import HTTPStatusCodes
 /// The router builds static content related to the URL such as parameters, headers, etc..
 enum ThunderRouter: URLRequestConvertible {
     
-    case create([String: String]?)
-    case update([String: String]?)
-    case fetch([String: String]?)
-    case delete([String: String]?)
+    case login(String, String)      // Email and password encoded in request as apposed to the adapter
+    case fetchPilotUser()           // Email param in auth adapter
+    case updatePilotUser(PilotUser) // Maps PilotUser to JSON
+    case createPilotUser(PilotUser) // Maps PilotUser to JSON
+    case deletePilotUser()          // Email param in auth adapter
     
-    static let baseURLString = PilotConfiguration.Thunder.endpoint
+    static let baseURLString = PilotConfiguration.Thunder.host
     
     // HTTP Method used for each request action
     var method: HTTPMethod {
         switch self {
-        case .create:
+        case .createPilotUser:
             return .post
-        case .update:
+        case .updatePilotUser:
             return .put
-        case .fetch:
+        case .fetchPilotUser:
             return .get
-        case .delete:
+        case .deletePilotUser:
             return .delete
+        case .login:
+            return .get
         }
     }
     
@@ -47,8 +50,8 @@ enum ThunderRouter: URLRequestConvertible {
     // How to encode the requet based on the HTTP Method
     var encoding: ParameterEncoding {
         switch self {
-        case .create:
-            return URLEncoding(destination: .queryString)
+        case .createPilotUser, .updatePilotUser:
+            return JSONEncoding.default
         default:
             return URLEncoding.default
         }
@@ -57,14 +60,20 @@ enum ThunderRouter: URLRequestConvertible {
     // Paramers for the request
     var parameters: [String: String]? {
         switch self {
-        case .create(let params):
-            return params
-        case .update(let params):
-            return params
-        case .fetch(let params):
-            return params
-        case .delete(let params):
-            return params
+        case .login(let email, _):
+            return ["email": email]
+        default:
+            return nil
+        }
+    }
+    
+    // Heaers for the request
+    var headers: [String: String]? {
+        switch self {
+        case .login( _, let password):
+            return ["password": password, "Authorization": "Basic \(PilotConfiguration.Thunder.basicCredentials)"]
+        default:
+            return nil
         }
     }
     
@@ -73,11 +82,18 @@ enum ThunderRouter: URLRequestConvertible {
     /// Builds a URLRequest based on enum values
     ///
     /// - Returns: A URLRequest
-    /// - Throws: Error or something idk
+    /// - Throws: A AFError.parameterEncodingFailed Error
     func asURLRequest() throws -> URLRequest {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
+        
+        // If headers exist then set them!
+        if let headers = headers {
+            for (key, value) in headers {
+                urlRequest.setValue(value, forHTTPHeaderField: key)
+            }
+        }
         
         return try encoding.encode(urlRequest, with: parameters)
     }

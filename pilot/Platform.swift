@@ -26,15 +26,6 @@ class Platform: PlatformProtocol, Equatable {
         setPlatformImage()
     }
     
-    func validate(post: Post) -> Bool {
-        
-        // Each platform has it's own requirnments for what a post needs inorder to upload.
-        // Verify the post meets these requirnments here before the upload request is performed.
-        
-        // Validate that the post is ok to upload to it's specific platform
-        return true
-    }
-    
     /// Sets the image used to represent the platform
     func setPlatformImage() {
         switch type {

@@ -12,17 +12,7 @@ class HomeTableViewCell: UITableViewCell, HomeTableViewCellDelegate {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var platformImage: UIImageView?
-    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
-    
-    var loading: Bool = false {
-        didSet {
-            if loading {
-                activitySpinner.startAnimating()
-            } else {
-                activitySpinner.stopAnimating()
-            }
-        }
-    }
+    @IBOutlet weak var progressBar: UIProgressView!
     
     var platform: Platform! {
         didSet {
@@ -34,12 +24,25 @@ class HomeTableViewCell: UITableViewCell, HomeTableViewCellDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        progressBar.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Custom cell animations/UI when selected
+    }
+    
+    func setProgress(value: Double) {
+        progressBar.progress = Float(value)
+    }
+    
+    func showProgressBar() {
+        progressBar.isHidden = false
+    }
+    
+    func hideProgressBar() {
+        progressBar.isHidden = true
     }
     
 }

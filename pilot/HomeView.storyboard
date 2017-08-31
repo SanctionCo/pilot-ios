@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wh8-FZ-ufs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wh8-FZ-ufs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -93,38 +93,37 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQH-sG-bme">
-                                                    <rect key="frame" x="52" y="12" width="277" height="21"/>
+                                                    <rect key="frame" x="52" y="12" width="135" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="277" id="aZd-5z-i4V"/>
+                                                        <constraint firstAttribute="width" constant="135" id="aZd-5z-i4V"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3oL-FU-0IC">
-                                                    <rect key="frame" x="337" y="12" width="20" height="20"/>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ENd-ub-1US">
+                                                    <rect key="frame" x="195" y="21" width="108" height="2"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="PyN-7Y-SEy"/>
-                                                        <constraint firstAttribute="width" constant="20" id="uxE-Ow-4vB"/>
+                                                        <constraint firstAttribute="height" constant="2" id="gYB-pL-r7x"/>
+                                                        <constraint firstAttribute="width" constant="108" id="i5E-xx-Hl1"/>
                                                     </constraints>
-                                                </activityIndicatorView>
+                                                </progressView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="xQH-sG-bme" firstAttribute="leading" secondItem="r3q-Cq-TWq" secondAttribute="trailing" constant="8" id="Beu-LV-Y4n"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="3oL-FU-0IC" secondAttribute="trailing" constant="10" id="DDn-Zw-vhC"/>
+                                                <constraint firstItem="ENd-ub-1US" firstAttribute="top" secondItem="18H-uf-u92" secondAttribute="topMargin" constant="13" id="GMT-6e-EbE"/>
                                                 <constraint firstItem="r3q-Cq-TWq" firstAttribute="top" secondItem="18H-uf-u92" secondAttribute="top" constant="4" id="OvW-vG-tfK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ENd-ub-1US" secondAttribute="bottom" constant="13" id="Rv3-gk-QJD"/>
                                                 <constraint firstAttribute="bottom" secondItem="r3q-Cq-TWq" secondAttribute="bottom" constant="4" id="SZ3-6O-rjQ"/>
-                                                <constraint firstItem="3oL-FU-0IC" firstAttribute="top" secondItem="18H-uf-u92" secondAttribute="topMargin" constant="4" id="Sa5-rl-064"/>
                                                 <constraint firstItem="r3q-Cq-TWq" firstAttribute="leading" secondItem="18H-uf-u92" secondAttribute="leading" constant="8" id="TR4-Tx-oO3"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="xQH-sG-bme" secondAttribute="bottom" constant="3" id="cPd-Pp-03K"/>
-                                                <constraint firstItem="3oL-FU-0IC" firstAttribute="leading" secondItem="xQH-sG-bme" secondAttribute="trailing" constant="8" id="qvx-Kj-uuD"/>
+                                                <constraint firstItem="ENd-ub-1US" firstAttribute="leading" secondItem="18H-uf-u92" secondAttribute="leadingMargin" constant="187" id="kM4-eE-ClZ"/>
                                                 <constraint firstItem="xQH-sG-bme" firstAttribute="top" secondItem="18H-uf-u92" secondAttribute="topMargin" constant="4" id="w66-Ae-GvT"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="3oL-FU-0IC" secondAttribute="bottom" constant="4" id="xjH-lJ-qFd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="activitySpinner" destination="3oL-FU-0IC" id="RP9-Ci-pF5"/>
                                             <outlet property="platformImage" destination="r3q-Cq-TWq" id="Pe1-ZU-Bda"/>
+                                            <outlet property="progressBar" destination="ENd-ub-1US" id="iNd-mq-MRX"/>
                                             <outlet property="title" destination="xQH-sG-bme" id="HRV-hv-XEC"/>
                                         </connections>
                                     </tableViewCell>

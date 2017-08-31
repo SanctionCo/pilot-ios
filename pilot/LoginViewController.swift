@@ -8,6 +8,8 @@
 
 import UIKit
 import SwiftHash
+import Alamofire
+import HTTPStatusCodes
 
 class LoginViewController: UIViewController {
     
@@ -15,8 +17,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var errorField: UILabel!
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
-    
-    let pilotUserService = PilotUserService() // TODO: Injection?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,36 +39,45 @@ class LoginViewController: UIViewController {
     func login(email: String?, password: String?) {
         
         guard let email = email, let password = password else { return }
-        
+
         if validate(email: email, password: password) {
             let hashedPassword = MD5(password).lowercased()
             
             activitySpinner.startAnimating()
-            pilotUserService.getPilotUser(email, password: hashedPassword, completion: { [weak self] pilotUser in
+            
+            // Make the request
+            PilotUser.fetch(with: ThunderRouter.login(email, hashedPassword), onSuccess: { pilotUser in
+                
+                // Set a request adapter for future network calls
+                let token = AuthToken(email: email, password: hashedPassword)
+                NetworkManager.sharedInstance.adapter = AuthAdapter(authToken: token)
+                
                 let homeStoryBoard = UIStoryboard.init(name: "HomeView", bundle: nil)
                 let destinationNavigationController = homeStoryBoard.instantiateViewController(withIdentifier: "HomeNavigationController") as! UINavigationController
                 
-                // Create a new file service and initialize it with the fetched `PilotUser`
-                let uploadService = UploadService(pilotUser: pilotUser)
-                
                 let homeViewController = destinationNavigationController.topViewController as! HomeViewController
-                homeViewController.uploadService = uploadService
-                homeViewController.availablePlatforms = pilotUser.loadPlatforms()
+                print(pilotUser.availablePlatforms)
+                homeViewController.availablePlatforms = pilotUser.availablePlatforms
                 
-                DispatchQueue.main.async {
-                    self?.activitySpinner.stopAnimating()
-                    self?.present(destinationNavigationController, animated: true, completion: nil)
-                }
-            }, failure: { [weak self] httpStatusCode in
                 DispatchQueue.main.async { [weak self] in
+                    self?.present(destinationNavigationController, animated: true, completion: nil)
                     self?.activitySpinner.stopAnimating()
-                    self?.errorField.text = httpStatusCode.description
                 }
+            }, onError: { error in
+                // debugPrint(error)
+                
+                DispatchQueue.main.async { [weak self] in
+                    self?.errorField.text = error.localizedDescription
+                    self?.activitySpinner.stopAnimating()
+                }
+
             })
+        
         }
     }
     
-    /// Validates that a user email and password are not empty or of invalid format
+    
+    /// Validates that required fields are filled
     ///
     /// - Parameters:
     ///   - email: email associated with a user account
