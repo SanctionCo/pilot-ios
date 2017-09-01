@@ -17,19 +17,42 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var errorField: UILabel!
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         emailField.becomeFirstResponder()
         
+        styleUI()
+        
         // TEMPORARY for faster login
-        self.login(email: "Testy@gmail.com", password: "password")
+        // self.login(email: "Testy@gmail.com", password: "password")
+        self.emailField.text = "Testy@gmail.com"
+        self.passwordField.text = "password"
+    }
+    
+    func styleUI() {
+        
+        // Button Style Properties
+        loginButton.layer.cornerRadius = 4
+        loginButton.layer.backgroundColor = UIColor.ButtonBlue.cgColor
+        
+    }
+    
+    @IBAction func signUp(_ sender: UIButton) {
+        
+        // Navigate to the signUp view
+        let createStoryBoard = UIStoryboard.init(name: "CreateView", bundle: nil)
+        let createViewController = createStoryBoard.instantiateViewController(withIdentifier: "CreateViewController")
+        
+        self.navigationController?.pushViewController(createViewController, animated: true)
     }
     
     @IBAction func login(_ sender: UIButton) {
         login(email: emailField.text, password: passwordField.text)
     }
+    
     
     /// Logs a user in using and email and password
     ///
@@ -44,6 +67,7 @@ class LoginViewController: UIViewController {
             let hashedPassword = MD5(password).lowercased()
             
             activitySpinner.startAnimating()
+            loginButton.isEnabled = false
             
             // Make the request
             PilotUser.fetch(with: ThunderRouter.login(email, hashedPassword), onSuccess: { pilotUser in
@@ -60,15 +84,16 @@ class LoginViewController: UIViewController {
                 homeViewController.availablePlatforms = pilotUser.availablePlatforms
                 
                 DispatchQueue.main.async { [weak self] in
-                    self?.present(destinationNavigationController, animated: true, completion: nil)
                     self?.activitySpinner.stopAnimating()
+                    self?.loginButton.isEnabled = true
+                    self?.present(destinationNavigationController, animated: true, completion: nil)
                 }
             }, onError: { error in
-                // debugPrint(error)
                 
                 DispatchQueue.main.async { [weak self] in
-                    self?.errorField.text = error.localizedDescription
                     self?.activitySpinner.stopAnimating()
+                    self?.loginButton.isEnabled = true
+                    self?.errorField.text = error.localizedDescription
                 }
 
             })

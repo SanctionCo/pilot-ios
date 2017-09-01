@@ -169,7 +169,6 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nh5-xV-S8K">
                                 <rect key="frame" x="63" y="615" width="248" height="32"/>
-                                <color key="backgroundColor" red="0.2106993687" green="0.53322786180000004" blue="0.9686799049" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="248" id="4EN-P6-l42"/>
                                     <constraint firstAttribute="height" constant="32" id="80h-qA-Tjh"/>

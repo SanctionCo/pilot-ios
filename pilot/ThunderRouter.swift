@@ -58,10 +58,13 @@ enum ThunderRouter: URLRequestConvertible {
     }
     
     // Paramers for the request
-    var parameters: [String: String]? {
+    var parameters: [String: Any]? {
         switch self {
         case .login(let email, _):
             return ["email": email]
+        case .createPilotUser(let pilotUser):
+            print(pilotUser.toJSON())
+            return pilotUser.toJSON()
         default:
             return nil
         }
@@ -72,10 +75,17 @@ enum ThunderRouter: URLRequestConvertible {
         switch self {
         case .login( _, let password):
             return ["password": password, "Authorization": "Basic \(PilotConfiguration.Thunder.basicCredentials)"]
+        case .createPilotUser( _):
+            return ["Authorization": "Basic \(PilotConfiguration.Thunder.basicCredentials)"]
         default:
             return nil
         }
     }
+    
+    var contentType: String {
+        return "application/json"
+    }
+    
     
     // MARK: URLRequestConvertable
     
@@ -88,12 +98,17 @@ enum ThunderRouter: URLRequestConvertible {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         
+        // Set the content-type
+        urlRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
         // If headers exist then set them!
         if let headers = headers {
             for (key, value) in headers {
                 urlRequest.setValue(value, forHTTPHeaderField: key)
             }
         }
+        
+        debugPrint(urlRequest)
         
         return try encoding.encode(urlRequest, with: parameters)
     }
