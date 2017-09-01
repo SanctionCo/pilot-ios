@@ -27,9 +27,6 @@ extension Uploadable where Self: Mappable {
     typealias ErrorHandler = (Error) -> Void
     
     static func upload(with request: URLRequestConvertible, onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
-
-//        let jsonString = object.toJSONString()
-//        let data = jsonString?.data(using: .utf8)
         
         NetworkManager.sharedInstance.request(request).responseString() { response in
             switch response.result {
@@ -40,6 +37,7 @@ extension Uploadable where Self: Mappable {
                 onError(error)
             }
         }
+        
     }
     
 }

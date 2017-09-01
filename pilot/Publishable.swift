@@ -42,8 +42,11 @@ extension Publishable {
                 
                 multipartFormData.append(fileURL, withName: "file", fileName: "video.mov", mimeType: "video/quicktime")
                 
-            default:
-                break
+            case .text:
+                // Encode empty string into the request
+                
+                multipartFormData.append("".data(using: .utf8)!, withName: "file")
+                
             }
         }, with: request, encodingCompletion: { encodingResult in
             switch encodingResult {
