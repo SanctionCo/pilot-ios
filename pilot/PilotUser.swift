@@ -11,7 +11,7 @@ import ObjectMapper
 
 // Represents a pilot user fetched from thunder
 
-struct PilotUser: Fetchable, Mappable {
+struct PilotUser: Fetchable, Uploadable, Mappable {
     
     var email: String?
     var password: String?
@@ -19,7 +19,12 @@ struct PilotUser: Fetchable, Mappable {
     var twitterAccessToken: String?
     var twitterAccessSecret: String?
     
-    var availablePlatforms = [Platform]()  // List of the platforms the user has
+    var availablePlatforms = [Platform]()  // List of platforms the user has
+    
+    init(email: String, password: String) {
+        self.email = email
+        self.password = password
+    }
     
     init?(map: Map) {
     
@@ -44,21 +49,5 @@ struct PilotUser: Fetchable, Mappable {
         twitterAccessToken <- map["twitterAccessToken"]
         twitterAccessSecret <- map["twitterAccessSecret"]
     }
-    
-}
-
-extension PilotUser {
-    
-//    var description: String {
-//        return "PilotUser {email=\(email))}"
-//    }
-//
-//    func isEqual(_ object: Any?) -> Bool {
-//        if let obj = object as? PilotUser {
-//            return self.type == obj.type
-//        }
-//        
-//        return false
-//    }
     
 }
