@@ -1,38 +1,44 @@
 PODS:
-  - Alamofire (4.5.0)
-  - AlamofireObjectMapper (4.1.0):
+  - Alamofire (4.5.1)
+  - AlamofireObjectMapper (5.0.0):
     - Alamofire (~> 4.1)
-    - ObjectMapper (~> 2.0)
+    - ObjectMapper (~> 3.0)
   - HTTPStatusCodes (3.1.2)
-  - ObjectMapper (2.2.8)
-  - SwiftHash (2.0.0)
+  - ObjectMapper (3.0.0)
+  - SwiftHash (2.0.1)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5.0)
-  - AlamofireObjectMapper (~> 4.0)
+  - AlamofireObjectMapper (from `https://github.com/tristanhimmelman/AlamofireObjectMapper.git`, branch `swift-4`)
   - HTTPStatusCodes (~> 3.1.2)
-  - ObjectMapper (~> 2.2)
+  - ObjectMapper (~> 3.0)
   - SwiftHash (from `https://github.com/onmyway133/SwiftHash`)
   - SwiftyJSON (~> 3.1.4)
 
 EXTERNAL SOURCES:
+  AlamofireObjectMapper:
+    :branch: swift-4
+    :git: https://github.com/tristanhimmelman/AlamofireObjectMapper.git
   SwiftHash:
     :git: https://github.com/onmyway133/SwiftHash
 
 CHECKOUT OPTIONS:
+  AlamofireObjectMapper:
+    :commit: 9304efad0c1f68d6fc25cf565bd30ff862501664
+    :git: https://github.com/tristanhimmelman/AlamofireObjectMapper.git
   SwiftHash:
-    :commit: 501d56d454e164e9e69e87fd1268af09e8922bbd
+    :commit: 1387bd2a614060ff516b3aa1279354b139b3e6f1
     :git: https://github.com/onmyway133/SwiftHash
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
-  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AlamofireObjectMapper: e1ff207b71715478ab69f12ca85112f37b139de8
   HTTPStatusCodes: 88155ba36826366a898a7b4f34d311f49083d546
-  ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
-  SwiftHash: 52faa311aa5ccd128989fb701637f1c981e69447
+  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
+  SwiftHash: 62691a0d6b09b958d21ab1ea0014b83d56f58e8f
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: c42c5357be71a6e76b0a2127175a2495747ea52a
+PODFILE CHECKSUM: 10ba73f3e53eb6bb4d698370790aad80ff81d80f
 
 COCOAPODS: 1.2.1

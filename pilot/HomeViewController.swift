@@ -228,7 +228,7 @@ extension HomeViewController: UITextViewDelegate {
         post.text = textView.text
     }
     
-    func doneButtonClicked() {
+    @objc func doneButtonClicked() {
         view.endEditing(true)
     }
     

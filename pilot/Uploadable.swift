@@ -11,7 +11,6 @@ import Foundation
 import Foundation
 import Alamofire
 import ObjectMapper
-import AlamofireObjectMapper
 import SwiftyJSON
 
 // The uploadable protocol will allow an object to be uploaded to lightning as a JSON object.
