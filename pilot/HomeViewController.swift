@@ -68,6 +68,8 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, Home
         // TODO: Make this modular for any keyboard that needs this
         // Set up the keyboard toolbar
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonClicked))
+        doneButton.style = UIBarButtonItemStyle.done
+        
         
         let keyboardToolBar = UIToolbar()
         keyboardToolBar.sizeToFit()
