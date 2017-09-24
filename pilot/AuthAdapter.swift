@@ -16,24 +16,20 @@ import HTTPStatusCodes
 /// NOTE: An adapter is nessissary to allow retrying connections since a Router is only called once at the beginning of a request
 class AuthAdapter: RequestAdapter {
     
-    private var authToken: AuthToken       // Token used for authentication headers and query parameters
-    
-    init(authToken: AuthToken) {
-        self.authToken = authToken
-    }
+    init() { }
     
     // This is called each time Alamofire is going to make a request
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
         
-        // Set dynamic request headers
+        // Set static request headers
         if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(PilotConfiguration.Lightning.host) {
-            urlRequest.setValue(authToken.password, forHTTPHeaderField: "password")
             urlRequest.setValue("Basic \(PilotConfiguration.Lightning.basicCredentials)", forHTTPHeaderField: "Authorization")
+        } else if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(PilotConfiguration.Thunder.host) {
+            urlRequest.setValue("Basic \(PilotConfiguration.Thunder.basicCredentials)", forHTTPHeaderField: "Authorization")
         }
         
-        // Set dynamic query parameters
-        return try URLEncoding(destination: .queryString).encode(urlRequest, with: ["email": authToken.email])
+        return urlRequest
     }
     
 }

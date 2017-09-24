@@ -11,21 +11,12 @@ import Foundation
 import ObjectMapper
 
 // Represents data that a user wishes to upload to a platform
-
 struct Post: Equatable, Publishable {
     
-    var text = ""                   // Default empty string
-    var thumbNailImage: UIImage? {  // Image displayed to the user that will be uploaded
-        didSet {
-            if let image = thumbNailImage {
-                delegate?.thumbNailDidUpdate(image: image)
-            }
-        }
-    }
+    var text = ""                    // Default empty string
+    var thumbNailImage: UIImage?     // Image displayed to the user that will be uploaded
     var fileURL: URL?                // URL of the image or video to be uploaded
     var postType = PostType.text     // Type of data being uploaded (photo or video). Default text unless image is chosen.
-    
-    var delegate: HomeTableViewControllerDelegate?  // Allows updating of the view
     
 }
 

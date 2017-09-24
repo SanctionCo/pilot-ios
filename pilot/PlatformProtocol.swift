@@ -19,23 +19,7 @@ enum PlatformType: String {
 protocol PlatformProtocol {
     
     var type: PlatformType { get }
-    var selected: Bool { get set }
     var image: UIImage? { get set }
-        
-}
-
-extension PlatformProtocol {
-    
-    var description: String {
-        return "Platform{name=\(type.rawValue)}"
-    }
-    
-    func isEqual(_ object: Any?) -> Bool {
-        if let obj = object as? PlatformProtocol {
-            return self.type == obj.type
-        }
-        
-        return false
-    }
+    var isConnected: Bool { get set }
     
 }

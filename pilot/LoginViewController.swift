@@ -27,20 +27,24 @@ class LoginViewController: UIViewController {
         styleUI()
         
         // TEMPORARY for faster login
-        // self.login(email: "Testy@gmail.com", password: "password")
-        self.emailField.text = "Testy@gmail.com"
+        self.emailField.text = "test@gmail.com"
         self.passwordField.text = "password"
+        
+        // Set a request adapter for future network calls
+        NetworkManager.sharedInstance.adapter = AuthAdapter()
     }
     
     func styleUI() {
         
-        // Button Style Properties
+        //vartton Style Properties
         loginButton.layer.cornerRadius = 4
         loginButton.layer.backgroundColor = UIColor.ButtonBlue.cgColor
         
     }
     
     @IBAction func signUp(_ sender: UIButton) {
+        
+        print("Sign Up")
         
         // Navigate to the signUp view
         let createStoryBoard = UIStoryboard.init(name: "CreateView", bundle: nil)
@@ -62,7 +66,7 @@ class LoginViewController: UIViewController {
     func login(email: String?, password: String?) {
         
         guard let email = email, let password = password else { return }
-
+        
         if validate(email: email, password: password) {
             let hashedPassword = MD5(password).lowercased()
             
@@ -72,16 +76,17 @@ class LoginViewController: UIViewController {
             // Make the request
             PilotUser.fetch(with: ThunderRouter.login(email, hashedPassword), onSuccess: { pilotUser in
                 
-                // Set a request adapter for future network calls
-                let token = AuthToken(email: email, password: hashedPassword)
-                NetworkManager.sharedInstance.adapter = AuthAdapter(authToken: token)
+                PilotConfiguration.PilotCredentials.email = pilotUser.email!
+                PilotConfiguration.PilotCredentials.password = pilotUser.password!
+                
+                // Set the platform list in the PlatformManager class
+                PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)
+                for platform in pilotUser.availablePlatforms {
+                    print(platform.type.rawValue)
+                }
                 
                 let homeStoryBoard = UIStoryboard.init(name: "HomeView", bundle: nil)
                 let destinationNavigationController = homeStoryBoard.instantiateViewController(withIdentifier: "HomeNavigationController") as! UINavigationController
-                
-                let homeViewController = destinationNavigationController.topViewController as! HomeViewController
-                print(pilotUser.availablePlatforms)
-                homeViewController.availablePlatforms = pilotUser.availablePlatforms
                 
                 DispatchQueue.main.async { [weak self] in
                     self?.activitySpinner.stopAnimating()
@@ -95,9 +100,9 @@ class LoginViewController: UIViewController {
                     self?.loginButton.isEnabled = true
                     self?.errorField.text = error.localizedDescription
                 }
-
+                
             })
-        
+            
         }
     }
     
@@ -111,9 +116,7 @@ class LoginViewController: UIViewController {
     fileprivate func validate(email: String, password: String) -> Bool {
         
         if email.isEmpty || password.isEmpty {
-            errorField.text = "Cannot have empty email or password fields"
-            
-            return false
+            alert(message: "Cannot have empty email or password fields", title: "Invalid Input")
         }
         
         return true

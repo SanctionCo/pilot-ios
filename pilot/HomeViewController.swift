@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class HomeViewController: UIViewController, UINavigationControllerDelegate, HomeTableViewControllerDelegate {
+class HomeViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var postText: UITextView!
     @IBOutlet weak var chosenImage: UIImageView!
@@ -25,7 +25,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, Home
         styleUI() // Put all styling properties unavailable in interface builder here
         loadUI()  // Load all data needed immedietly by the view
         
-        post.delegate = self
         imagePicker.delegate = self
         postText.delegate = self
     }
@@ -55,6 +54,14 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, Home
         chosenImage.image = nil
     }
     
+    @IBAction func settings(_ sender: UIBarButtonItem) {
+        
+        let storyboard = UIStoryboard.init(name: "SettingsView", bundle: nil)
+        let destinationViewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        
+        self.present(destinationViewController, animated: true, completion: nil)
+    }
+    
     func styleUI() {
         
         // Button Style Properties
@@ -81,6 +88,8 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, Home
     
     func loadUI() {
         
+        self.availablePlatforms = PlatformManager.sharedInstance.fetchConnectedPlatforms()
+    
     }
     
     /// Upload data to provided destination platroms
@@ -96,34 +105,34 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, Home
         guard let availablePlatforms = availablePlatforms, validate(post: post) else { return }
         
         // Upload to the selected platforms
-        for platform in availablePlatforms {
-            if platform.selected {
-                
-                let parameters = ["type": post.postType.rawValue, "message": post.text]
-
-                platform.delegate?.showProgressBar()
-                
-                // Make the request
-                Post.publish(post: post, with: LightningRouter.publish(platform, parameters), onProgress: { value in
-                    
-                    DispatchQueue.main.async {
-                        platform.delegate?.setProgress(value: value)
-                    }
-                    
-                }, onSuccess: {
-
-                    DispatchQueue.main.async {
-                        platform.delegate?.hideProgressBar()
-                    }
-                    
-                }, onError: { error in
-                    
-                    debugPrint(error)
-                
-                })
-                
-            }
-        }
+//        for platform in availablePlatforms {
+//            if platform.selected {
+//
+//                let parameters = ["type": post.postType.rawValue, "message": post.text]
+//
+////                platform.delegate?.showProgressBar()
+//
+//                // Make the request
+//                Post.publish(post: post, with: LightningRouter.publish(platform, parameters), onProgress: { value in
+//
+////                    DispatchQueue.main.async {
+////                        platform.delegate?.setProgress(value: value)
+////                    }
+//
+//                }, onSuccess: {
+//
+//                    DispatchQueue.main.async {
+//                        platform.delegate?.hideProgressBar()
+//                    }
+//
+//                }, onError: { error in
+//
+//                    debugPrint(error)
+//
+//                })
+//
+//            }
+//        }
         
     }
     
@@ -147,17 +156,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, Home
         self.chosenImage.image = image
     }
     
-    // MARK: Segue to SettingsViewController or AddPlatformViewController
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        // Pass information to the settingsViewController here
-        //        if let destinationViewController = segue.destination as? AddPlatformViewController {
-        //            destinationViewController.platformListViewModel = PlatformListViewModel(platformList: composeViewModel.platformsToChoose())
-        //        }
-        
-    }
-    
 }
 
 // MARK: UITableView Methods
@@ -178,7 +176,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Set platform as selected
             let cellIndex = availablePlatforms?.index(of: cell.platform)!
-            availablePlatforms?[cellIndex!].selected = true
+            availablePlatforms?[cellIndex!].isSelected = true
         }
     }
     
@@ -189,7 +187,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Set platform as unselected
             let cellIndex = availablePlatforms?.index(of: cell.platform)!
-            availablePlatforms?[cellIndex!].selected = false
+            availablePlatforms?[cellIndex!].isSelected = false
         }
     }
     
@@ -200,7 +198,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // Cell entered memory
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
         cell.platform = availablePlatforms?[indexPath.row]
-        cell.platform.delegate = cell
         
         return cell
     }

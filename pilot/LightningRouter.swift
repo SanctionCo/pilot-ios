@@ -14,9 +14,9 @@ import HTTPStatusCodes
 /// The router builds static content related to the URL such as parameters, headers, etc..
 enum LightningRouter: URLRequestConvertible {
     
-    case publish(Platform, [String: String]?)
-    case extendToken(Platform)
-    case getOauthURL(Platform)
+    case publish(Platform, [String: Any]?)
+    case extendToken(PlatformType)
+    case getOauthURL(PlatformType)
     
     static let baseURLString = PilotConfiguration.Lightning.host
     
@@ -35,10 +35,10 @@ enum LightningRouter: URLRequestConvertible {
         switch self {
         case .publish(let platform, _):
             return "/\(platform.type.rawValue)/publish"
-        case .extendToken(let platform):
-            return "/\(platform.type.rawValue)/extendedToken"
-        case .getOauthURL(let platform):
-            return "/\(platform.type.rawValue)/oauthURL"
+        case .extendToken(let type):
+            return "/\(type.rawValue)/extendedToken"
+        case .getOauthURL(let type):
+            return "/\(type.rawValue)/oauthUrl"
         }
     }
     
@@ -46,10 +46,10 @@ enum LightningRouter: URLRequestConvertible {
         return URL(string: LightningRouter.baseURLString)!.appendingPathComponent(path)
     }
     
-    // How to encode the requet based on the HTTP Method
+    // How to encode the requet based on the endpoint
     var encoding: ParameterEncoding {
         switch self {
-        case .publish:
+        case .publish, .getOauthURL:
             return URLEncoding(destination: .queryString)
         default:
             return URLEncoding.default
@@ -57,12 +57,41 @@ enum LightningRouter: URLRequestConvertible {
     }
     
     // Paramers for the request
-    var parameters: [String: String]? {
+    var dynamicparameters: [String: Any]? {
         switch self {
         case .publish( _, let parameters):
             return parameters
+        case .getOauthURL(let type):
+            
+            switch type {
+            case .facebook:
+                return ["redirect": PilotConfiguration.Lightning.facebookRedirectURL]
+            case .twitter:
+                return ["redirect": PilotConfiguration.Lightning.twitterRedirectURL]
+            }
+            
         default:
             return nil
+        }
+    }
+    
+    var staticParameters: [String: Any]? {
+        switch self {
+        case .getOauthURL:
+            return nil
+        default:
+            print("Email set: \(PilotConfiguration.PilotCredentials.email)")
+            return ["email": PilotConfiguration.PilotCredentials.email]
+        }
+    }
+    
+    var staticHeaders: [String: String]? {
+        switch self {
+        case .getOauthURL:
+            return nil
+        default:
+            print("Password Set: \(PilotConfiguration.PilotCredentials.password)")
+            return ["password": PilotConfiguration.PilotCredentials.password]
         }
     }
     
@@ -77,7 +106,19 @@ enum LightningRouter: URLRequestConvertible {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         
-        return try encoding.encode(urlRequest, with: parameters)
+        // Set static headers if needed
+        if let staticHeaders = staticHeaders {
+            for (key, value) in staticHeaders {
+                urlRequest.setValue(value, forHTTPHeaderField: key)
+            }
+        }
+        
+        // Set the static parameters if needed
+        if let staticParameters = staticParameters {
+            urlRequest = try encoding.encode(urlRequest, with: staticParameters)
+        }
+        
+        return try encoding.encode(urlRequest, with: dynamicparameters)
     }
-
+    
 }
