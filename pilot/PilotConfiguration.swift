@@ -22,6 +22,21 @@ struct PilotConfiguration {
         static let userKey = "application"
         static let userSecret = "secret"
         static let basicCredentials = "\(userKey):\(userSecret)".data(using: String.Encoding.utf8)!.base64EncodedString(options: [])
+        
+        // Facebook
+        static let facebookRedirectURL = "fb896501930437172://authorize"
+        static let facebookRedirectScheme = "fb896501930437172"
+        static let facebookTokenParamKey = "access_token"
+        
+        // Twitter
+        static let twitterRedirectURL = ""
+        static let twitterRedirectScheme = ""
+        static let twitterTokenParamKey = ""
+    }
+    
+    struct PilotCredentials {
+        static var email = ""
+        static var password = ""
     }
     
 }

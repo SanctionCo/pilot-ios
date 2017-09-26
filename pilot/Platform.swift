@@ -10,24 +10,23 @@ import Foundation
 import UIKit
 
 // WARNING: Only one platform should exist per PlatformType otherwise you'll have multiple instances of each service! :o
-
-class Platform: PlatformProtocol, Equatable {
+struct Platform: PlatformProtocol {
     
     var type: PlatformType      // Enum type for the platform
-    var selected: Bool          // If the user has selected this platform as an upload target
     var image: UIImage?         // Image to represent the platform
+    var isConnected: Bool       // Is the platform connected to the users account?
+    var isSelected: Bool        // Is the platform selected by the user?
     
-    var delegate: HomeTableViewCellDelegate? // Allows communication back to the cell view (Updating loading state)
-    
-    init(type: PlatformType) {
+    init(type: PlatformType, isConnected: Bool) {
         self.type = type
-        self.selected = false // TODO: Pull this from config file to persist across app restart
+        self.isConnected = isConnected
+        self.isSelected = false  // Default
         
-        setPlatformImage()
+        self.setPlatformImage()
     }
     
-    /// Sets the image used to represent the platform
-    func setPlatformImage() {
+    // Sets the image used to represent the platform
+    mutating func setPlatformImage() {
         switch type {
         case PlatformType.facebook:
             guard let facebookImage = UIImage(named: "facebook") else {
@@ -46,6 +45,15 @@ class Platform: PlatformProtocol, Equatable {
     
 }
 
+extension Platform: Hashable {
+    var hashValue: Int {
+        return type.hashValue &* 987654433
+    }
+}
+
+extension Platform: Equatable { }
+
 func == (left: Platform, right: Platform) -> Bool {
-    return left.type.hashValue == right.type.hashValue
+    guard left.hashValue == right.hashValue else { return false }
+    return left.type == right.type
 }

@@ -11,14 +11,19 @@ import UIKit
 
 extension UIColor {
     
-    static let PilotBlue = UIColor.fromRGB(red: 114.0, green: 192.0, blue: 228.0)
+    // UI Colors
+    static let PilotBlue = UIColor.fromRGB(red: 1.0, green: 126.0, blue: 185.0)
+    
+    // Button Colors
+    static let ButtonRed = UIColor.fromRGB(red: 215, green: 46, blue: 46)
     static let ButtonBlue = UIColor.fromRGB(red: 55, green: 139, blue: 251)
-    static let RainBlue = UIColor.fromRGB(red: 71, green: 178, blue: 230)
-    static let RainDropBlue = UIColor.fromRGB(red: 20, green: 102, blue: 152)
-    static let PilotBrownBackground = UIColor.fromRGB(red: 242.0, green: 242.0, blue: 242.0)
-    static let PilotBrownText = UIColor.fromRGB(red: 173.0, green: 173.0, blue: 173.0)
-    static let ErrorRed = UIColor.fromRGB(red: 242, green: 71, blue: 15)
-    static let White = UIColor.fromRGB(red: 255, green: 255, blue: 255)
+    
+    // Text Colors
+    static let TextBrown = UIColor.fromRGB(red: 173.0, green: 173.0, blue: 173.0)
+    static let TextRed = UIColor.fromRGB(red: 242, green: 71, blue: 15)
+    static let TextGray = UIColor.fromRGB(red: 154, green: 154, blue: 154)
+    static let TextWhite = UIColor.fromRGB(red: 255, green: 255, blue: 255)
+    static let TextBlack = UIColor.fromRGB(red: 0, green: 0, blue: 0)
     
     // Returns color instance from RGB values (0-255)
     static func fromRGB(red: Double, green: Double, blue: Double, alpha: Double = 100.0) -> UIColor {

@@ -15,7 +15,7 @@ import HTTPStatusCodes
 enum ThunderRouter: URLRequestConvertible {
     
     case login(String, String)      // Email and password encoded in request as apposed to the adapter
-    case fetchPilotUser()           // Email param in auth adapter
+    case fetchPilotUser()           // Email param
     case updatePilotUser(PilotUser) // Maps PilotUser to JSON
     case createPilotUser(PilotUser) // Maps PilotUser to JSON
     case deletePilotUser()          // Email param in auth adapter
@@ -52,33 +52,43 @@ enum ThunderRouter: URLRequestConvertible {
         switch self {
         case .createPilotUser, .updatePilotUser:
             return JSONEncoding.default
-        default:
-            return URLEncoding.default
+        case .fetchPilotUser, .deletePilotUser, .login:
+            return URLEncoding(destination: .queryString)
         }
     }
     
-    // Paramers for the request
-    var parameters: [String: Any]? {
+    // Dynamic paramers for the request
+    var dynamicParameters: [String: Any]? {
         switch self {
         case .login(let email, _):
             return ["email": email]
         case .createPilotUser(let pilotUser):
-            print(pilotUser.toJSON())
+            return pilotUser.toJSON()
+        case .updatePilotUser(let pilotUser):
             return pilotUser.toJSON()
         default:
             return nil
         }
     }
     
+    var staticParameters: [String: Any]? {
+        switch self {
+        case .createPilotUser, .login:
+            return nil
+        default:
+            return ["email": PilotConfiguration.PilotCredentials.email]
+        }
+    }
+    
     // Heaers for the request
-    var headers: [String: String]? {
+    var staticHeaders: [String: String]? {
         switch self {
         case .login( _, let password):
-            return ["password": password, "Authorization": "Basic \(PilotConfiguration.Thunder.basicCredentials)"]
-        case .createPilotUser( _):
-            return ["Authorization": "Basic \(PilotConfiguration.Thunder.basicCredentials)"]
-        default:
+            return ["password": password]
+        case .createPilotUser:
             return nil
+        default:
+            return ["password": PilotConfiguration.PilotCredentials.password]
         }
     }
     
@@ -101,16 +111,19 @@ enum ThunderRouter: URLRequestConvertible {
         // Set the content-type
         urlRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
-        // If headers exist then set them!
-        if let headers = headers {
-            for (key, value) in headers {
+        // If static headers exist then set them!
+        if let staticHeaders = staticHeaders {
+            for (key, value) in staticHeaders {
                 urlRequest.setValue(value, forHTTPHeaderField: key)
             }
         }
         
-        debugPrint(urlRequest)
+        // Set the static parameters if needed
+        if let staticParameters = staticParameters {
+            urlRequest = try encoding.encode(urlRequest, with: staticParameters)
+        }
         
-        return try encoding.encode(urlRequest, with: parameters)
+        return try encoding.encode(urlRequest, with: dynamicParameters)
     }
     
 }

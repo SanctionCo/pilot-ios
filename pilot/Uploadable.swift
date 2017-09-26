@@ -6,11 +6,11 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
 
 import Foundation
 import Alamofire
 import ObjectMapper
+import AlamofireObjectMapper
 import SwiftyJSON
 
 // The uploadable protocol will allow an object to be uploaded to lightning as a JSON object.

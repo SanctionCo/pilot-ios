@@ -17,7 +17,7 @@ enum PostType: String {
 protocol PostProtocol {
     
     var type: PostType { get }
-
+    
 }
 
 extension PostProtocol {

@@ -14,8 +14,11 @@ struct NetworkManager {
     
     static let sharedInstance = Alamofire.SessionManager.default
     
-    static func setAuthToken(token: AuthToken) {
-        NetworkManager.sharedInstance.adapter = AuthAdapter(authToken: token)
-    }
+    // Called when a platform returns an OAuth token
+    static var authCompletionHandler: (() -> Void)?
+    static var authErrorHandler: ((Error) -> Void)?
+    
+    // Called to refresh HomeView
+    static var authHomeViewHandler: (() -> Void)?
     
 }
