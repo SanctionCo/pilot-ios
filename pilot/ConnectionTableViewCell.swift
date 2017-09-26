@@ -12,17 +12,25 @@ class ConnectionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var platformImage: UIImageView!
     @IBOutlet weak var platformName: UILabel!
+    @IBOutlet weak var disclosureMessage: UILabel!
     
     var platform: Platform? {
         didSet {
             platformImage.image = platform?.image
             platformName.text = platform?.type.rawValue
+            
+            if platform!.isConnected {
+                disclosureMessage.textColor = UIColor.TextRed
+                disclosureMessage.text = "Disconnect"
+            } else {
+                disclosureMessage.text = "Connect"
+            }
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
