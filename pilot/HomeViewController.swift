@@ -101,7 +101,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
                 let parameters = ["type": post.postType.rawValue, "message": post.text]
 
                 // Make the request
-                Post.publish(post: post, with: LightningRouter.publish(platform, parameters), onProgress: { value in
+                Post.publish(post: post, with: LightningRouter.publish(platform.type, parameters), onProgress: { value in
                     // Output upload status to view
                 }, onSuccess: {
                     // Output oossible success to view

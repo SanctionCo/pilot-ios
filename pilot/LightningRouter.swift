@@ -14,7 +14,7 @@ import HTTPStatusCodes
 /// The router builds static content related to the URL such as parameters, headers, etc..
 enum LightningRouter: URLRequestConvertible {
     
-    case publish(Platform, [String: Any]?)
+    case publish(PlatformType, [String: Any]?)
     case extendToken(PlatformType)
     case getOauthURL(PlatformType)
     
@@ -33,8 +33,8 @@ enum LightningRouter: URLRequestConvertible {
     // Path for each request type
     var path: String {
         switch self {
-        case .publish(let platform, _):
-            return "/\(platform.type.rawValue)/publish"
+        case .publish(let type, _):
+            return "/\(type.rawValue)/publish"
         case .extendToken(let type):
             return "/\(type.rawValue)/extendedToken"
         case .getOauthURL(let type):
@@ -62,14 +62,12 @@ enum LightningRouter: URLRequestConvertible {
         case .publish( _, let parameters):
             return parameters
         case .getOauthURL(let type):
-            
             switch type {
             case .facebook:
                 return ["redirect": PilotConfiguration.Lightning.facebookRedirectURL]
             case .twitter:
                 return ["redirect": PilotConfiguration.Lightning.twitterRedirectURL]
             }
-            
         default:
             return nil
         }
@@ -80,7 +78,6 @@ enum LightningRouter: URLRequestConvertible {
         case .getOauthURL:
             return nil
         default:
-            print("Email set: \(PilotConfiguration.PilotCredentials.email)")
             return ["email": PilotConfiguration.PilotCredentials.email]
         }
     }
@@ -90,7 +87,6 @@ enum LightningRouter: URLRequestConvertible {
         case .getOauthURL:
             return nil
         default:
-            print("Password Set: \(PilotConfiguration.PilotCredentials.password)")
             return ["password": PilotConfiguration.PilotCredentials.password]
         }
     }

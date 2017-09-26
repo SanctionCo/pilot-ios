@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
     
     func styleUI() {
         
-        //vartton Style Properties
+        // Button Style Properties
         loginButton.layer.cornerRadius = 4
         loginButton.layer.backgroundColor = UIColor.ButtonBlue.cgColor
         

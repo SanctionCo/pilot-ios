@@ -6,14 +6,6 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
-
-import Foundation
-import Alamofire
-import ObjectMapper
-import SwiftyJSON
-
-import Foundation
 
 import Foundation
 import Alamofire
