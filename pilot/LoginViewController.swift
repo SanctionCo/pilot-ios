@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
         styleUI()
         
         // TEMPORARY for faster login
-        self.emailField.text = "test@gmail.com"
+        self.emailField.text = "jappleseed@pilot.com"
         self.passwordField.text = "password"
         
         // Set a request adapter for future network calls

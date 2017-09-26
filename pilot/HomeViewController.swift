@@ -48,18 +48,11 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         publish(text: postText.text, image: chosenImage.image)
     }
     
-    @IBAction func clear(_ sender: UIBarButtonItem) {
-        postText.text = ""
-        postText.endEditing(true)
-        chosenImage.image = nil
-    }
-    
     @IBAction func settings(_ sender: UIBarButtonItem) {
-        
         let storyboard = UIStoryboard.init(name: "SettingsView", bundle: nil)
-        let destinationViewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        let settingsViewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
         
-        self.present(destinationViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
     func styleUI() {
@@ -87,9 +80,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func loadUI() {
-        
         self.availablePlatforms = PlatformManager.sharedInstance.fetchConnectedPlatforms()
-    
     }
     
     /// Upload data to provided destination platroms
@@ -105,34 +96,21 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         guard let availablePlatforms = availablePlatforms, validate(post: post) else { return }
         
         // Upload to the selected platforms
-//        for platform in availablePlatforms {
-//            if platform.selected {
-//
-//                let parameters = ["type": post.postType.rawValue, "message": post.text]
-//
-////                platform.delegate?.showProgressBar()
-//
-//                // Make the request
-//                Post.publish(post: post, with: LightningRouter.publish(platform, parameters), onProgress: { value in
-//
-////                    DispatchQueue.main.async {
-////                        platform.delegate?.setProgress(value: value)
-////                    }
-//
-//                }, onSuccess: {
-//
-//                    DispatchQueue.main.async {
-//                        platform.delegate?.hideProgressBar()
-//                    }
-//
-//                }, onError: { error in
-//
-//                    debugPrint(error)
-//
-//                })
-//
-//            }
-//        }
+        for platform in availablePlatforms {
+            if platform.isSelected {
+                let parameters = ["type": post.postType.rawValue, "message": post.text]
+
+                // Make the request
+                Post.publish(post: post, with: LightningRouter.publish(platform, parameters), onProgress: { value in
+                    // Output upload status to view
+                }, onSuccess: {
+                    // Output oossible success to view
+                }, onError: { error in
+                    // Output/handle error in view
+                })
+
+            }
+        }
         
     }
     
@@ -141,6 +119,8 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     /// - Parameters:
     /// - Returns: boolean indicating valid or invalid fields
     fileprivate func validate(post: Post) -> Bool {
+        
+        // TODO: Display alter if not platform has been selected!
         
         // The only time a post should fail is if both text and image are empty or if text is only present and it's empty
         if post.text.isEmpty && post.thumbNailImage == nil {
@@ -195,7 +175,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // Cell entered memory
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
         cell.platform = availablePlatforms?[indexPath.row]
         
