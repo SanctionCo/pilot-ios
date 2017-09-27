@@ -202,7 +202,6 @@ extension HomeViewController: UITextViewDelegate {
             textView.textColor = UIColor.lightGray
         }
         
-        // Update the model
         post.text = textView.text
     }
     

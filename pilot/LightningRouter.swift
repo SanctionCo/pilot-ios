@@ -78,7 +78,7 @@ enum LightningRouter: URLRequestConvertible {
         case .getOauthURL:
             return nil
         default:
-            return ["email": PilotConfiguration.PilotCredentials.email]
+            return ["email": UserManager.sharedInstance!.getEmail()]
         }
     }
     
@@ -87,7 +87,7 @@ enum LightningRouter: URLRequestConvertible {
         case .getOauthURL:
             return nil
         default:
-            return ["password": PilotConfiguration.PilotCredentials.password]
+            return ["password": UserManager.sharedInstance!.getPassword()]
         }
     }
     

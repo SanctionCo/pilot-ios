@@ -76,8 +76,7 @@ class LoginViewController: UIViewController {
             // Make the request
             PilotUser.fetch(with: ThunderRouter.login(email, hashedPassword), onSuccess: { pilotUser in
                 
-                PilotConfiguration.PilotCredentials.email = pilotUser.email!
-                PilotConfiguration.PilotCredentials.password = pilotUser.password!
+                UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
                 
                 // Set the platform list in the PlatformManager class
                 PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)

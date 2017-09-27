@@ -76,7 +76,7 @@ enum ThunderRouter: URLRequestConvertible {
         case .createPilotUser, .login:
             return nil
         default:
-            return ["email": PilotConfiguration.PilotCredentials.email]
+            return ["email": UserManager.sharedInstance!.getEmail()]
         }
     }
     
@@ -88,7 +88,7 @@ enum ThunderRouter: URLRequestConvertible {
         case .createPilotUser:
             return nil
         default:
-            return ["password": PilotConfiguration.PilotCredentials.password]
+            return ["password": UserManager.sharedInstance!.getPassword()]
         }
     }
     
