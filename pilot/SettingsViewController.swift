@@ -19,6 +19,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationItem.largeTitleDisplayMode = .never
+        
         styleUI()
         loadUI()
     }
@@ -80,13 +82,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         let unconnectedCount = unconnectedPlatforms.count
         
         if connectedCount == 0 && unconnectedCount == 0 {
-            print("Return 1")
             return 1
         } else if connectedCount != 0 && unconnectedCount != 0 {
-            print("Return 3")
             return 3
         } else {
-            print("return 2")
             return 2
         }
     }
@@ -96,16 +95,37 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             return 1
         } else if section == 1 {
             if connectedPlatforms.count != 0 {
-                print("Connected Rows")
                 return connectedPlatforms.count
             } else {
-                print("Unconnected Rows")
                 return unconnectedPlatforms.count
             }
         } else {
-            print("Unconnected Rows 2")
             return unconnectedPlatforms.count
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        } else if indexPath.section == 1 {
+            let accountViewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
+            if connectedPlatforms.count != 0 {
+                accountViewController.platform = connectedPlatforms[indexPath.row]
+            } else {
+                accountViewController.platform = unconnectedPlatforms[indexPath.row]
+            }
+            
+            self.navigationController?.pushViewController(accountViewController, animated: true)
+        } else if indexPath.section == 2 {
+            let accountViewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
+            accountViewController.platform = unconnectedPlatforms[indexPath.row]
+            
+            self.navigationController?.pushViewController(accountViewController, animated: true)
+        }
+        
     }
     
 }
