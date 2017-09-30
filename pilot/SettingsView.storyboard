@@ -285,7 +285,6 @@
         <!--Profile View Controller-->
         <scene sceneID="Yc5-gJ-XfG">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mwv-wD-cdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="ProfileViewController" id="Ppk-mz-65g" customClass="ProfileViewController" customModule="pilot" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="GkM-hm-4nu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -383,6 +382,7 @@
                     </tableView>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mwv-wD-cdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1477.5999999999999" y="-167.76611694152925"/>
         </scene>

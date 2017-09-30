@@ -48,7 +48,7 @@ class CreateViewController: UIViewController {
             activitySpinner.startAnimating()
             signUpButton.isEnabled = false
             
-            PilotUser.upload(with: ThunderRouter.createPilotUser(pilotUser), onSuccess: {
+            PilotUser.upload(with: ThunderRouter.createPilotUser(pilotUser), onSuccess: { pilotUser in
                 
                 DispatchQueue.main.async { [weak self] in
                     self?.activitySpinner.stopAnimating()
