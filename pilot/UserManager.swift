@@ -38,4 +38,24 @@ class UserManager {
         return pilotUser.twitterAccessSecret!
     }
     
+    func setEmail(newEmail: String) {
+        self.pilotUser.email = newEmail
+    }
+    
+    func setPassword(newPassword: String) {
+        self.pilotUser.password = newPassword
+    }
+    
+    func setFacebookAccessToken(token: String) {
+        self.pilotUser.facebookAccessToken = token
+    }
+    
+    func setTwitterAccessToken(token: String) {
+        self.pilotUser.twitterAccessToken = token
+    }
+    
+    func setTwitterAccessSecret(secret: String) {
+        self.pilotUser.twitterAccessSecret = secret
+    }
+    
 }
