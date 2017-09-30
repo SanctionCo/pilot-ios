@@ -29,11 +29,9 @@ extension Fetchable where Self: Mappable {
             debugPrint(response)
             switch response.result {
             case .success:
-                
                 if let responseObject: Self = response.result.value {
                     onSuccess(responseObject)
                 }
-                
             case .failure(let error):
                 onError(error)
             }

@@ -22,16 +22,18 @@ protocol Uploadable {
 
 extension Uploadable where Self: Mappable {
     
-    typealias SuccessHandler = () -> Void
+    typealias SuccessHandler<T> = (T) -> Void where T: Mappable
     typealias ErrorHandler = (Error) -> Void
     
-    static func upload(with request: URLRequestConvertible, onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
+    static func upload(with request: URLRequestConvertible, onSuccess: @escaping SuccessHandler<Self>, onError: @escaping ErrorHandler) {
         
-        NetworkManager.sharedInstance.request(request).responseString() { response in
+        NetworkManager.sharedInstance.request(request).responseObject() { (response: DataResponse<Self>) in
+            
             switch response.result {
             case .success:
-                debugPrint(response)
-                onSuccess()
+                if let responseObject: Self = response.result.value {
+                    onSuccess(responseObject)
+                }
             case .failure(let error):
                 onError(error)
             }

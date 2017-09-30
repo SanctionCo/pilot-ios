@@ -58,4 +58,15 @@ class UserManager {
         self.pilotUser.twitterAccessSecret = secret
     }
     
+    func invalidateUser() {
+        UserManager.sharedInstance = nil
+    }
+    
+    func updateUser() {
+        PilotUser.upload(with: ThunderRouter.updatePilotUser(pilotUser), onSuccess: { pilotUser in
+            self.pilotUser = pilotUser
+        }, onError: { error in
+            debugPrint(error)
+        })
+    }
 }
