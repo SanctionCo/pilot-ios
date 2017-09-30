@@ -19,19 +19,4 @@ class ProfileViewController: UITableViewController {
         self.tableView.tableHeaderView = customHeaderView
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if let headerView = tableView.tableHeaderView {
-            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-            var headerFrame = headerView.frame
-            
-            if height != headerFrame.size.height {
-                headerFrame.size.height = height
-                headerView.frame = headerFrame
-                tableView.tableHeaderView = headerView
-            }
-        }
-    }
-    
 }
