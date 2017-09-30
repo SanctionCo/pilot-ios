@@ -76,31 +76,28 @@ class LoginViewController: UIViewController {
             // Make the request
             PilotUser.fetch(with: ThunderRouter.login(email, hashedPassword), onSuccess: { pilotUser in
                 
-                PilotConfiguration.PilotCredentials.email = pilotUser.email!
-                PilotConfiguration.PilotCredentials.password = pilotUser.password!
-                
+                UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
+
                 // Set the platform list in the PlatformManager class
                 PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)
                 for platform in pilotUser.availablePlatforms {
                     print(platform.type.rawValue)
                 }
-                
+
                 let homeStoryBoard = UIStoryboard.init(name: "HomeView", bundle: nil)
                 let destinationNavigationController = homeStoryBoard.instantiateViewController(withIdentifier: "HomeNavigationController") as! UINavigationController
-                
+
                 DispatchQueue.main.async { [weak self] in
                     self?.activitySpinner.stopAnimating()
                     self?.loginButton.isEnabled = true
                     self?.present(destinationNavigationController, animated: true, completion: nil)
                 }
             }, onError: { error in
-                
                 DispatchQueue.main.async { [weak self] in
                     self?.activitySpinner.stopAnimating()
                     self?.loginButton.isEnabled = true
                     self?.errorField.text = error.localizedDescription
                 }
-                
             })
             
         }

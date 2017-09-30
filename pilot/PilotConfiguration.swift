@@ -34,9 +34,4 @@ struct PilotConfiguration {
         static let twitterTokenParamKey = ""
     }
     
-    struct PilotCredentials {
-        static var email = ""
-        static var password = ""
-    }
-    
 }

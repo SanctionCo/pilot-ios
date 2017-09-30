@@ -29,7 +29,7 @@
                                 </constraints>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="FjB-ih-Ra7">
-                                <rect key="frame" x="54" y="169" width="267" height="328.5"/>
+                                <rect key="frame" x="54" y="125" width="267" height="372.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-uE-7ni">
                                         <rect key="frame" x="0.0" y="0.0" width="267" height="203.5"/>
@@ -79,7 +79,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="l5M-1Z-NIC">
-                                        <rect key="frame" x="0.0" y="253.5" width="267" height="75"/>
+                                        <rect key="frame" x="0.0" y="253.5" width="267" height="119"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtQ-mM-yvh">
                                                 <rect key="frame" x="0.0" y="0.0" width="267" height="30"/>
@@ -95,7 +95,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGu-Tc-abZ">
-                                                <rect key="frame" x="0.0" y="45" width="267" height="30"/>
+                                                <rect key="frame" x="0.0" y="45" width="267" height="74"/>
                                                 <state key="normal" title="Sign Up"/>
                                                 <connections>
                                                     <action selector="signUp:" destination="XYY-HZ-VdY" eventType="touchUpInside" id="cW0-Gc-GsS"/>
@@ -118,6 +118,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Kh-0F-coC"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="activitySpinner" destination="2tk-DF-cdW" id="fom-AK-PpF"/>
                         <outlet property="emailField" destination="FxX-Em-Sn0" id="dpC-V8-8pO"/>

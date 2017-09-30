@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var pilotUser: PilotUser = PilotUser(email: PilotConfiguration.PilotCredentials.email, password: PilotConfiguration.PilotCredentials.password)
+    var pilotUser: PilotUser = PilotUser(email: UserManager.sharedInstance!.getEmail(), password: UserManager.sharedInstance!.getPassword())
     var connectedPlatforms: [Platform] = []
     var unconnectedPlatforms: [Platform] = []
 
