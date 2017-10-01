@@ -110,20 +110,31 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             
             self.navigationController?.pushViewController(profileViewController, animated: true)
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 1 && connectedPlatforms.count != 0 {
+
             let accountViewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-            if connectedPlatforms.count != 0 {
-                accountViewController.platform = connectedPlatforms[indexPath.row]
-            } else {
-                accountViewController.platform = unconnectedPlatforms[indexPath.row]
+            accountViewController.platform = connectedPlatforms[indexPath.row]
+            
+            self.navigationController?.pushViewController(accountViewController, animated: true)
+        } else {
+            
+            let platform = unconnectedPlatforms[indexPath.row]
+            
+            OAuthManager.authorizeService(platform: platform) { tokenURL, error in
+                print(tokenURL?.absoluteString)
+                                
+                switch platform.type {
+                case .facebook:
+                    let matchingGroups = tokenURL?.absoluteString.matchingStrings(regex: "access_token=([^&]+)(?:&expires=(.*))?")
+                    let token = matchingGroups![0][1]
+                    UserManager.sharedInstance?.setFacebookAccessToken(token: token)
+                default:
+                    break
+                }
+                
+                UserManager.sharedInstance?.updateUser()
             }
             
-            self.navigationController?.pushViewController(accountViewController, animated: true)
-        } else if indexPath.section == 2 {
-            let accountViewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-            accountViewController.platform = unconnectedPlatforms[indexPath.row]
-            
-            self.navigationController?.pushViewController(accountViewController, animated: true)
         }
         
     }

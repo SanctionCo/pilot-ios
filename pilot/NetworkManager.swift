@@ -14,11 +14,4 @@ struct NetworkManager {
     
     static let sharedInstance = Alamofire.SessionManager.default
     
-    // Called when a platform returns an OAuth token
-    static var authCompletionHandler: (() -> Void)?
-    static var authErrorHandler: ((Error) -> Void)?
-    
-    // Called to refresh HomeView
-    static var authHomeViewHandler: (() -> Void)?
-    
 }
