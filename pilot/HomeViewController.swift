@@ -15,6 +15,8 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var chosenImage: UIImageView!
     @IBOutlet weak var publishButton: UIButton!
     
+    @IBOutlet weak var tableView: UITableView!
+    
     var imagePicker = UIImagePickerController()                   // TODO: Injection?
     var availablePlatforms: [Platform]?                           // Platforms the user has to choose from
     var post = Post()                                             // Post object representing current user post state

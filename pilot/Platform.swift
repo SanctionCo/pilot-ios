@@ -17,6 +17,24 @@ struct Platform: PlatformProtocol {
     var isConnected: Bool       // Is the platform connected to the users account?
     var isSelected: Bool        // Is the platform selected by the user?
     
+    var redirectURL: String {
+        switch type {
+        case .facebook:
+            return PilotConfiguration.Lightning.facebookRedirectURL
+        case .twitter:
+            return PilotConfiguration.Lightning.twitterRedirectURL
+        }
+    }
+    
+    var tokenParamKey: String {
+        switch type {
+        case .facebook:
+            return PilotConfiguration.Lightning.facebookTokenParamKey
+        case .twitter:
+            return PilotConfiguration.Lightning.twitterTokenParamKey
+        }
+    }
+    
     init(type: PlatformType, isConnected: Bool) {
         self.type = type
         self.isConnected = isConnected

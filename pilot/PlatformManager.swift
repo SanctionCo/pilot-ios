@@ -44,15 +44,12 @@ class PlatformManager {
         self.platforms = platforms
     }
     
-    // Reload the platfrom list from Thunder
+    // Update the platform list using the local pilotUser stored in UserManager
     func reload() {
         
-        PilotUser.fetch(with: ThunderRouter.fetchPilotUser(), onSuccess: { [weak self] pilotUser in
-            self?.platforms = pilotUser.availablePlatforms
-        }, onError: { error in
-            // Display an error to the user informing them their data is out of sync
-            print("There was en error updaing the platform list")
-        })
+        if let manager = UserManager.sharedInstance {
+            self.platforms = manager.getAvailablePlatforms()
+        }
         
     }
     

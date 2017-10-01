@@ -110,20 +110,32 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             
             self.navigationController?.pushViewController(profileViewController, animated: true)
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 1 && connectedPlatforms.count != 0 {
+
             let accountViewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-            if connectedPlatforms.count != 0 {
-                accountViewController.platform = connectedPlatforms[indexPath.row]
-            } else {
-                accountViewController.platform = unconnectedPlatforms[indexPath.row]
-            }
+            accountViewController.platform = connectedPlatforms[indexPath.row]
             
             self.navigationController?.pushViewController(accountViewController, animated: true)
-        } else if indexPath.section == 2 {
-            let accountViewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-            accountViewController.platform = unconnectedPlatforms[indexPath.row]
+        } else {
             
-            self.navigationController?.pushViewController(accountViewController, animated: true)
+            let platform = unconnectedPlatforms[indexPath.row]
+            
+            OAuthManager.authorizeService(platform: platform, onSuccess: {
+                
+                // Reload the platform list
+                PlatformManager.sharedInstance.reload()
+                
+                // Reload the home tableView and pop to it
+                let homeViewController = self.navigationController?.viewControllers[0] as! HomeViewController
+                homeViewController.loadUI()
+                homeViewController.tableView.reloadData()
+                
+                self.navigationController?.popViewController(animated: true)
+                
+            }, onError: { error in
+                debugPrint(error)
+            })
+            
         }
         
     }
