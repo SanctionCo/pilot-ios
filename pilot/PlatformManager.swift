@@ -51,13 +51,6 @@ class PlatformManager {
             self.platforms = manager.getAvailablePlatforms()
         }
         
-//        PilotUser.fetch(with: ThunderRouter.fetchPilotUser(), onSuccess: { [weak self] pilotUser in
-//            self?.platforms = pilotUser.availablePlatforms
-//        }, onError: { error in
-//            // Display an error to the user informing them their data is out of sync
-//            print("There was en error updaing the platform list")
-//        })
-        
     }
     
 }
