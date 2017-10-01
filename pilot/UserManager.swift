@@ -58,6 +58,10 @@ class UserManager {
         self.pilotUser.twitterAccessSecret = secret
     }
     
+    func getAvailablePlatforms() -> [Platform] {
+        return pilotUser.availablePlatforms
+    }
+    
     func invalidateUser() {
         UserManager.sharedInstance = nil
     }

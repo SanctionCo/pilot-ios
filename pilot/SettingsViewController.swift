@@ -120,20 +120,21 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             
             let platform = unconnectedPlatforms[indexPath.row]
             
-            OAuthManager.authorizeService(platform: platform) { tokenURL, error in
-                print(tokenURL?.absoluteString)
-                                
-                switch platform.type {
-                case .facebook:
-                    let matchingGroups = tokenURL?.absoluteString.matchingStrings(regex: "access_token=([^&]+)(?:&expires=(.*))?")
-                    let token = matchingGroups![0][1]
-                    UserManager.sharedInstance?.setFacebookAccessToken(token: token)
-                default:
-                    break
-                }
+            OAuthManager.authorizeService(platform: platform, onSuccess: {
                 
-                UserManager.sharedInstance?.updateUser()
-            }
+                // Reload the platform list
+                PlatformManager.sharedInstance.reload()
+                
+                // Reload the home tableView and pop to it
+                let homeViewController = self.navigationController?.viewControllers[0] as! HomeViewController
+                homeViewController.loadUI()
+                homeViewController.tableView.reloadData()
+                
+                self.navigationController?.popViewController(animated: true)
+                
+            }, onError: { error in
+                debugPrint(error)
+            })
             
         }
         

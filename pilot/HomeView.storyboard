@@ -231,6 +231,7 @@
                         <outlet property="chosenImage" destination="dsp-g2-2NJ" id="d7y-dF-cBg"/>
                         <outlet property="postText" destination="ZbM-8S-qCL" id="SQM-da-k2i"/>
                         <outlet property="publishButton" destination="Nh5-xV-S8K" id="lL3-7I-BCw"/>
+                        <outlet property="tableView" destination="Fha-Xk-dDS" id="O4j-wH-JQh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y70-L4-kH5" userLabel="First Responder" sceneMemberID="firstResponder"/>

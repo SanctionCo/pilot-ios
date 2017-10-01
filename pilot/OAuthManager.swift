@@ -13,7 +13,10 @@ class OAuthManager {
     
     static var authSession: SFAuthenticationSession? = nil
     
-    static func authorizeService(platform: Platform, handler: @escaping (_ callBack: URL?, _ error: Error?) -> ()) {
+    typealias SuccessHandler = () -> Void
+    typealias ErrorHandler = (Error) -> Void
+    
+    static func authorizeService(platform: Platform, onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
         
         // Fetch the OAuth URL from thunder
         NetworkManager.sharedInstance.request(LightningRouter.getOauthURL(platform.type)).responseString() { response in
@@ -26,13 +29,34 @@ class OAuthManager {
                     return
                 }
                 
-                let redirectUriString = authURL.getQueryParam(key: "redirect_uri")!
+                OAuthManager.authSession = SFAuthenticationSession(url: authURL, callbackURLScheme: platform.redirectURL) { (callBack: URL?, error: Error?) in
+                        guard error == nil, let successURL = callBack else {
+                            if let error = error {
+                                onError(error)
+                            }
+                            
+                            return
+                        }
+                        
+                        switch platform.type {
+                        case .facebook:
+                            let token = successURL.getFragementParam(key: platform.tokenParamKey)
+                            
+                            UserManager.sharedInstance?.setFacebookAccessToken(token: token!)
+                        default:
+                            break
+                        }
+                        
+                        UserManager.sharedInstance?.updateUser()
+                        
+                        onSuccess()
+                }
                 
-                OAuthManager.authSession = SFAuthenticationSession(url: authURL, callbackURLScheme: redirectUriString, completionHandler: handler)
+                
                 OAuthManager.authSession?.start()
                 
             case .failure(let error):
-                debugPrint(error)
+                onError(error)
             }
             
         }

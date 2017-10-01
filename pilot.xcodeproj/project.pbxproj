@@ -26,7 +26,6 @@
 		945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C21F475ACD00E07290 /* AuthAdapter.swift */; };
 		9460CDDB1F7F658200D8E910 /* CustomTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460CDDA1F7F658200D8E910 /* CustomTableHeaderView.xib */; };
 		9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9460CDDE1F807A0500D8E910 /* OAuthManager.swift */; };
-		9460CDE11F80AAC300D8E910 /* String+Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9460CDE01F80AAC300D8E910 /* String+Pilot.swift */; };
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
 		946890341F29A1A9007E46DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890331F29A1A9007E46DD /* HomeViewController.swift */; };
@@ -93,7 +92,6 @@
 		945E67C21F475ACD00E07290 /* AuthAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthAdapter.swift; path = pilot/AuthAdapter.swift; sourceTree = "<group>"; };
 		9460CDDA1F7F658200D8E910 /* CustomTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableHeaderView.xib; sourceTree = "<group>"; };
 		9460CDDE1F807A0500D8E910 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
-		9460CDE01F80AAC300D8E910 /* String+Pilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Pilot.swift"; sourceTree = "<group>"; };
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
 		946890331F29A1A9007E46DD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 			children = (
 				949E5DCD1F2813C8009EE3EB /* UIColor+PilotColors.swift */,
 				94CD01B11F76045D0045BB45 /* URL+Params.swift */,
-				9460CDE01F80AAC300D8E910 /* String+Pilot.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -524,7 +521,6 @@
 				94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */,
 				949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */,
 				94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */,
-				9460CDE11F80AAC300D8E910 /* String+Pilot.swift in Sources */,
 				948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */,
 				942951491F591160000EF278 /* NetworkManager.swift in Sources */,
 				9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */,
