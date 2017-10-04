@@ -43,7 +43,12 @@ class AccountTableViewController: UITableViewController {
 
         if let type = self.platform?.type {
           let actionSheet = UIAlertController(title: "Disconnect" + type.rawValue,
-                                              message: "Are you sure you want to disconnect this account?",
+                                              message:
+                                              """
+                                                Are you sure you want to disconnect this account?
+                                                You will need to reconnect again if you want post
+                                                to this account in the future
+                                              """,
                                               preferredStyle: UIAlertControllerStyle.actionSheet)
 
           actionSheet.addAction(UIAlertAction(title: "Disconnect", style: UIAlertActionStyle.default, handler: { _ in
@@ -51,7 +56,15 @@ class AccountTableViewController: UITableViewController {
 
               PlatformManager.sharedInstance.reload()
 
-              self.navigationController?.popViewController(animated: true)
+              // Alert the user that the platform removal was successful
+              let alert = UIAlertController(title: "Account succesfully removed!",
+                                            message: "", preferredStyle: .alert)
+
+              alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                  self.navigationController?.popViewController(animated: true)
+              })
+
+              self.present(alert, animated: true, completion: nil)
             }, onError: { error in
               debugPrint(error)
             })
