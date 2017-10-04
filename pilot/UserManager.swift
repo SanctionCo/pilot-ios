@@ -65,18 +65,12 @@ class UserManager {
     func invalidateUser() {
         UserManager.sharedInstance = nil
     }
-    
-    func getUser() {
-        
-    }
-    
+
     typealias SuccessHandler = (PilotUser) -> Void
     typealias ErrorHandler = (Error) -> Void
     
     func updateUser(onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
-        
-        print(pilotUser.toJSONString(prettyPrint: true)!)
-        
+                
         PilotUser.upload(with: ThunderRouter.updatePilotUser(pilotUser), onSuccess: { pilotUser in
             self.pilotUser = pilotUser
             onSuccess(pilotUser)
