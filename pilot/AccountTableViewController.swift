@@ -42,14 +42,24 @@ class AccountTableViewController: UITableViewController {
             if indexPath.row == 0 {
 
                 if let type = self.platform?.type {
-                    PlatformManager.sharedInstance.disconnectPlatform(type: type, onSuccess: {
+                    let actionSheet = UIAlertController(title: "Disconnect" + type.rawValue,
+                                                        message: "Are you sure you want to disconnect this account?",
+                                                        preferredStyle: UIAlertControllerStyle.actionSheet)
 
-                        PlatformManager.sharedInstance.reload()
+                    actionSheet.addAction(UIAlertAction(title: "Disconnect", style: UIAlertActionStyle.default, handler: { _ in
+                        PlatformManager.sharedInstance.disconnectPlatform(type: type, onSuccess: {
 
-                        self.navigationController?.popViewController(animated: true)
-                    }, onError: { error in
-                        debugPrint(error)
-                    })
+                            PlatformManager.sharedInstance.reload()
+
+                            self.navigationController?.popViewController(animated: true)
+                        }, onError: { error in
+                            debugPrint(error)
+                        })
+                    }))
+
+                    actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+
+                    present(actionSheet, animated: true, completion: nil)
                 }
 
             }

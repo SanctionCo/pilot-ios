@@ -32,12 +32,21 @@ class ProfileViewController: UITableViewController {
         if indexPath.section == 1 {
             if indexPath.row == 0 {
                 UserManager.sharedInstance?.invalidateUser()
-                
-                // Navigate back to the LoginViewController
-                let storyboard = UIStoryboard.init(name: "LoginViewController", bundle: nil)
-                let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                
-                self.present(loginViewController, animated: false, completion: nil)
+
+                let actionSheet = UIAlertController(title: "Sign out",
+                                              message: "Are you sure you want to sign out?",
+                                              preferredStyle: UIAlertControllerStyle.actionSheet)
+
+                actionSheet.addAction(UIAlertAction(title: "Sign out", style: UIAlertActionStyle.default, handler: { _ in
+                    let storyboard = UIStoryboard.init(name: "LoginViewController", bundle: nil)
+                    let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+
+                    self.present(loginViewController, animated: false, completion: nil)
+                }))
+
+                actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+
+                present(actionSheet, animated: true, completion: nil)
             }
         }
     }
