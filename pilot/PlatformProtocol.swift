@@ -17,7 +17,7 @@ enum PlatformType: String {
 }
 
 protocol PlatformProtocol {
-    
+
     var type: PlatformType { get }
     var image: UIImage? { get set }
     var isConnected: Bool { get set }

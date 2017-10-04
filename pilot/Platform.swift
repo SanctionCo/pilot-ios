@@ -9,14 +9,13 @@
 import Foundation
 import UIKit
 
-// WARNING: Only one platform should exist per PlatformType otherwise you'll have multiple instances of each service! :o
 struct Platform: PlatformProtocol {
-    
+
     var type: PlatformType      // Enum type for the platform
     var image: UIImage?         // Image to represent the platform
     var isConnected: Bool       // Is the platform connected to the users account?
     var isSelected: Bool        // Is the platform selected by the user?
-    
+
     var redirectURL: String {
         switch type {
         case .facebook:
@@ -25,7 +24,7 @@ struct Platform: PlatformProtocol {
             return PilotConfiguration.Lightning.twitterRedirectURL
         }
     }
-    
+
     var tokenParamKey: String {
         switch type {
         case .facebook:
@@ -34,15 +33,15 @@ struct Platform: PlatformProtocol {
             return PilotConfiguration.Lightning.twitterTokenParamKey
         }
     }
-    
+
     init(type: PlatformType, isConnected: Bool) {
         self.type = type
         self.isConnected = isConnected
         self.isSelected = false  // Default
-        
+
         self.setPlatformImage()
     }
-    
+
     // Sets the image used to represent the platform
     mutating func setPlatformImage() {
         switch type {
@@ -50,17 +49,17 @@ struct Platform: PlatformProtocol {
             guard let facebookImage = UIImage(named: "facebook") else {
                 return
             }
-            
+
             image = facebookImage
         case PlatformType.twitter:
             guard let twitterImage = UIImage(named: "twitter") else {
                 return
             }
-            
+
             image = twitterImage
         }
     }
-    
+
 }
 
 extension Platform: Hashable {

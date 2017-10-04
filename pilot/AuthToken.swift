@@ -12,13 +12,13 @@ import SwiftHash
 // The Auth Token is used for headers or parameters needed to authenticate a request
 
 struct AuthToken {
-    
+
     var email: String
     var password: String
-    
+
     init(email: String, password: String) {
         self.email = email
         self.password = password
     }
-    
+
 }
