@@ -55,7 +55,6 @@ class OAuthManager {
 
                 }
 
-
                 OAuthManager.authSession?.start()
 
             case .failure(let error):

@@ -29,7 +29,7 @@ class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
     }
-    
+
     func styleUI() { }
 
     func loadUI() {
