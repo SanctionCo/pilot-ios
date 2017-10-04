@@ -9,40 +9,40 @@
 import UIKit
 
 class HomeTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var platformImage: UIImageView?
-    @IBOutlet weak var progressBar: UIProgressView!
-    
-    var platform: Platform! {
-        didSet {
-            title.text = platform.type.rawValue
-            platformImage?.image = platform.image
-        }
+  
+  @IBOutlet weak var title: UILabel!
+  @IBOutlet weak var platformImage: UIImageView?
+  @IBOutlet weak var progressBar: UIProgressView!
+  
+  var platform: Platform! {
+    didSet {
+      title.text = platform.type.rawValue
+      platformImage?.image = platform.image
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        progressBar.isHidden = true
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Custom cell animations/UI when selected
-    }
+  }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
     
-    func setProgress(value: Double) {
-        progressBar.progress = Float(value)
-    }
+    progressBar.isHidden = true
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
     
-    func showProgressBar() {
-        progressBar.isHidden = false
-    }
-    
-    func hideProgressBar() {
-        progressBar.isHidden = true
-    }
-    
+    // Custom cell animations/UI when selected
+  }
+  
+  func setProgress(value: Double) {
+    progressBar.progress = Float(value)
+  }
+  
+  func showProgressBar() {
+    progressBar.isHidden = false
+  }
+  
+  func hideProgressBar() {
+    progressBar.isHidden = true
+  }
+  
 }

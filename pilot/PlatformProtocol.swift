@@ -12,14 +12,14 @@ import SwiftyJSON
 import HTTPStatusCodes
 
 enum PlatformType: String {
-    case twitter = "twitter"
-    case facebook = "facebook"
+  case twitter = "twitter"
+  case facebook = "facebook"
 }
 
 protocol PlatformProtocol {
 
-    var type: PlatformType { get }
-    var image: UIImage? { get set }
-    var isConnected: Bool { get set }
-    
+  var type: PlatformType { get }
+  var image: UIImage? { get set }
+  var isConnected: Bool { get set }
+
 }
