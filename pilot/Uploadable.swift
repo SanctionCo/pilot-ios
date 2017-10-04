@@ -24,9 +24,7 @@ extension Uploadable where Self: Mappable {
     
     typealias SuccessHandler<T> = (T) -> Void where T: Mappable
     typealias ErrorHandler = (Error) -> Void
-    
     static func upload(with request: URLRequestConvertible, onSuccess: @escaping SuccessHandler<Self>, onError: @escaping ErrorHandler) {
-        
         NetworkManager.sharedInstance.request(request).responseObject() { (response: DataResponse<Self>) in
             
             debugPrint(response)
