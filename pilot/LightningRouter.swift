@@ -13,13 +13,13 @@ import HTTPStatusCodes
 
 /// The router builds static content related to the URL such as parameters, headers, etc..
 enum LightningRouter: URLRequestConvertible {
-  
+
   case publish(PlatformType, [String: Any]?)
   case extendToken(PlatformType)
   case getOauthURL(PlatformType)
-  
+
   static let baseURLString = PilotConfiguration.Lightning.host
-  
+
   // HTTP Method used for each endpoint
   var method: HTTPMethod {
     switch self {
@@ -29,7 +29,7 @@ enum LightningRouter: URLRequestConvertible {
       return .get
     }
   }
-  
+
   // Path for each request type
   var path: String {
     switch self {
@@ -41,11 +41,11 @@ enum LightningRouter: URLRequestConvertible {
       return "/\(type.rawValue)/oauthUrl"
     }
   }
-  
+
   var url: URL {
     return URL(string: LightningRouter.baseURLString)!.appendingPathComponent(path)
   }
-  
+
   // How to encode the requet based on the endpoint
   var encoding: ParameterEncoding {
     switch self {
@@ -55,7 +55,7 @@ enum LightningRouter: URLRequestConvertible {
       return URLEncoding.default
     }
   }
-  
+
   // Paramers for the request
   var dynamicparameters: [String: Any]? {
     switch self {
@@ -72,7 +72,7 @@ enum LightningRouter: URLRequestConvertible {
       return nil
     }
   }
-  
+
   var staticParameters: [String: Any]? {
     switch self {
     case .getOauthURL:
@@ -81,7 +81,7 @@ enum LightningRouter: URLRequestConvertible {
       return ["email": UserManager.sharedInstance!.getEmail()]
     }
   }
-  
+
   var staticHeaders: [String: String]? {
     switch self {
     case .getOauthURL:
@@ -90,31 +90,31 @@ enum LightningRouter: URLRequestConvertible {
       return ["password": UserManager.sharedInstance!.getPassword()]
     }
   }
-  
+
   // MARK: URLRequestConvertable
-  
+
   /// Builds a URLRequest based on enum values
   ///
   /// - Returns: A URLRequest
   /// - Throws: A AFError.parameterEncodingFailed Error
   func asURLRequest() throws -> URLRequest {
-    
+
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = method.rawValue
-    
+
     // Set static headers if needed
     if let staticHeaders = staticHeaders {
       for (key, value) in staticHeaders {
         urlRequest.setValue(value, forHTTPHeaderField: key)
       }
     }
-    
+
     // Set the static parameters if needed
     if let staticParameters = staticParameters {
       urlRequest = try encoding.encode(urlRequest, with: staticParameters)
     }
-    
+
     return try encoding.encode(urlRequest, with: dynamicparameters)
   }
-  
+
 }

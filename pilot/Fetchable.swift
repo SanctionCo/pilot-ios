@@ -14,15 +14,15 @@ import SwiftyJSON
 
 // The fetchable protocol will allow an object to be capable of fetching data from a URL
 protocol Fetchable {
-  
+
 }
 
 
 extension Fetchable where Self: Mappable {
-  
+
   typealias SuccessHandler<T> = (T) -> Void where T: Mappable
   typealias ErrorHandler = (Error) -> Void
-  
+
   static func fetch(with request: URLRequestConvertible,
                     onSuccess: @escaping SuccessHandler<Self>,
                     onError: @escaping ErrorHandler) {
@@ -37,8 +37,8 @@ extension Fetchable where Self: Mappable {
       case .failure(let error):
         onError(error)
       }
-      
+
     }
-    
+
   }
 }
