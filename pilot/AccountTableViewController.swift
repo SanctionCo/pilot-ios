@@ -9,16 +9,16 @@
 import UIKit
 
 class AccountTableViewController: UITableViewController {
-    
+
     var platform: Platform?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if let title = platform?.type.rawValue {
             self.title = title
         }
-        
+
         navigationItem.largeTitleDisplayMode = .never
     }
 
@@ -35,26 +35,26 @@ class AccountTableViewController: UITableViewController {
             return 1
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-                
+
                 if let type = self.platform?.type {
                     PlatformManager.sharedInstance.disconnectPlatform(type: type, onSuccess: {
-                        
+
                         PlatformManager.sharedInstance.reload()
-                        
+
                         self.navigationController?.popViewController(animated: true)
                     }, onError: { error in
                         debugPrint(error)
                     })
                 }
-                
+
             }
         }
-        
+
     }
-    
+
 }
