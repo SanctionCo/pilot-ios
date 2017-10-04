@@ -13,12 +13,12 @@ import SwiftHash
 
 struct AuthToken {
 
-    var email: String
-    var password: String
+  var email: String
+  var password: String
 
-    init(email: String, password: String) {
-        self.email = email
-        self.password = password
-    }
+  init(email: String, password: String) {
+    self.email = email
+    self.password = password
+  }
 
 }

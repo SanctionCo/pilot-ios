@@ -9,18 +9,18 @@
 import UIKit
 
 class AccountTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var accountEmail: UILabel!
-    
-    var pilotUser: PilotUser? {
-        didSet {
-            accountEmail.text = pilotUser?.email
-        }
-    }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+  @IBOutlet weak var accountEmail: UILabel!
 
+  var pilotUser: PilotUser? {
+    didSet {
+      accountEmail.text = pilotUser?.email
     }
+  }
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+
+  }
 
 }
