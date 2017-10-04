@@ -38,23 +38,23 @@ class UserManager {
         return pilotUser.twitterAccessSecret!
     }
     
-    func setEmail(newEmail: String) {
+    func setEmail(newEmail: String?) {
         self.pilotUser.email = newEmail
     }
     
-    func setPassword(newPassword: String) {
+    func setPassword(newPassword: String?) {
         self.pilotUser.password = newPassword
     }
     
-    func setFacebookAccessToken(token: String) {
+    func setFacebookAccessToken(token: String?) {
         self.pilotUser.facebookAccessToken = token
     }
     
-    func setTwitterAccessToken(token: String) {
+    func setTwitterAccessToken(token: String?) {
         self.pilotUser.twitterAccessToken = token
     }
     
-    func setTwitterAccessSecret(secret: String) {
+    func setTwitterAccessSecret(secret: String?) {
         self.pilotUser.twitterAccessSecret = secret
     }
     
@@ -66,11 +66,23 @@ class UserManager {
         UserManager.sharedInstance = nil
     }
     
-    func updateUser() {
+    func getUser() {
+        
+    }
+    
+    typealias SuccessHandler = (PilotUser) -> Void
+    typealias ErrorHandler = (Error) -> Void
+    
+    func updateUser(onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
+        
+        print(pilotUser.toJSONString(prettyPrint: true)!)
+        
         PilotUser.upload(with: ThunderRouter.updatePilotUser(pilotUser), onSuccess: { pilotUser in
             self.pilotUser = pilotUser
+            onSuccess(pilotUser)
         }, onError: { error in
             debugPrint(error)
+            onError(error)
         })
     }
 }

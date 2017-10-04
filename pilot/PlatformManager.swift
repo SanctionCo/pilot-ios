@@ -53,4 +53,31 @@ class PlatformManager {
         
     }
     
+    typealias SuccessHandler = () -> Void
+    typealias ErrorHandler = (Error) -> Void
+    
+    /// Disconnects a platform from the logged in user
+    ///
+    /// - Parameter type: A platform type to disconnect
+    func disconnectPlatform(type: PlatformType, onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
+        
+        guard let sharedInstance = UserManager.sharedInstance else {
+            return
+        }
+        
+        switch type {
+        case .facebook:
+            sharedInstance.setFacebookAccessToken(token: nil)
+        case .twitter:
+            sharedInstance.setTwitterAccessToken(token: nil)
+            sharedInstance.setTwitterAccessSecret(secret: nil)
+        }
+                
+        sharedInstance.updateUser(onSuccess: { _ in
+            onSuccess()
+        }, onError: { error in
+            onError(error)
+        })
+    }
+    
 }

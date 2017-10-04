@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-// WARNING: Only one platform should exist per PlatformType otherwise you'll have multiple instances of each service! :o
 struct Platform: PlatformProtocol {
     
     var type: PlatformType      // Enum type for the platform

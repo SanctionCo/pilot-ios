@@ -49,5 +49,5 @@ struct PilotUser: Fetchable, Uploadable, Mappable {
         twitterAccessToken <- map["twitterAccessToken"]
         twitterAccessSecret <- map["twitterAccessSecret"]
     }
-    
+
 }

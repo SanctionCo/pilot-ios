@@ -47,9 +47,12 @@ class OAuthManager {
                             break
                         }
                         
-                        UserManager.sharedInstance?.updateUser()
-                        
+                    UserManager.sharedInstance?.updateUser(onSuccess: { _ in
                         onSuccess()
+                    }, onError: { error in
+                        debugPrint(error)
+                    })
+                        
                 }
                 
                 

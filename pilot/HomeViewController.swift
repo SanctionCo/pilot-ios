@@ -31,6 +31,12 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         postText.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tableView.reloadData()
+    }
+    
     @IBAction func pickImage(_ sender: UIButton) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
