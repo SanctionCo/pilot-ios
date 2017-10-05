@@ -18,7 +18,6 @@ protocol Uploadable {
 
 }
 
-
 extension Uploadable where Self: Mappable {
 
   typealias SuccessHandler<T> = (T) -> Void where T: Mappable

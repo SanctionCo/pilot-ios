@@ -16,7 +16,6 @@ protocol Publishable {
 
 }
 
-
 extension Publishable {
 
   typealias SuccessHandler = () -> Void

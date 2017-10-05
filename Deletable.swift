@@ -16,7 +16,6 @@ protocol Deletable {
 
 }
 
-
 extension Deletable where Self: Mappable {
 
   typealias SuccessHandler<T> = (T) -> Void where T: Mappable
