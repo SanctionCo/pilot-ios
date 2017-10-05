@@ -11,7 +11,6 @@ import Alamofire
 import SwiftyJSON
 import HTTPStatusCodes
 
-
 /// Inserts dynamic authentication data such as Basic auth and password headers required for each request.
 /// NOTE: An adapter is nessissary to allow retrying connections since a Router is only called once per request.
 class AuthAdapter: RequestAdapter {

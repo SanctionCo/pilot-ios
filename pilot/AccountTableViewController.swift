@@ -57,11 +57,11 @@ class AccountTableViewController: UITableViewController {
               PlatformManager.sharedInstance.reload()
 
               // Alert the user that the platform removal was successful
-              let alert = UIAlertController(title: "Account succesfully removed!",
+              let alert = UIAlertController(title: "Account successfully removed!",
                                             message: "", preferredStyle: .alert)
 
               alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                  self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
               })
 
               self.present(alert, animated: true, completion: nil)

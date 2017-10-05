@@ -51,5 +51,44 @@ class ProfileViewController: UITableViewController {
         present(actionSheet, animated: true, completion: nil)
       }
     }
+
+    if indexPath.section == 2 {
+      if indexPath.row == 0 {
+        let actionSheet = UIAlertController(title: "DELETE ACCOUNT",
+                                            message: """
+                                                      Are you sure you want to delete your account?
+                                                      This action cannot be undone.
+                                                     """,
+                                            preferredStyle: UIAlertControllerStyle.actionSheet)
+
+        actionSheet.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.default, handler: { _ in
+
+          UserManager.sharedInstance?.deleteUser(onSuccess: { _ in
+
+            // Alert the user that the account was successfully deleted
+            let alert = UIAlertController(title: "User account successfully deleted!",
+                                          message: "", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+
+              // Navigate back to the LoginViewController
+              let storyboard = UIStoryboard.init(name: "LoginViewController", bundle: nil)
+              let loginViewController =
+                storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+
+              self.present(loginViewController, animated: false, completion: nil)
+            })
+
+            self.present(alert, animated: true, completion: nil)
+          }, onError: { error in
+            debugPrint(error)
+          })
+        }))
+
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+
+        present(actionSheet, animated: true, completion: nil)
+      }
+    }
   }
 }

@@ -11,7 +11,6 @@ import Foundation
 import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
-import SwiftyJSON
 
 // The uploadable protocol will allow an object to be uploaded to lightning as a JSON object.
 // (mainly for a PilotUser object to update/create a new user)
@@ -19,11 +18,11 @@ protocol Uploadable {
 
 }
 
-
 extension Uploadable where Self: Mappable {
 
   typealias SuccessHandler<T> = (T) -> Void where T: Mappable
   typealias ErrorHandler = (Error) -> Void
+
   static func upload(with request: URLRequestConvertible,
                      onSuccess: @escaping SuccessHandler<Self>,
                      onError: @escaping ErrorHandler) {
