@@ -11,7 +11,7 @@ import ObjectMapper
 
 // Represents a pilot user fetched from thunder
 
-struct PilotUser: Fetchable, Uploadable, Mappable {
+struct PilotUser: Fetchable, Uploadable, Deletable, Mappable {
 
   var email: String?
   var password: String?

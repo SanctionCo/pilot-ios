@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
-import SwiftyJSON
 
 // The fetchable protocol will allow an object to be capable of fetching data from a URL
 protocol Fetchable {

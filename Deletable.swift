@@ -1,35 +1,32 @@
 //
-//  Uploadable.swift
+//  Deletable.swift
 //  pilot
 //
-//  Created by Nick Eckert on 8/28/17.
+//  Created by Nick Eckert on 10/4/17.
 //  Copyright © 2017 sanction. All rights reserved.
 //
-
 
 import Foundation
 import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
 
-// The uploadable protocol will allow an object to be uploaded to lightning as a JSON object.
-// (mainly for a PilotUser object to update/create a new user)
-protocol Uploadable {
-
+// The fetchable protocol will allow an object to be capable of fetching data from a URL
+protocol Deletable {
+  
 }
 
 
-extension Uploadable where Self: Mappable {
-
+extension Deletable where Self: Mappable {
+  
   typealias SuccessHandler<T> = (T) -> Void where T: Mappable
   typealias ErrorHandler = (Error) -> Void
   
-  static func upload(with request: URLRequestConvertible,
-                     onSuccess: @escaping SuccessHandler<Self>,
-                     onError: @escaping ErrorHandler) {
-
+  static func delete(with request: URLRequestConvertible,
+                    onSuccess: @escaping SuccessHandler<Self>,
+                    onError: @escaping ErrorHandler) {
+    
     NetworkManager.sharedInstance.request(request).responseObject() { (response: DataResponse<Self>) in
-
       debugPrint(response)
       switch response.result {
       case .success:
@@ -39,8 +36,8 @@ extension Uploadable where Self: Mappable {
       case .failure(let error):
         onError(error)
       }
+      
     }
-
+    
   }
-
 }

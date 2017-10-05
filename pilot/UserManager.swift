@@ -80,4 +80,14 @@ class UserManager {
     })
 
   }
+  
+  func deleteUser(onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
+    
+    PilotUser.delete(with: ThunderRouter.deletePilotUser(), onSuccess: { pilotUser in
+      onSuccess(pilotUser)
+    }, onError: { error in
+      onError(error)
+    })
+    
+  }
 }
