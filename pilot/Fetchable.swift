@@ -11,7 +11,7 @@ import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
 
-// The fetchable protocol will allow an object to be capable of fetching data from a URL
+// The fetchable protocol will allow an object to be capable of fetching data from a URL.
 protocol Fetchable {
 
 }

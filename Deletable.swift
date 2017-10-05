@@ -11,21 +11,21 @@ import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
 
-// The fetchable protocol will allow an object to be capable of fetching data from a URL
+// The deletable protocol will allow an object to be deleted from Thunder.
 protocol Deletable {
-  
+
 }
 
 
 extension Deletable where Self: Mappable {
-  
+
   typealias SuccessHandler<T> = (T) -> Void where T: Mappable
   typealias ErrorHandler = (Error) -> Void
-  
+
   static func delete(with request: URLRequestConvertible,
-                    onSuccess: @escaping SuccessHandler<Self>,
-                    onError: @escaping ErrorHandler) {
-    
+                     onSuccess: @escaping SuccessHandler<Self>,
+                     onError: @escaping ErrorHandler) {
+
     NetworkManager.sharedInstance.request(request).responseObject() { (response: DataResponse<Self>) in
       debugPrint(response)
       switch response.result {
@@ -36,8 +36,8 @@ extension Deletable where Self: Mappable {
       case .failure(let error):
         onError(error)
       }
-      
+
     }
-    
+
   }
 }
