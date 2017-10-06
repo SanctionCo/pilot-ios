@@ -50,7 +50,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       // swiftlint:disable force_cast
       let cell =
         tableView.dequeueReusableCell(withIdentifier: "AccountTableViewCell", for: indexPath) as! AccountTableViewCell
-      // swiftline:enable force_cast
+      // swiftlint:enable force_cast
 
       cell.pilotUser = pilotUser
       return cell
@@ -59,7 +59,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       // swiftlint:disable force_cast
       let cell = tableView
         .dequeueReusableCell(withIdentifier: "ConnectionTableViewCell", for: indexPath) as! ConnectionTableViewCell
-      // swiftline:enable force_cast
+      // swiftlint:enable force_cast
 
       if connectedPlatforms.count != 0 {
         cell.platform = connectedPlatforms[indexPath.row]
@@ -73,7 +73,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       // swiftlint:disable force_cast
       let cell = tableView
         .dequeueReusableCell(withIdentifier: "ConnectionTableViewCell", for: indexPath) as! ConnectionTableViewCell
-      // swiftline:enable force_cast
+      // swiftlint:enable force_cast
 
       cell.platform = unconnectedPlatforms[indexPath.row]
       return cell
@@ -130,7 +130,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       // swiftlint:disable force_cast
       let profileViewController =
         storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-      // swiftline:enable force_cast
+      // swiftlint:enable force_cast
 
       self.navigationController?.pushViewController(profileViewController, animated: true)
     } else if indexPath.section == 1 && connectedPlatforms.count != 0 {
@@ -138,7 +138,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       // swiftlint:disable force_cast
       let accountViewController = storyboard?
         .instantiateViewController(withIdentifier: "AccountTableViewController") as! AccountTableViewController
-      // swiftline:enable force_cast
+      // swiftlint:enable force_cast
 
       accountViewController.platform = connectedPlatforms[indexPath.row]
 
