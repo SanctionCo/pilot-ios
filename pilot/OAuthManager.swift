@@ -11,7 +11,7 @@ import SafariServices
 
 class OAuthManager {
 
-  static var authSession: SFAuthenticationSession? = nil
+  static var authSession: SFAuthenticationSession?
 
   typealias SuccessHandler = () -> Void
   typealias ErrorHandler = (Error) -> Void
@@ -20,7 +20,7 @@ class OAuthManager {
                                onSuccess: @escaping SuccessHandler,
                                onError: @escaping ErrorHandler) {
 
-    NetworkManager.sharedInstance.request(LightningRouter.getOauthURL(platform.type)).responseString() { response in
+    NetworkManager.sharedInstance.request(LightningRouter.getOauthURL(platform.type)).responseString { response in
 
       debugPrint(response)
       switch response.result {
@@ -30,8 +30,9 @@ class OAuthManager {
           return
         }
 
-        OAuthManager.authSession = SFAuthenticationSession(url: authURL, callbackURLScheme: platform.redirectURL) {
-          (callBack: URL?, error: Error?) in
+        OAuthManager.authSession =
+          SFAuthenticationSession(url: authURL,
+                                  callbackURLScheme: platform.redirectURL) { (callBack: URL?, error: Error?) in
 
           guard error == nil, let successURL = callBack else {
             if let error = error {

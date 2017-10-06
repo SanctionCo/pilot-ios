@@ -6,7 +6,6 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-
 import Foundation
 import Alamofire
 import AVFoundation
@@ -56,8 +55,7 @@ extension Publishable {
         uploadRequest.uploadProgress { progress in
           let percentage = progress.fractionCompleted
           onProgress(percentage)
-          }.responseJSON() { response in
-            debugPrint(response)
+          }.responseJSON { response in
             switch response.result {
             case .success:
               onSuccess()

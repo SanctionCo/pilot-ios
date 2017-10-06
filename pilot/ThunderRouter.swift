@@ -96,7 +96,6 @@ enum ThunderRouter: URLRequestConvertible {
     return "application/json"
   }
 
-
   // MARK: URLRequestConvertable
 
   /// Builds a URLRequest based on enum values

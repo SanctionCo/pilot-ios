@@ -28,13 +28,13 @@ struct PilotUser: Fetchable, Uploadable, Deletable, Mappable {
 
   init?(map: Map) {
 
-    if let _ = map.JSON["facebookAccessToken"] as? String {
+    if (map.JSON["facebookAccessToken"] as? String) != nil {
       availablePlatforms.append(Platform(type: .facebook, isConnected: true))
     } else {
       availablePlatforms.append(Platform(type: .facebook, isConnected: false))
     }
 
-    if let _ = map.JSON["twitterAccessToken"] as? String {
+    if (map.JSON["twitterAccessToken"] as? String) != nil {
       availablePlatforms.append(Platform(type: .twitter, isConnected: true))
     } else {
       availablePlatforms.append(Platform(type: .twitter, isConnected: false))

@@ -339,6 +339,7 @@
 				941A43691F1F0AE600D35777 /* Resources */,
 				BB0EB33906ADB568D6A6FD10 /* [CP] Embed Pods Frameworks */,
 				59A1D5DA541923C3EC0ED0B0 /* [CP] Copy Pods Resources */,
+				9425EF721F87308100DA34C6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -537,6 +538,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pilot/Pods-pilot-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9425EF721F87308100DA34C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		96505924C2D9621BDC770747 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

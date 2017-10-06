@@ -46,14 +46,20 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
+
+      // swiftlint:disable force_cast
       let cell =
         tableView.dequeueReusableCell(withIdentifier: "AccountTableViewCell", for: indexPath) as! AccountTableViewCell
-      cell.pilotUser = pilotUser
+      // swiftlint:enable force_cast
 
+      cell.pilotUser = pilotUser
       return cell
     } else if indexPath.section == 1 {
+
+      // swiftlint:disable force_cast
       let cell = tableView
         .dequeueReusableCell(withIdentifier: "ConnectionTableViewCell", for: indexPath) as! ConnectionTableViewCell
+      // swiftlint:enable force_cast
 
       if connectedPlatforms.count != 0 {
         cell.platform = connectedPlatforms[indexPath.row]
@@ -63,10 +69,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
       return cell
     } else {
+
+      // swiftlint:disable force_cast
       let cell = tableView
         .dequeueReusableCell(withIdentifier: "ConnectionTableViewCell", for: indexPath) as! ConnectionTableViewCell
-      cell.platform = unconnectedPlatforms[indexPath.row]
+      // swiftlint:enable force_cast
 
+      cell.platform = unconnectedPlatforms[indexPath.row]
       return cell
     }
   }
@@ -117,13 +126,20 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     if indexPath.section == 0 {
+
+      // swiftlint:disable force_cast
       let profileViewController =
         storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+      // swiftlint:enable force_cast
 
       self.navigationController?.pushViewController(profileViewController, animated: true)
     } else if indexPath.section == 1 && connectedPlatforms.count != 0 {
+
+      // swiftlint:disable force_cast
       let accountViewController = storyboard?
         .instantiateViewController(withIdentifier: "AccountTableViewController") as! AccountTableViewController
+      // swiftlint:enable force_cast
+
       accountViewController.platform = connectedPlatforms[indexPath.row]
 
       self.navigationController?.pushViewController(accountViewController, animated: true)
