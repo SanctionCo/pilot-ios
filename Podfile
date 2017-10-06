@@ -8,7 +8,6 @@ target 'pilot' do
   pod 'AlamofireObjectMapper', '~> 5.0.0'
   pod 'SwiftyJSON', '~> 3.1.4'
   pod 'HTTPStatusCodes', '~> 3.1.2'
-  pod 'SwiftLint'
 
   target 'pilotTests' do
     inherit! :search_paths
