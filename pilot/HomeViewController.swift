@@ -112,7 +112,12 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
         Post.publish(post: post, with: LightningRouter.publish(platform.type, parameters), onProgress: { value in
           // Output upload status to view
         }, onSuccess: {
-          // Output oossible success to view
+          let alert = UIAlertController(title: "Post Successful!",
+                                        message: "", preferredStyle: .alert)
+
+          alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+
+          self.present(alert, animated: true, completion: nil)
         }, onError: { error in
           // Output/handle error in view
         })
