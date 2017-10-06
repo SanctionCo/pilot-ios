@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
 
   @IBOutlet weak var tableView: UITableView!
 
-  var imagePicker = UIImagePickerController()                   // TODO: Injection?
+  var imagePicker = UIImagePickerController()
   var availablePlatforms: [Platform]?                           // Platforms the user has to choose from
   var post = Post()                                             // Post object representing current user post state
 
@@ -58,10 +58,11 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
 
   @IBAction func settings(_ sender: UIBarButtonItem) {
     let storyboard = UIStoryboard.init(name: "SettingsView", bundle: nil)
-    let settingsViewController =
-      storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+    if let settingsViewController =
+      storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController {
 
-    self.navigationController?.pushViewController(settingsViewController, animated: true)
+      self.navigationController?.pushViewController(settingsViewController, animated: true)
+    }
   }
 
   func styleUI() {
@@ -74,7 +75,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
     postText.text = "Write post here"
     postText.textColor = UIColor.lightGray
 
-    // TODO: Make this modular for any keyboard that needs this
     // Set up the keyboard toolbar
     let doneButton =
       UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonClicked))
@@ -98,31 +98,27 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
   ///   - image: User selected image
   func publish(text: String, image: UIImage?) {
 
-    // TODO: Disable publish button while network call is active!
-
     // Validate that at least one field is not empty
     guard let availablePlatforms = availablePlatforms, validate(post: post) else { return }
 
     // Upload to the selected platforms
-    for platform in availablePlatforms {
-      if platform.isSelected {
-        let parameters = ["type": post.postType.rawValue, "message": post.text]
+    for platform in availablePlatforms where platform.isSelected == true {
+      let parameters = ["type": post.postType.rawValue, "message": post.text]
 
-        // Make the request
-        Post.publish(post: post, with: LightningRouter.publish(platform.type, parameters), onProgress: { value in
-          // Output upload status to view
-        }, onSuccess: {
-          let alert = UIAlertController(title: "Post Successful!",
-                                        message: "", preferredStyle: .alert)
+      // Make the request
+      Post.publish(post: post, with: LightningRouter.publish(platform.type, parameters), onProgress: { _ in
+        // Output upload status to view
+      }, onSuccess: {
+        let alert = UIAlertController(title: "Post Successful!",
+                                      message: "", preferredStyle: .alert)
 
-          alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
 
-          self.present(alert, animated: true, completion: nil)
-        }, onError: { error in
-          // Output/handle error in view
-        })
+        self.present(alert, animated: true, completion: nil)
+      }, onError: { _ in
+        // Output/handle error in view
+      })
 
-      }
     }
 
   }
@@ -132,8 +128,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
   /// - Parameters:
   /// - Returns: boolean indicating valid or invalid fields
   fileprivate func validate(post: Post) -> Bool {
-
-    // TODO: Display altert if no platform has been selected!
 
     // The only time a post should fail is if both text and image are empty or if text is only present and it's empty
     if post.text.isEmpty && post.thumbNailImage == nil {
@@ -187,7 +181,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
+    // swiftlint:disable:next force_cast
+    let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as! HomeTableViewCell
     cell.platform = availablePlatforms?[indexPath.row]
 
     return cell
@@ -198,8 +193,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: TextViewDelegate
 
 extension HomeViewController: UITextViewDelegate {
-
-  // TODO: The placeholder text is a little buggy, look into this.
 
   func textViewDidBeginEditing(_ textView: UITextView) {
     if textView.textColor == UIColor.lightGray {
@@ -227,7 +220,7 @@ extension HomeViewController: UITextViewDelegate {
 
 extension HomeViewController: UIImagePickerControllerDelegate {
 
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
     if let mediaType = info[UIImagePickerControllerMediaType] as? String {
 
       if mediaType == "public.image" {
@@ -247,7 +240,6 @@ extension HomeViewController: UIImagePickerControllerDelegate {
 
         if let pickedVideoURL = info[UIImagePickerControllerMediaURL] as? URL {
 
-          // TODO: Make this asynchronous and add a loding spinner to the thumbnail spot!
           let pickedVideoImage = generateThumnail(url: pickedVideoURL, fromTime: 0)
 
           // Update the model
@@ -275,7 +267,7 @@ extension HomeViewController: UIImagePickerControllerDelegate {
   }
 
   // Extracts an image from a video
-  func generateThumnail(url : URL, fromTime: Float64) -> UIImage? {
+  func generateThumnail(url: URL, fromTime: Float64) -> UIImage? {
     let asset = AVAsset(url: url)
     let assetGenerator = AVAssetImageGenerator(asset: asset)
     assetGenerator.appliesPreferredTrackTransform = true

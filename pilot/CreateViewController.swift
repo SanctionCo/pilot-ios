@@ -56,7 +56,7 @@ class CreateViewController: UIViewController {
           self?.navigationController?.popViewController(animated: true)
         }
 
-      }, onError: { error in
+      }, onError: { _ in
 
         DispatchQueue.main.async { [weak self] in
           self?.activitySpinner.stopAnimating()

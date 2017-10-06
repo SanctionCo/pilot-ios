@@ -6,7 +6,6 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-
 import Foundation
 import Alamofire
 import ObjectMapper
@@ -27,7 +26,7 @@ extension Uploadable where Self: Mappable {
                      onSuccess: @escaping SuccessHandler<Self>,
                      onError: @escaping ErrorHandler) {
 
-    NetworkManager.sharedInstance.request(request).responseObject() { (response: DataResponse<Self>) in
+    NetworkManager.sharedInstance.request(request).responseObject { (response: DataResponse<Self>) in
 
       debugPrint(response)
       switch response.result {

@@ -25,7 +25,7 @@ extension Fetchable where Self: Mappable {
                     onSuccess: @escaping SuccessHandler<Self>,
                     onError: @escaping ErrorHandler) {
 
-    NetworkManager.sharedInstance.request(request).responseObject() { (response: DataResponse<Self>) in
+    NetworkManager.sharedInstance.request(request).responseObject { (response: DataResponse<Self>) in
       debugPrint(response)
       switch response.result {
       case .success:

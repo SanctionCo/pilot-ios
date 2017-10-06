@@ -12,8 +12,8 @@ import SwiftyJSON
 import HTTPStatusCodes
 
 enum PlatformType: String {
-  case twitter = "twitter"
-  case facebook = "facebook"
+  case twitter
+  case facebook
 }
 
 protocol PlatformProtocol {

@@ -1,0 +1,8 @@
+excluded:
+  - Pods
+
+swift:
+  config_file: .swiftlint.yml
+
+disabled_rules:
+  - type_name

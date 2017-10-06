@@ -57,7 +57,6 @@ class LoginViewController: UIViewController {
     login(email: emailField.text, password: passwordField.text)
   }
 
-
   /// Logs a user in using and email and password
   ///
   /// - Parameters:
@@ -85,13 +84,14 @@ class LoginViewController: UIViewController {
         }
 
         let homeStoryBoard = UIStoryboard.init(name: "HomeView", bundle: nil)
-        let destinationNavigationController = homeStoryBoard
-          .instantiateViewController(withIdentifier: "HomeNavigationController") as! UINavigationController
+        if let destinationNavigationController = homeStoryBoard
+          .instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController {
 
-        DispatchQueue.main.async { [weak self] in
-          self?.activitySpinner.stopAnimating()
-          self?.loginButton.isEnabled = true
-          self?.present(destinationNavigationController, animated: true, completion: nil)
+          DispatchQueue.main.async { [weak self] in
+            self?.activitySpinner.stopAnimating()
+            self?.loginButton.isEnabled = true
+            self?.present(destinationNavigationController, animated: true, completion: nil)
+          }
         }
       }, onError: { error in
         DispatchQueue.main.async { [weak self] in
@@ -103,7 +103,6 @@ class LoginViewController: UIViewController {
 
     }
   }
-
 
   /// Validates that required fields are filled
   ///

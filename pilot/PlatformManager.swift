@@ -19,10 +19,8 @@ class PlatformManager {
   func fetchConnectedPlatforms() -> [Platform] {
 
     var connectedPlatforms: [Platform] = []
-    for platform in platforms {
-      if platform.isConnected {
-        connectedPlatforms.append(platform)
-      }
+    for platform in platforms where platform.isConnected == true {
+      connectedPlatforms.append(platform)
     }
 
     return connectedPlatforms
@@ -31,10 +29,8 @@ class PlatformManager {
   func fetchUnconnectedPlatforms() -> [Platform] {
 
     var unconnectedPlatforms: [Platform] = []
-    for platform in platforms {
-      if !platform.isConnected {
-        unconnectedPlatforms.append(platform)
-      }
+    for platform in platforms where platform.isConnected == false {
+      unconnectedPlatforms.append(platform)
     }
 
     return unconnectedPlatforms
