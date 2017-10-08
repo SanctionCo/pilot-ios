@@ -21,6 +21,8 @@
 		942951491F591160000EF278 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951451F591160000EF278 /* NetworkManager.swift */; };
 		9429514A1F591160000EF278 /* Publishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951461F591160000EF278 /* Publishable.swift */; };
 		9429514B1F591160000EF278 /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951471F591160000EF278 /* Uploadable.swift */; };
+		9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */; };
+		9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */; };
 		944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944679071F4AC4A3000C0D66 /* AuthToken.swift */; };
 		945A433F1F2BCA97000C3B86 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */; };
 		945E67C11F47414200E07290 /* LightningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C01F47414200E07290 /* LightningRouter.swift */; };
@@ -91,6 +93,8 @@
 		942951451F591160000EF278 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = pilot/NetworkManager.swift; sourceTree = "<group>"; };
 		942951461F591160000EF278 /* Publishable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Publishable.swift; path = pilot/Publishable.swift; sourceTree = "<group>"; };
 		942951471F591160000EF278 /* Uploadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Uploadable.swift; path = pilot/Uploadable.swift; sourceTree = "<group>"; };
+		9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationTableViewController.swift; sourceTree = "<group>"; };
+		9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
 		944679071F4AC4A3000C0D66 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
 		945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		945E67C01F47414200E07290 /* LightningRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LightningRouter.swift; path = pilot/LightningRouter.swift; sourceTree = "<group>"; };
@@ -264,6 +268,8 @@
 				948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */,
 				948D21EA1F78AE75001D5897 /* SettingsView.storyboard */,
 				9460CDDA1F7F658200D8E910 /* CustomTableHeaderView.xib */,
+				9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */,
+				9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -675,12 +681,14 @@
 				94AF20F21F270698009A1484 /* LoginViewController.swift in Sources */,
 				949E5DD41F281EEE009EE3EB /* PilotConfiguration.swift in Sources */,
 				945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */,
+				9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */,
 				941BA4F31F3B5F4800227C60 /* Post.swift in Sources */,
 				945E67C11F47414200E07290 /* LightningRouter.swift in Sources */,
 				94B079441F85F134002BDD28 /* Deletable.swift in Sources */,
 				94AF20EA1F26F8EA009A1484 /* PilotUser.swift in Sources */,
 				946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */,
 				94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */,
+				9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */,
 				949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */,
 				94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */,
 				948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */,

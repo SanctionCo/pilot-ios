@@ -113,7 +113,13 @@ class LoginViewController: UIViewController {
   fileprivate func validate(email: String, password: String) -> Bool {
 
     if email.isEmpty || password.isEmpty {
-      alert(message: "Cannot have empty email or password fields", title: "Invalid Input")
+      let alert = UIAlertController(title: "Invalid Input",
+                                    message: "Cannot have empty email or password fields",
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+      present(alert, animated: true, completion: nil)
+      return false
     }
 
     return true
