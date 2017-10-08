@@ -6,10 +6,10 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import ObjectMapper
 import AlamofireObjectMapper
+import Foundation
+import ObjectMapper
 
 // The fetchable protocol will allow an object to be capable of fetching data from a URL.
 protocol Fetchable {

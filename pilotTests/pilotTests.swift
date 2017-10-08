@@ -6,8 +6,8 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import XCTest
 @testable import pilot
+import XCTest
 
 class pilotTests: XCTestCase {
 

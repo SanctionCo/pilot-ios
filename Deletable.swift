@@ -6,10 +6,10 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import ObjectMapper
 import AlamofireObjectMapper
+import Foundation
+import ObjectMapper
 
 // The deletable protocol will allow an object to be deleted from Thunder.
 protocol Deletable {

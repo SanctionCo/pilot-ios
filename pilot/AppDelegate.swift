@@ -6,8 +6,8 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

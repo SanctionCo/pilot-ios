@@ -6,8 +6,8 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 class HomeViewController: UIViewController, UINavigationControllerDelegate {
 

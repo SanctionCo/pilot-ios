@@ -6,9 +6,9 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import UIKit
 import Foundation
 import ObjectMapper
+import UIKit
 
 // Represents data that a user wishes to upload to a platform
 struct Post: Equatable, Publishable {
