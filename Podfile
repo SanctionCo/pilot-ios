@@ -6,7 +6,6 @@ target 'pilot' do
   pod 'Alamofire', '~> 4.5.0'
   pod 'ObjectMapper', '~> 3.0'
   pod 'AlamofireObjectMapper', '~> 5.0.0'
-  pod 'SwiftyJSON', '~> 3.1.4'
   pod 'HTTPStatusCodes', '~> 3.1.2'
 
   target 'pilotTests' do

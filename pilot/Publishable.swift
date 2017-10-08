@@ -6,9 +6,9 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 import AVFoundation
+import Foundation
 
 // The publishable protocol allows an object to be published through lightning's publish endpoint.
 protocol Publishable {

@@ -6,9 +6,8 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import HTTPStatusCodes
 
 enum PlatformType: String {

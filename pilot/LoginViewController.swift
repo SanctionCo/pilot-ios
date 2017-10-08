@@ -6,10 +6,10 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import UIKit
-import SwiftHash
 import Alamofire
 import HTTPStatusCodes
+import SwiftHash
+import UIKit
 
 class LoginViewController: UIViewController {
 

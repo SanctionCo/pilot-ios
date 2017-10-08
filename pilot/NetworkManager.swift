@@ -6,8 +6,8 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 // Contains static instance of SessionManager used for all requests
 struct NetworkManager {
