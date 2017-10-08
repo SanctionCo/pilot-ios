@@ -71,12 +71,19 @@ class CreateViewController: UIViewController {
   fileprivate func validate(email: String, password: String, confirmPassword: String) -> Bool {
 
     if email.isEmpty || password.isEmpty || confirmPassword.isEmpty {
-      alert(message: "Cannot have empty fields", title: "Invalid Input")
+      let alert = UIAlertController(title: "Invalid Input", message: "Cannot have empty fields", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+      present(alert, animated: true, completion: nil)
       return false
     }
 
     if password != confirmPassword {
-      alert(message: "Password fields do not match", title: "Invalid Input")
+      let alert =
+        UIAlertController(title: "Invalid Input", message: "Password fields do not match", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+      present(alert, animated: true, completion: nil)
       return false
     }
 

@@ -12,18 +12,31 @@ class UserManager {
 
   static var sharedInstance: UserManager?
 
+  fileprivate var authenticationEmail: String?
+  fileprivate var authenticationPassword: String?
+
   fileprivate var pilotUser: PilotUser
 
   init(pilotUser: PilotUser) {
     self.pilotUser = pilotUser
+    self.authenticationEmail = pilotUser.email
+    self.authenticationPassword = pilotUser.password
   }
 
   func getEmail() -> String {
     return pilotUser.email!
   }
 
+  func getAuthenticationEmail() -> String {
+    return authenticationEmail!
+  }
+
   func getPassword() -> String {
     return pilotUser.password!
+  }
+
+  func getAuthenticationPassword() -> String {
+    return authenticationPassword!
   }
 
   func getFacebookAccessToken() -> String {
@@ -42,8 +55,16 @@ class UserManager {
     self.pilotUser.email = newEmail
   }
 
+  func setAuthenticationEmail(newAuthEmail: String?) {
+    self.authenticationEmail = newAuthEmail
+  }
+
   func setPassword(newPassword: String?) {
     self.pilotUser.password = newPassword
+  }
+
+  func setAuthenticationPassword(newPassword: String?) {
+    self.authenticationPassword = newPassword
   }
 
   func setFacebookAccessToken(token: String?) {
@@ -73,6 +94,8 @@ class UserManager {
 
     PilotUser.upload(with: ThunderRouter.updatePilotUser(pilotUser), onSuccess: { pilotUser in
       self.pilotUser = pilotUser
+      self.authenticationEmail = pilotUser.email
+      self.authenticationPassword = pilotUser.password
       onSuccess(pilotUser)
     }, onError: { error in
       debugPrint(error)

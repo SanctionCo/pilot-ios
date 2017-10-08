@@ -131,8 +131,12 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate {
 
     // The only time a post should fail is if both text and image are empty or if text is only present and it's empty
     if post.text.isEmpty && post.thumbNailImage == nil {
-      alert(message: "Cannot have empty text and image", title: "Invalid Input")
+      let alert = UIAlertController(title: "Invalid Input",
+                                    message: "Cannot have empty text and image",
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
+      present(alert, animated: true, completion: nil)
       return false
     }
 
@@ -278,17 +282,6 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     }
 
     return nil
-  }
-
-}
-
-extension UIViewController {
-
-  func alert(message: String, title: String = "") {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    alertController.addAction(OKAction)
-    self.present(alertController, animated: true, completion: nil)
   }
 
 }

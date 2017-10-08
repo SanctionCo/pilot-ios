@@ -23,15 +23,19 @@ class ProfileViewController: UITableViewController {
   }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    // Change password
     if indexPath.section == 0 {
       if indexPath.row == 0 {
-
-      }
-      if indexPath.row == 1 {
-
+        if let navVerificationController =
+          storyboard?.instantiateViewController(withIdentifier: "PasswordVerificationNavigationController")
+            as? UINavigationController {
+          self.present(navVerificationController, animated: true, completion: nil)
+        }
       }
     }
 
+    // Sign out field
     if indexPath.section == 1 {
       if indexPath.row == 0 {
         let actionSheet = UIAlertController(title: "Sign out",
@@ -49,13 +53,13 @@ class ProfileViewController: UITableViewController {
             self.present(loginViewController, animated: false, completion: nil)
           }
         }))
-
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
 
         present(actionSheet, animated: true, completion: nil)
       }
     }
 
+    // Delete field
     if indexPath.section == 2 {
       if indexPath.row == 0 {
         let actionSheet = UIAlertController(title: "DELETE ACCOUNT",
