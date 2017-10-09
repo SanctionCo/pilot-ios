@@ -50,7 +50,7 @@ class OAuthManager {
           case .twitter:
             let token = successURL.getQueryParam(key: platform.tokenParamKey)
 
-            UserManager.sharedInstance?.setFacebookAccessToken(token: token!)
+            UserManager.sharedInstance?.setTwitterAccessToken(token: token!)
           }
 
           UserManager.sharedInstance?.updateUser(onSuccess: { _ in
