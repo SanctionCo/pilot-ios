@@ -47,8 +47,10 @@ class OAuthManager {
             let token = successURL.getFragementParam(key: platform.tokenParamKey)
 
             UserManager.sharedInstance?.setFacebookAccessToken(token: token!)
-          default:
-            break
+          case .twitter:
+            let token = successURL.getQueryParam(key: platform.tokenParamKey)
+
+            UserManager.sharedInstance?.setFacebookAccessToken(token: token!)
           }
 
           UserManager.sharedInstance?.updateUser(onSuccess: { _ in
@@ -60,7 +62,6 @@ class OAuthManager {
         }
 
         OAuthManager.authSession?.start()
-
       case .failure(let error):
         onError(error)
       }
