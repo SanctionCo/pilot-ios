@@ -18,6 +18,7 @@ enum ThunderRouter: URLRequestConvertible {
   case updatePilotUser(PilotUser) // Maps PilotUser to JSON
   case createPilotUser(PilotUser) // Maps PilotUser to JSON
   case deletePilotUser()          // Email param in auth adapter
+  case validateAccount()          // Send a verification email to the account email
 
   static let baseURLString = PilotConfiguration.Thunder.host
 
@@ -34,12 +35,19 @@ enum ThunderRouter: URLRequestConvertible {
       return .delete
     case .login:
       return .get
+    case .validateAccount:
+      return .post
     }
   }
 
   // Path for each request type
   var path: String {
-    return "/users"
+    switch self {
+    case .validateAccount:
+      return "/verify"
+    default:
+      return "/users"
+    }
   }
 
   var url: URL {
@@ -51,7 +59,7 @@ enum ThunderRouter: URLRequestConvertible {
     switch self {
     case .createPilotUser, .updatePilotUser:
       return JSONEncoding.default
-    case .fetchPilotUser, .deletePilotUser, .login:
+    case .fetchPilotUser, .deletePilotUser, .login, .validateAccount:
       return URLEncoding(destination: .queryString)
     }
   }
