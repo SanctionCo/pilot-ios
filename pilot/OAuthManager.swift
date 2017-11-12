@@ -26,9 +26,9 @@ class OAuthManager {
           return
       }
 
-      OAuthManager.authSession = SFAuthenticationSession(url: requestUrl,
-                                                         callbackURLScheme: platform.redirectURL) {
-                                                          (callBack: URL?, error: Error?) in
+      OAuthManager.authSession =
+        SFAuthenticationSession(url: requestUrl,
+                                callbackURLScheme: platform.redirectURL) { (callBack: URL?, error: Error?) in
         guard error == nil, let successURL = callBack else {
           if let error = error {
             onError(error)
@@ -82,7 +82,9 @@ class OAuthManager {
                             onError: @escaping ErrorHandler) {
     switch platformType {
     case .facebook:
-      guard let token = successURL.getFragementParam(key: PilotConfiguration.Lightning.facebookTokenParamKey) else { return }
+      guard let token = successURL.getFragementParam(key: PilotConfiguration.Lightning.facebookTokenParamKey) else {
+        return
+      }
 
       onSuccess(OAuthResult(accessToken: token, accessSecret: nil))
     case .twitter:
