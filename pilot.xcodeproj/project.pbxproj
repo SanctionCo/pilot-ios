@@ -17,6 +17,7 @@
 		941A43841F1F0AE600D35777 /* pilotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A43831F1F0AE600D35777 /* pilotTests.swift */; };
 		941A438F1F1F0AE600D35777 /* pilotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A438E1F1F0AE600D35777 /* pilotUITests.swift */; };
 		941BA4F31F3B5F4800227C60 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BA4F21F3B5F4800227C60 /* Post.swift */; };
+		941F142A1F9B1ACF00086262 /* OAuthResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941F14291F9B1ACF00086262 /* OAuthResult.swift */; };
 		9429513D1F57C348000EF278 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9429513C1F57C348000EF278 /* CreateViewController.swift */; };
 		9429513F1F57C468000EF278 /* CreateView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9429513E1F57C468000EF278 /* CreateView.storyboard */; };
 		942951481F591160000EF278 /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951441F591160000EF278 /* Fetchable.swift */; };
@@ -51,6 +52,7 @@
 		94E8F8491F2A5D1800B3D43C /* HomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */; };
 		94EBBB641F7C410E003DA5E3 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBBB631F7C410E003DA5E3 /* UserManager.swift */; };
 		94F9AE6F1F841B0C0026FA78 /* AccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */; };
+		94FDA5B61F9422BC005C6B8F /* OAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FDA5B51F9422BC005C6B8F /* OAuthRequest.swift */; };
 		94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF17AF1F7F49D400C1C1F2 /* ProfileViewController.swift */; };
 		F79A36E7AF8C172EFE81689F /* Pods_pilotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDA6D17AEEF2E3A4EE112836 /* Pods_pilotUITests.framework */; };
 /* End PBXBuildFile section */
@@ -91,6 +93,7 @@
 		941A438E1F1F0AE600D35777 /* pilotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pilotUITests.swift; sourceTree = "<group>"; };
 		941A43901F1F0AE600D35777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		941BA4F21F3B5F4800227C60 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		941F14291F9B1ACF00086262 /* OAuthResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResult.swift; sourceTree = "<group>"; };
 		9429513C1F57C348000EF278 /* CreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		9429513E1F57C468000EF278 /* CreateView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateView.storyboard; sourceTree = "<group>"; };
 		942951441F591160000EF278 /* Fetchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fetchable.swift; path = pilot/Fetchable.swift; sourceTree = "<group>"; };
@@ -125,6 +128,7 @@
 		94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeView.storyboard; sourceTree = "<group>"; };
 		94EBBB631F7C410E003DA5E3 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewController.swift; sourceTree = "<group>"; };
+		94FDA5B51F9422BC005C6B8F /* OAuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRequest.swift; sourceTree = "<group>"; };
 		94FF17AF1F7F49D400C1C1F2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BBD040E5B89801048F563576 /* Pods-pilotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pilotTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pilotTests/Pods-pilotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C7E3C3FB67745510FB1EB208 /* Pods_pilotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pilotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +306,7 @@
 		94AF20DB1F26EB56009A1484 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				94FDA5B91F943748005C6B8F /* OAuthRequest */,
 				944679071F4AC4A3000C0D66 /* AuthToken.swift */,
 				94AF20E91F26F8EA009A1484 /* PilotUser.swift */,
 				946890261F295A67007E46DD /* Platform.swift */,
@@ -331,6 +336,15 @@
 				94AF20F81F271751009A1484 /* LoginViewController.storyboard */,
 			);
 			name = LoginView;
+			sourceTree = "<group>";
+		};
+		94FDA5B91F943748005C6B8F /* OAuthRequest */ = {
+			isa = PBXGroup;
+			children = (
+				94FDA5B51F9422BC005C6B8F /* OAuthRequest.swift */,
+				941F14291F9B1ACF00086262 /* OAuthResult.swift */,
+			);
+			name = OAuthRequest;
 			sourceTree = "<group>";
 		};
 		B5D4FCB8A1C06B57AF99414C /* Pods */ = {
@@ -691,6 +705,7 @@
 				94CD01B21F76045D0045BB45 /* URL+Params.swift in Sources */,
 				949588D71F76FFFC003C9C88 /* PlatformManager.swift in Sources */,
 				94AF20F21F270698009A1484 /* LoginViewController.swift in Sources */,
+				94FDA5B61F9422BC005C6B8F /* OAuthRequest.swift in Sources */,
 				949E5DD41F281EEE009EE3EB /* PilotConfiguration.swift in Sources */,
 				945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */,
 				9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */,
@@ -704,6 +719,7 @@
 				949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */,
 				94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */,
 				948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */,
+				941F142A1F9B1ACF00086262 /* OAuthResult.swift in Sources */,
 				942951491F591160000EF278 /* NetworkManager.swift in Sources */,
 				9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */,
 				94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */,

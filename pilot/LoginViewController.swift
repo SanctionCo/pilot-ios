@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     styleUI()
 
     // TEMPORARY for faster login
-    self.emailField.text = "jappleseed@pilot.com"
+    self.emailField.text = "Testy@gmail.com"
     self.passwordField.text = "password"
 
     // Set a request adapter for future network calls
@@ -43,10 +43,6 @@ class LoginViewController: UIViewController {
   }
 
   @IBAction func signUp(_ sender: UIButton) {
-
-    print("Sign Up")
-
-    // Navigate to the signUp view
     let createStoryBoard = UIStoryboard.init(name: "CreateView", bundle: nil)
     let createViewController = createStoryBoard.instantiateViewController(withIdentifier: "CreateViewController")
 

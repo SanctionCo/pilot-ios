@@ -13,6 +13,7 @@ import ObjectMapper
 
 struct PilotUser: Fetchable, Uploadable, Deletable, Mappable {
 
+  var verified: Bool?
   var email: String?
   var password: String?
   var facebookAccessToken: String?
@@ -43,10 +44,11 @@ struct PilotUser: Fetchable, Uploadable, Deletable, Mappable {
   }
 
   mutating func mapping(map: Map) {
-    email <- map["email"]
-    password <- map["password"]
+    verified            <- map["email.verified"]
+    email               <- map["email.address"]
+    password            <- map["password"]
     facebookAccessToken <- map["facebookAccessToken"]
-    twitterAccessToken <- map["twitterAccessToken"]
+    twitterAccessToken  <- map["twitterAccessToken"]
     twitterAccessSecret <- map["twitterAccessSecret"]
   }
 
