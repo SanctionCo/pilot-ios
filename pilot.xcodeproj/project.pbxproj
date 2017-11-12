@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14B81B871F926B05003D758A /* URL+ParamsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B81B861F926B05003D758A /* URL+ParamsTest.swift */; };
+		14B81B8F1F9276A6003D758A /* UIColor+PilotColorsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B81B8E1F9276A6003D758A /* UIColor+PilotColorsTest.swift */; };
 		2EF8A9BDDDF9626BA460D8B5 /* Pods_pilotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7E3C3FB67745510FB1EB208 /* Pods_pilotTests.framework */; };
 		7E09444A9F9D6C9646943D2D /* Pods_pilot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D1069997527783835BBDADE /* Pods_pilot.framework */; };
 		941A436F1F1F0AE600D35777 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A436E1F1F0AE600D35777 /* AppDelegate.swift */; };
@@ -74,6 +76,8 @@
 
 /* Begin PBXFileReference section */
 		00168322916B949822B6D07E /* Pods-pilotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pilotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-pilotTests/Pods-pilotTests.release.xcconfig"; sourceTree = "<group>"; };
+		14B81B861F926B05003D758A /* URL+ParamsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ParamsTest.swift"; sourceTree = "<group>"; };
+		14B81B8E1F9276A6003D758A /* UIColor+PilotColorsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PilotColorsTest.swift"; sourceTree = "<group>"; };
 		29796AA7E868FE87DCE12D88 /* Pods-pilotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pilotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-pilotUITests/Pods-pilotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3D1069997527783835BBDADE /* Pods_pilot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pilot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4231911B3C13501804F698 /* Pods-pilot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pilot.release.xcconfig"; path = "Pods/Target Support Files/Pods-pilot/Pods-pilot.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +175,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		14B81B8B1F926B55003D758A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				14B81B861F926B05003D758A /* URL+ParamsTest.swift */,
+				14B81B8E1F9276A6003D758A /* UIColor+PilotColorsTest.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		941A43621F1F0AE600D35777 = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 			children = (
 				941A43831F1F0AE600D35777 /* pilotTests.swift */,
 				941A43851F1F0AE600D35777 /* Info.plist */,
+				14B81B8B1F926B55003D758A /* Extensions */,
 			);
 			path = pilotTests;
 			sourceTree = "<group>";
@@ -723,6 +737,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				941A43841F1F0AE600D35777 /* pilotTests.swift in Sources */,
+				14B81B871F926B05003D758A /* URL+ParamsTest.swift in Sources */,
+				14B81B8F1F9276A6003D758A /* UIColor+PilotColorsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
