@@ -16,6 +16,7 @@ enum LightningRouter: URLRequestConvertible {
   case publish(PlatformType, [String: Any]?)
   case extendToken(PlatformType)
   case getOauthURL(PlatformType)
+  case getAccessToken(PlatformType, [String: Any]?)
 
   static let baseURLString = PilotConfiguration.Lightning.host
 
@@ -38,6 +39,8 @@ enum LightningRouter: URLRequestConvertible {
       return "/\(type.rawValue)/extendedToken"
     case .getOauthURL(let type):
       return "/\(type.rawValue)/oauthUrl"
+    case .getAccessToken(let type, _):
+      return "/\(type.rawValue)/accessToken"
     }
   }
 
@@ -48,7 +51,7 @@ enum LightningRouter: URLRequestConvertible {
   // How to encode the requet based on the endpoint
   var encoding: ParameterEncoding {
     switch self {
-    case .publish, .getOauthURL:
+    case .publish, .getOauthURL, .getAccessToken:
       return URLEncoding(destination: .queryString)
     default:
       return URLEncoding.default
@@ -59,6 +62,8 @@ enum LightningRouter: URLRequestConvertible {
   var dynamicparameters: [String: Any]? {
     switch self {
     case .publish( _, let parameters):
+      return parameters
+    case.getAccessToken(_, let parameters):
       return parameters
     case .getOauthURL(let type):
       switch type {
@@ -74,7 +79,7 @@ enum LightningRouter: URLRequestConvertible {
 
   var staticParameters: [String: Any]? {
     switch self {
-    case .getOauthURL:
+    case .getOauthURL, .getAccessToken:
       return nil
     default:
       return ["email": UserManager.sharedInstance!.getEmail()]
@@ -83,7 +88,7 @@ enum LightningRouter: URLRequestConvertible {
 
   var staticHeaders: [String: String]? {
     switch self {
-    case .getOauthURL:
+    case .getOauthURL, .getAccessToken:
       return nil
     default:
       return ["password": UserManager.sharedInstance!.getPassword()]

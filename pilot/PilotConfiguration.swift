@@ -31,9 +31,10 @@ struct PilotConfiguration {
     static let facebookTokenParamKey = "access_token"
 
     // Twitter
-    static let twitterRedirectURL = ""
-    static let twitterRedirectScheme = ""
-    static let twitterTokenParamKey = ""
+    static let twitterRedirectURL = "pilot://twitter"
+    static let twitterRedirectScheme = "pilot"
+    static let twitterTokenParamKey = "oauth_token"
+    static let twitterVerifierParamKey = "oauth_verifier"
   }
 
 }

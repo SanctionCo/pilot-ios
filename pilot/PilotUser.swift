@@ -43,7 +43,7 @@ struct PilotUser: Fetchable, Uploadable, Deletable, Mappable {
   }
 
   mutating func mapping(map: Map) {
-    email <- map["email"]
+    email <- map["email.address"]
     password <- map["password"]
     facebookAccessToken <- map["facebookAccessToken"]
     twitterAccessToken <- map["twitterAccessToken"]
