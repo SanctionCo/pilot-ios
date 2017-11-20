@@ -24,17 +24,24 @@
 		942951491F591160000EF278 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951451F591160000EF278 /* NetworkManager.swift */; };
 		9429514A1F591160000EF278 /* Publishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951461F591160000EF278 /* Publishable.swift */; };
 		9429514B1F591160000EF278 /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951471F591160000EF278 /* Uploadable.swift */; };
+		9430AF121FC23F5A00D134F0 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */; };
+		9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF171FC24E0700D134F0 /* ComposeViewController.swift */; };
+		9430AF1C1FC24E8200D134F0 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */; };
+		9430AF1E1FC251AE00D134F0 /* ComposeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9430AF1D1FC251AE00D134F0 /* ComposeView.storyboard */; };
+		9430AF201FC251C300D134F0 /* HistoryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9430AF1F1FC251C300D134F0 /* HistoryView.storyboard */; };
+		9430AF221FC251E200D134F0 /* PasswordVerificationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9430AF211FC251E200D134F0 /* PasswordVerificationView.storyboard */; };
+		9430AF241FC2520100D134F0 /* ServiceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9430AF231FC2520100D134F0 /* ServiceView.storyboard */; };
+		9430AF261FC2521400D134F0 /* ProfileView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9430AF251FC2521400D134F0 /* ProfileView.storyboard */; };
+		9435513C1FC258B6007E984B /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435513B1FC258B6007E984B /* HistoryTableViewCell.swift */; };
 		9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */; };
 		9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */; };
 		944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944679071F4AC4A3000C0D66 /* AuthToken.swift */; };
-		945A433F1F2BCA97000C3B86 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */; };
 		945E67C11F47414200E07290 /* LightningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C01F47414200E07290 /* LightningRouter.swift */; };
 		945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C21F475ACD00E07290 /* AuthAdapter.swift */; };
 		9460CDDB1F7F658200D8E910 /* CustomTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460CDDA1F7F658200D8E910 /* CustomTableHeaderView.xib */; };
 		9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9460CDDE1F807A0500D8E910 /* OAuthManager.swift */; };
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
-		946890341F29A1A9007E46DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890331F29A1A9007E46DD /* HomeViewController.swift */; };
 		948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21E81F78AE61001D5897 /* SettingsViewController.swift */; };
 		948D21EB1F78AE75001D5897 /* SettingsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 948D21EA1F78AE75001D5897 /* SettingsView.storyboard */; };
 		948D21ED1F78B071001D5897 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */; };
@@ -100,17 +107,24 @@
 		942951451F591160000EF278 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = pilot/NetworkManager.swift; sourceTree = "<group>"; };
 		942951461F591160000EF278 /* Publishable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Publishable.swift; path = pilot/Publishable.swift; sourceTree = "<group>"; };
 		942951471F591160000EF278 /* Uploadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Uploadable.swift; path = pilot/Uploadable.swift; sourceTree = "<group>"; };
+		9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		9430AF171FC24E0700D134F0 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		9430AF1D1FC251AE00D134F0 /* ComposeView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ComposeView.storyboard; sourceTree = "<group>"; };
+		9430AF1F1FC251C300D134F0 /* HistoryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryView.storyboard; sourceTree = "<group>"; };
+		9430AF211FC251E200D134F0 /* PasswordVerificationView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordVerificationView.storyboard; sourceTree = "<group>"; };
+		9430AF231FC2520100D134F0 /* ServiceView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServiceView.storyboard; sourceTree = "<group>"; };
+		9430AF251FC2521400D134F0 /* ProfileView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileView.storyboard; sourceTree = "<group>"; };
+		9435513B1FC258B6007E984B /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationTableViewController.swift; sourceTree = "<group>"; };
 		9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
 		944679071F4AC4A3000C0D66 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
-		945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		945E67C01F47414200E07290 /* LightningRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LightningRouter.swift; path = pilot/LightningRouter.swift; sourceTree = "<group>"; };
 		945E67C21F475ACD00E07290 /* AuthAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthAdapter.swift; path = pilot/AuthAdapter.swift; sourceTree = "<group>"; };
 		9460CDDA1F7F658200D8E910 /* CustomTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableHeaderView.xib; sourceTree = "<group>"; };
 		9460CDDE1F807A0500D8E910 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
-		946890331F29A1A9007E46DD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		948D21E81F78AE61001D5897 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		948D21EA1F78AE75001D5897 /* SettingsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsView.storyboard; sourceTree = "<group>"; };
 		948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -250,6 +264,63 @@
 			name = CreateView;
 			sourceTree = "<group>";
 		};
+		9430AF0F1FC23F1500D134F0 /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				9435513A1FC2578E007E984B /* HistoryPostView */,
+				9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */,
+				9435513B1FC258B6007E984B /* HistoryTableViewCell.swift */,
+				9430AF1F1FC251C300D134F0 /* HistoryView.storyboard */,
+			);
+			name = HistoryView;
+			sourceTree = "<group>";
+		};
+		9430AF131FC24C5D00D134F0 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				94FF17AF1F7F49D400C1C1F2 /* ProfileViewController.swift */,
+				9460CDDA1F7F658200D8E910 /* CustomTableHeaderView.xib */,
+				9430AF251FC2521400D134F0 /* ProfileView.storyboard */,
+			);
+			name = ProfileView;
+			sourceTree = "<group>";
+		};
+		9430AF141FC24C6800D134F0 /* ServiceView */ = {
+			isa = PBXGroup;
+			children = (
+				94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */,
+				948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */,
+				9430AF231FC2520100D134F0 /* ServiceView.storyboard */,
+			);
+			name = ServiceView;
+			sourceTree = "<group>";
+		};
+		9430AF151FC24C9500D134F0 /* PasswordVerificationView */ = {
+			isa = PBXGroup;
+			children = (
+				9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */,
+				9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */,
+				9430AF211FC251E200D134F0 /* PasswordVerificationView.storyboard */,
+			);
+			name = PasswordVerificationView;
+			sourceTree = "<group>";
+		};
+		9430AF161FC24DCC00D134F0 /* ComposeView */ = {
+			isa = PBXGroup;
+			children = (
+				9430AF171FC24E0700D134F0 /* ComposeViewController.swift */,
+				9430AF1D1FC251AE00D134F0 /* ComposeView.storyboard */,
+			);
+			name = ComposeView;
+			sourceTree = "<group>";
+		};
+		9435513A1FC2578E007E984B /* HistoryPostView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = HistoryPostView;
+			sourceTree = "<group>";
+		};
 		944679091F4B92BB000C0D66 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,8 +340,7 @@
 		946890301F29A167007E46DD /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				946890331F29A1A9007E46DD /* HomeViewController.swift */,
-				945A433E1F2BCA97000C3B86 /* HomeTableViewCell.swift */,
+				9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */,
 				94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */,
 			);
 			name = HomeView;
@@ -279,15 +349,12 @@
 		948D21E71F78AE3D001D5897 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				9430AF151FC24C9500D134F0 /* PasswordVerificationView */,
+				9430AF141FC24C6800D134F0 /* ServiceView */,
+				9430AF131FC24C5D00D134F0 /* ProfileView */,
 				948D21E81F78AE61001D5897 /* SettingsViewController.swift */,
-				94FF17AF1F7F49D400C1C1F2 /* ProfileViewController.swift */,
-				94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */,
-				948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */,
 				948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */,
 				948D21EA1F78AE75001D5897 /* SettingsView.storyboard */,
-				9460CDDA1F7F658200D8E910 /* CustomTableHeaderView.xib */,
-				9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */,
-				9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -295,6 +362,8 @@
 		94AF20DA1F26EB4E009A1484 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9430AF161FC24DCC00D134F0 /* ComposeView */,
+				9430AF0F1FC23F1500D134F0 /* HistoryView */,
 				948D21E71F78AE3D001D5897 /* SettingsView */,
 				9429513B1F57C2B7000EF278 /* CreateView */,
 				94AF20F51F270E4D009A1484 /* LoginView */,
@@ -484,11 +553,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				941A43791F1F0AE600D35777 /* LaunchScreen.storyboard in Resources */,
+				9430AF221FC251E200D134F0 /* PasswordVerificationView.storyboard in Resources */,
+				9430AF201FC251C300D134F0 /* HistoryView.storyboard in Resources */,
 				9429513F1F57C468000EF278 /* CreateView.storyboard in Resources */,
 				94E8F8491F2A5D1800B3D43C /* HomeView.storyboard in Resources */,
+				9430AF261FC2521400D134F0 /* ProfileView.storyboard in Resources */,
 				94AF20F91F271751009A1484 /* LoginViewController.storyboard in Resources */,
 				948D21EB1F78AE75001D5897 /* SettingsView.storyboard in Resources */,
+				9430AF241FC2520100D134F0 /* ServiceView.storyboard in Resources */,
 				941A43761F1F0AE600D35777 /* Assets.xcassets in Resources */,
+				9430AF1E1FC251AE00D134F0 /* ComposeView.storyboard in Resources */,
 				9460CDDB1F7F658200D8E910 /* CustomTableHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -709,9 +783,11 @@
 				949E5DD41F281EEE009EE3EB /* PilotConfiguration.swift in Sources */,
 				945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */,
 				9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */,
+				9430AF1C1FC24E8200D134F0 /* HomeTabBarController.swift in Sources */,
 				941BA4F31F3B5F4800227C60 /* Post.swift in Sources */,
 				945E67C11F47414200E07290 /* LightningRouter.swift in Sources */,
 				94B079441F85F134002BDD28 /* Deletable.swift in Sources */,
+				9435513C1FC258B6007E984B /* HistoryTableViewCell.swift in Sources */,
 				94AF20EA1F26F8EA009A1484 /* PilotUser.swift in Sources */,
 				946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */,
 				94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */,
@@ -722,12 +798,12 @@
 				941F142A1F9B1ACF00086262 /* OAuthResult.swift in Sources */,
 				942951491F591160000EF278 /* NetworkManager.swift in Sources */,
 				9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */,
+				9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */,
 				94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */,
 				941A436F1F1F0AE600D35777 /* AppDelegate.swift in Sources */,
-				946890341F29A1A9007E46DD /* HomeViewController.swift in Sources */,
-				945A433F1F2BCA97000C3B86 /* HomeTableViewCell.swift in Sources */,
 				948D21ED1F78B071001D5897 /* AccountTableViewCell.swift in Sources */,
 				944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */,
+				9430AF121FC23F5A00D134F0 /* HistoryViewController.swift in Sources */,
 				942951481F591160000EF278 /* Fetchable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

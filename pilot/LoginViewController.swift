@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     styleUI()
 
     // TEMPORARY for faster login
-    self.emailField.text = "Testy@gmail.com"
+    self.emailField.text = "rohannagar11@gmail.com"
     self.passwordField.text = "password"
 
     // Set a request adapter for future network calls
@@ -80,13 +80,13 @@ class LoginViewController: UIViewController {
         }
 
         let homeStoryBoard = UIStoryboard.init(name: "HomeView", bundle: nil)
-        if let destinationNavigationController = homeStoryBoard
-          .instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController {
+        if let destinationTabBarController = homeStoryBoard
+          .instantiateViewController(withIdentifier: "HomeTabBarController") as? UITabBarController {
 
           DispatchQueue.main.async { [weak self] in
             self?.activitySpinner.stopAnimating()
             self?.loginButton.isEnabled = true
-            self?.present(destinationNavigationController, animated: true, completion: nil)
+            self?.present(destinationTabBarController, animated: true, completion: nil)
           }
         }
       }, onError: { error in
