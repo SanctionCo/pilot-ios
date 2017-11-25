@@ -31,13 +31,22 @@ class SettingsViewController: UIViewController {
     self.tableView.reloadData()
   }
 
-  func styleUI() { }
+  func styleUI() {
+    self.navigationController?.navigationBar.isTranslucent = false
+    self.navigationController?.navigationBar.shadowImage = UIImage()
+  }
 
   func loadUI() {
     connectedPlatforms = PlatformManager.sharedInstance.fetchConnectedPlatforms()
     unconnectedPlatforms = PlatformManager.sharedInstance.fetchUnconnectedPlatforms()
   }
 
+  @IBAction func compose(_ sender: UIBarButtonItem) {
+    if let composeNavigationController = UIStoryboard.init(name: "ComposeView", bundle: nil)
+      .instantiateViewController(withIdentifier: "ComposeNavigationController") as? UINavigationController {
+      self.present(composeNavigationController, animated: true, completion: nil)
+    }
+  }
 }
 
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {

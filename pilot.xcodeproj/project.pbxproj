@@ -33,6 +33,8 @@
 		9430AF241FC2520100D134F0 /* ServiceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9430AF231FC2520100D134F0 /* ServiceView.storyboard */; };
 		9430AF261FC2521400D134F0 /* ProfileView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9430AF251FC2521400D134F0 /* ProfileView.storyboard */; };
 		9435513C1FC258B6007E984B /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435513B1FC258B6007E984B /* HistoryTableViewCell.swift */; };
+		943551441FC53A9C007E984B /* HistoryEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943551431FC53A9C007E984B /* HistoryEmptyView.xib */; };
+		943551461FC57142007E984B /* ComposeToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943551451FC57142007E984B /* ComposeToolbarView.xib */; };
 		9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */; };
 		9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */; };
 		944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944679071F4AC4A3000C0D66 /* AuthToken.swift */; };
@@ -42,6 +44,9 @@
 		9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9460CDDE1F807A0500D8E910 /* OAuthManager.swift */; };
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
+		948A551C1FC69FB300AD77B2 /* loginToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 948A551B1FC69FB300AD77B2 /* loginToolbar.xib */; };
+		948A55201FC7663800AD77B2 /* ComposeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A551F1FC7663800AD77B2 /* ComposeCollectionViewCell.swift */; };
+		948A55221FC768E500AD77B2 /* ComposeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A55211FC768E500AD77B2 /* ComposeCollectionViewLayout.swift */; };
 		948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21E81F78AE61001D5897 /* SettingsViewController.swift */; };
 		948D21EB1F78AE75001D5897 /* SettingsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 948D21EA1F78AE75001D5897 /* SettingsView.storyboard */; };
 		948D21ED1F78B071001D5897 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */; };
@@ -116,6 +121,8 @@
 		9430AF231FC2520100D134F0 /* ServiceView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServiceView.storyboard; sourceTree = "<group>"; };
 		9430AF251FC2521400D134F0 /* ProfileView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileView.storyboard; sourceTree = "<group>"; };
 		9435513B1FC258B6007E984B /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		943551431FC53A9C007E984B /* HistoryEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryEmptyView.xib; sourceTree = "<group>"; };
+		943551451FC57142007E984B /* ComposeToolbarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComposeToolbarView.xib; sourceTree = "<group>"; };
 		9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationTableViewController.swift; sourceTree = "<group>"; };
 		9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
 		944679071F4AC4A3000C0D66 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
@@ -125,6 +132,9 @@
 		9460CDDE1F807A0500D8E910 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
+		948A551B1FC69FB300AD77B2 /* loginToolbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = loginToolbar.xib; sourceTree = "<group>"; };
+		948A551F1FC7663800AD77B2 /* ComposeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeCollectionViewCell.swift; sourceTree = "<group>"; };
+		948A55211FC768E500AD77B2 /* ComposeCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeCollectionViewLayout.swift; sourceTree = "<group>"; };
 		948D21E81F78AE61001D5897 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		948D21EA1F78AE75001D5897 /* SettingsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsView.storyboard; sourceTree = "<group>"; };
 		948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -271,6 +281,7 @@
 				9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */,
 				9435513B1FC258B6007E984B /* HistoryTableViewCell.swift */,
 				9430AF1F1FC251C300D134F0 /* HistoryView.storyboard */,
+				943551431FC53A9C007E984B /* HistoryEmptyView.xib */,
 			);
 			name = HistoryView;
 			sourceTree = "<group>";
@@ -309,7 +320,10 @@
 			isa = PBXGroup;
 			children = (
 				9430AF171FC24E0700D134F0 /* ComposeViewController.swift */,
+				948A551F1FC7663800AD77B2 /* ComposeCollectionViewCell.swift */,
+				948A55211FC768E500AD77B2 /* ComposeCollectionViewLayout.swift */,
 				9430AF1D1FC251AE00D134F0 /* ComposeView.storyboard */,
+				943551451FC57142007E984B /* ComposeToolbarView.xib */,
 			);
 			name = ComposeView;
 			sourceTree = "<group>";
@@ -403,6 +417,7 @@
 			children = (
 				94AF20F11F270698009A1484 /* LoginViewController.swift */,
 				94AF20F81F271751009A1484 /* LoginViewController.storyboard */,
+				948A551B1FC69FB300AD77B2 /* loginToolbar.xib */,
 			);
 			name = LoginView;
 			sourceTree = "<group>";
@@ -552,8 +567,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943551441FC53A9C007E984B /* HistoryEmptyView.xib in Resources */,
 				941A43791F1F0AE600D35777 /* LaunchScreen.storyboard in Resources */,
 				9430AF221FC251E200D134F0 /* PasswordVerificationView.storyboard in Resources */,
+				943551461FC57142007E984B /* ComposeToolbarView.xib in Resources */,
+				948A551C1FC69FB300AD77B2 /* loginToolbar.xib in Resources */,
 				9430AF201FC251C300D134F0 /* HistoryView.storyboard in Resources */,
 				9429513F1F57C468000EF278 /* CreateView.storyboard in Resources */,
 				94E8F8491F2A5D1800B3D43C /* HomeView.storyboard in Resources */,
@@ -708,6 +726,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/HTTPStatusCodes/HTTPStatusCodes.framework",
+				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftHash/SwiftHash.framework",
 			);
@@ -716,6 +735,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTTPStatusCodes.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftHash.framework",
 			);
@@ -776,6 +796,7 @@
 				9429514B1F591160000EF278 /* Uploadable.swift in Sources */,
 				946890271F295A67007E46DD /* Platform.swift in Sources */,
 				948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */,
+				948A55221FC768E500AD77B2 /* ComposeCollectionViewLayout.swift in Sources */,
 				94CD01B21F76045D0045BB45 /* URL+Params.swift in Sources */,
 				949588D71F76FFFC003C9C88 /* PlatformManager.swift in Sources */,
 				94AF20F21F270698009A1484 /* LoginViewController.swift in Sources */,
@@ -797,6 +818,7 @@
 				948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */,
 				941F142A1F9B1ACF00086262 /* OAuthResult.swift in Sources */,
 				942951491F591160000EF278 /* NetworkManager.swift in Sources */,
+				948A55201FC7663800AD77B2 /* ComposeCollectionViewCell.swift in Sources */,
 				9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */,
 				9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */,
 				94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */,

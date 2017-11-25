@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZhG-gj-4cx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fy5-UZ-tiO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,8 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="wvu-D5-djC">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <color key="backgroundColor" red="0.9951923077" green="0.9903846154" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="separatorColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="AccountTableViewCell" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AccountTableViewCell" rowHeight="75" id="ddn-T5-Ty9" customClass="AccountTableViewCell" customModule="pilot" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="75"/>
@@ -145,15 +147,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w7T-tc-Hev"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="5FI-kj-CDy"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationItem key="navigationItem" title="Settings" id="5FI-kj-CDy">
+                        <barButtonItem key="rightBarButtonItem" image="plus" id="ZU7-Bq-KC8">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="compose:" destination="ZhG-gj-4cx" id="YxS-ia-8f4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="wvu-D5-djC" id="MC7-x4-O7w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pIb-VM-7yn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="196" y="231"/>
+            <point key="canvasLocation" x="535.20000000000005" y="230.73463268365819"/>
         </scene>
         <!--Account Table View Controller-->
         <scene sceneID="FZC-f5-Pg8">
@@ -255,7 +263,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZj-R0-Fjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1108" y="541"/>
+            <point key="canvasLocation" x="1447.2" y="540.17991004497753"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Yc5-gJ-XfG">
@@ -342,7 +350,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mwv-wD-cdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1108" y="-124.58770614692655"/>
+            <point key="canvasLocation" x="1447.2" y="-124.58770614692655"/>
         </scene>
         <!--Reset Password-->
         <scene sceneID="pZ5-hw-Niq">
@@ -531,8 +539,30 @@
             </objects>
             <point key="canvasLocation" x="1937.5999999999999" y="-471.36431784107947"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gzd-ly-BPb">
+            <objects>
+                <navigationController storyboardIdentifier="SettingsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fy5-UZ-tiO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Menu" id="hnG-by-C8W"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="fih-BD-nra">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZhG-gj-4cx" kind="relationship" relationship="rootViewController" id="omU-WT-rSs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OPJ-vf-96L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-263" y="231"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Menu" width="25" height="25"/>
         <image name="RainLogo" width="237" height="237"/>
+        <image name="plus" width="25" height="25"/>
     </resources>
 </document>

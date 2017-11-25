@@ -7,6 +7,7 @@ target 'pilot' do
   pod 'ObjectMapper', '~> 3.0'
   pod 'AlamofireObjectMapper', '~> 5.0.0'
   pod 'HTTPStatusCodes', '~> 3.1.2'
+  pod 'ImagePicker'
 
   target 'pilotTests' do
     inherit! :search_paths
