@@ -30,37 +30,11 @@
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z6t-S2-a8N">
-                                                <rect key="frame" x="8" y="70" width="359" height="145"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="145" id="euY-o2-2Xy"/>
-                                                    <constraint firstAttribute="width" constant="359" id="gcY-sB-7lW"/>
-                                                </constraints>
-                                                <collectionViewLayout key="collectionViewLayout" id="UEg-hK-38h" customClass="ComposeCollectionViewLayout" customModule="pilot" customModuleProvider="target"/>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ComposeCollectionView" id="yQW-wo-cfG" userLabel="ComposeCollectionViewCell">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                        </view>
-                                                    </collectionViewCell>
-                                                </cells>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="8P8-8v-TsI" id="mOU-by-uiQ"/>
-                                                    <outlet property="delegate" destination="8P8-8v-TsI" id="lua-hL-PnL"/>
-                                                </connections>
-                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="2RM-Zo-x2K" firstAttribute="leading" secondItem="Xcb-P5-BlZ" secondAttribute="leadingMargin" id="6T0-qd-pZP"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="2RM-Zo-x2K" secondAttribute="trailing" id="Ieb-uo-qlM"/>
-                                            <constraint firstAttribute="trailing" secondItem="z6t-S2-a8N" secondAttribute="trailing" constant="8" id="NOt-cq-nNL"/>
-                                            <constraint firstItem="z6t-S2-a8N" firstAttribute="top" secondItem="2RM-Zo-x2K" secondAttribute="bottom" constant="17" id="bgM-GA-YGW"/>
-                                            <constraint firstItem="z6t-S2-a8N" firstAttribute="leading" secondItem="Xcb-P5-BlZ" secondAttribute="leading" constant="8" id="dcB-nR-NZC"/>
                                             <constraint firstItem="2RM-Zo-x2K" firstAttribute="top" secondItem="Xcb-P5-BlZ" secondAttribute="topMargin" id="vVz-wZ-77M"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="2RM-Zo-x2K" secondAttribute="bottom" id="wGe-Vf-rAO"/>
                                         </constraints>

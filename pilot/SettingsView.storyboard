@@ -539,11 +539,11 @@
             </objects>
             <point key="canvasLocation" x="1937.5999999999999" y="-471.36431784107947"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Settings-->
         <scene sceneID="gzd-ly-BPb">
             <objects>
                 <navigationController storyboardIdentifier="SettingsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fy5-UZ-tiO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Menu" id="hnG-by-C8W"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Menu" id="hnG-by-C8W"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="fih-BD-nra">

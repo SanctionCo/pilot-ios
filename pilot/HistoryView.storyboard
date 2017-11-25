@@ -56,11 +56,11 @@
             </objects>
             <point key="canvasLocation" x="-1728.8" y="17.541229385307346"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--History-->
         <scene sceneID="iIH-ay-RPg">
             <objects>
                 <navigationController storyboardIdentifier="HistoryNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="HtS-Ss-sN3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Clock" selectedImage="Clock" id="z5b-LR-YRa"/>
+                    <tabBarItem key="tabBarItem" title="History" image="Clock" selectedImage="Clock" id="z5b-LR-YRa"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="uKD-jf-kd5">

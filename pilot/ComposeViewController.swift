@@ -12,29 +12,43 @@ import UIKit
 class ComposeViewController: UIViewController {
 
   @IBOutlet weak var textView: UITextView!
-  @IBOutlet var composeToolbar: UIToolbar!
   @IBOutlet weak var postButton: UIBarButtonItem!
-  @IBOutlet weak var scrollView: UIScrollView!
 
+  // Post attributes
   private var selectedPlatforms = [Platform]()
   private var selectedImages = [UIImage]()
   private let imagePicker = ImagePickerController()
 
+  override var inputAccessoryView: UIView? { get { return self.composeToolBar }}
+  override var canBecomeFirstResponder: Bool { return true }
+
+  // swiftlint:disable force_cast
+  lazy var composeToolBar: UIToolbar = {
+    return Bundle.main.loadNibNamed("ComposeToolbarView", owner: self, options: nil)?.first as! UIToolbar
+  }()
+  // swiftlint:enable force_cast
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    postButton.isEnabled = false
-
+    // Delegates
     imagePicker.delegate = self
     textView.delegate = self
 
-    // Add the compose toolbarView to the keyboard
-    if let composeToolbarView =
-      Bundle.main.loadNibNamed("ComposeToolbarView", owner: self, options: nil)?.first as? UIToolbar {
-      textView.inputAccessoryView = composeToolbarView
-    }
+    // Post button is disabled until minimum requirnments are met (PostChanged)
+    postButton.isEnabled = false
 
-    textView.becomeFirstResponder()
+    // Set up the placeholder text for the textView
+    textView.text = "Write your post here!"
+    textView.textColor = UIColor.TextGray
+
+//    textView.becomeFirstResponder()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    self.becomeFirstResponder()
   }
 
   @IBAction func photoPicker(_ sender: UIBarButtonItem) {
@@ -47,32 +61,43 @@ class ComposeViewController: UIViewController {
 
   @IBAction func cancel(_ sender: UIBarButtonItem) {
     self.textView.resignFirstResponder()
+    self.resignFirstResponder()
     self.dismiss(animated: true, completion: nil)
   }
 
   func postChanged() {
-    print("Post changed called!")
     if self.textView.text != "" || self.selectedImages.count != 0 {
-      print("Post was valid")
       self.postButton.isEnabled = true
     } else {
-      print("Post was invalid")
       self.postButton.isEnabled = false
     }
-    print("End post changed call")
   }
 }
+
+extension ComposeViewController: UIToolbarDelegate { }
 
 extension ComposeViewController: UITextViewDelegate {
   func textViewDidChange(_ textView: UITextView) {
     self.postChanged()
   }
+
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    if textView.textColor == UIColor.TextGray {
+      textView.text = ""
+      textView.textColor = UIColor.TextBlack
+    }
+  }
+
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if textView.text.isEmpty {
+      textView.text = "Write your post here!"
+      textView.textColor = UIColor.TextGray
+    }
+  }
 }
 
 extension ComposeViewController: ImagePickerDelegate {
-  func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-
-  }
+  func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) { }
 
   func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
     imagePicker.dismiss(animated: true, completion: nil)
@@ -85,19 +110,4 @@ extension ComposeViewController: ImagePickerDelegate {
       self.postChanged()
     })
   }
-}
-
-extension ComposeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return selectedImages.count
-  }
-
-  // swiftlint:disable force_cast
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView
-      .dequeueReusableCell(withReuseIdentifier: "composeCollectionView", for: indexPath) as! ComposeCollectionViewCell
-
-    return cell
-  }
-  // swiftlint:enable force_cast
 }
