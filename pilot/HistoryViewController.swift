@@ -11,34 +11,29 @@ import UIKit
 class HistoryViewController: UIViewController {
 
   @IBOutlet weak var historyTableView: UITableView!
-  @IBOutlet var historyEmptyView: UIView!
 
   let history = [Post]() // Historical posts to display in the historyTableView
 
+  lazy var historyEmptyView: HistoryEmptyView = {
+    return HistoryEmptyView.loadFromNib()
+  }()
+
   override func viewDidLoad() {
-      super.viewDidLoad()
+    super.viewDidLoad()
 
-      // Load the custom emptyTableView
-      if let historyEmptyView =
-        Bundle.main.loadNibNamed("HistoryEmptyView", owner: self, options: nil)?.first as? UIView {
-
-        historyEmptyView.center = CGPoint.init(x: self.view.frame.midX, y: self.view.frame.midY)
-
-        // Place the view behind the tableView
-        self.view.addSubview(historyEmptyView)
-        self.view.sendSubview(toBack: historyEmptyView)
-      }
-
-      styleUI()
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+    styleUI()
   }
 
   func styleUI() {
+
+    // Navigation Controller style
     self.navigationController?.navigationBar.isTranslucent = false
     self.navigationController?.navigationBar.shadowImage = UIImage()
+
+    // Add the empty view to the view hierachy
+    historyEmptyView.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY - (self.navigationController?.navigationBar.bounds.height)!)
+    self.view.addSubview(historyEmptyView)
+    self.view.sendSubview(toBack: historyEmptyView)
   }
 
   @IBAction func compose(_ sender: UIBarButtonItem) {

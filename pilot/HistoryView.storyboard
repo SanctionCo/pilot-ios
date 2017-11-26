@@ -60,7 +60,9 @@
         <scene sceneID="iIH-ay-RPg">
             <objects>
                 <navigationController storyboardIdentifier="HistoryNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="HtS-Ss-sN3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="History" image="Clock" selectedImage="Clock" id="z5b-LR-YRa"/>
+                    <tabBarItem key="tabBarItem" title="History" image="Clock" selectedImage="ClockFilled" id="z5b-LR-YRa">
+                        <color key="badgeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="uKD-jf-kd5">
@@ -79,6 +81,7 @@
     </scenes>
     <resources>
         <image name="Clock" width="25" height="25"/>
+        <image name="ClockFilled" width="25" height="25"/>
         <image name="plus" width="25" height="25"/>
     </resources>
 </document>

@@ -14,6 +14,10 @@ class HomeTabBarController: UITabBarController {
     self.delegate = self
   }
 
+  override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    
+  }
+
 }
 
 extension HomeTabBarController: UITabBarControllerDelegate {

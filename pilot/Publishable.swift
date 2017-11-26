@@ -28,17 +28,17 @@ extension Publishable {
                       onError: @escaping ErrorHandler) {
 
     NetworkManager.sharedInstance.upload(multipartFormData: { multipartFormData in
-      switch post.postType {
+      switch post.type {
       case .photo:
         // Encode an image into the request
-        if let image = post.thumbNailImage, let imageData = UIImageJPEGRepresentation(image, 1) {
+        if let image = post.image, let imageData = UIImageJPEGRepresentation(image, 1) {
           multipartFormData.append(imageData, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
         }
       case .video:
         // Encode a video into the request
 
         // Because a video can exceed memory limits a file URL is used instead
-        guard let fileURL = post.fileURL else { return }
+        guard let fileURL = post.video else { return }
 
         multipartFormData.append(fileURL, withName: "file", fileName: "video.mov", mimeType: "video/quicktime")
       case .text:

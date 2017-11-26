@@ -6,18 +6,25 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
-import ImagePicker
+import Gallery
 import UIKit
 
 class ComposeViewController: UIViewController {
 
   @IBOutlet weak var textView: UITextView!
+  @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var postButton: UIBarButtonItem!
+
+  internal var post = Post() // Post object to publish
 
   // Post attributes
   private var selectedPlatforms = [Platform]()
-  private var selectedImages = [UIImage]()
-  private let imagePicker = ImagePickerController()
+  private var selectedImages = [UIImage]() {
+    didSet {
+      self.imageView.image = selectedImages[0]
+    }
+  }
+  private let gallery = GalleryController()
 
   override var inputAccessoryView: UIView? { get { return self.composeToolBar }}
   override var canBecomeFirstResponder: Bool { return true }
@@ -32,8 +39,9 @@ class ComposeViewController: UIViewController {
     super.viewDidLoad()
 
     // Delegates
-    imagePicker.delegate = self
+    gallery.delegate = self
     textView.delegate = self
+    post.delegate = self
 
     // Post button is disabled until minimum requirnments are met (PostChanged)
     postButton.isEnabled = false
@@ -41,8 +49,6 @@ class ComposeViewController: UIViewController {
     // Set up the placeholder text for the textView
     textView.text = "Write your post here!"
     textView.textColor = UIColor.TextGray
-
-//    textView.becomeFirstResponder()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +58,7 @@ class ComposeViewController: UIViewController {
   }
 
   @IBAction func photoPicker(_ sender: UIBarButtonItem) {
-    self.present(imagePicker, animated: true, completion: nil)
+    self.present(gallery, animated: true, completion: nil)
   }
 
   @IBAction func post(_ sender: UIBarButtonItem) {
@@ -74,11 +80,23 @@ class ComposeViewController: UIViewController {
   }
 }
 
+extension ComposeViewController: ComposeViewControllerDelegate {
+  func didUpdateText(text: String) { }
+
+  func didUpdateImage(image: UIImage) {
+    self.imageView.image = image
+  }
+
+  func didUpdateVideo(video: URL) { }
+  func didUpdateType(type: PostType) { }
+}
+
 extension ComposeViewController: UIToolbarDelegate { }
 
 extension ComposeViewController: UITextViewDelegate {
   func textViewDidChange(_ textView: UITextView) {
     self.postChanged()
+    self.post.text = self.textView.text
   }
 
   func textViewDidBeginEditing(_ textView: UITextView) {
@@ -96,18 +114,40 @@ extension ComposeViewController: UITextViewDelegate {
   }
 }
 
-extension ComposeViewController: ImagePickerDelegate {
-  func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) { }
-
-  func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-    imagePicker.dismiss(animated: true, completion: nil)
+extension ComposeViewController: GalleryControllerDelegate {
+  func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+    controller.dismiss(animated: true, completion: { [weak self] in
+      if let image = images[0].uiImage(ofSize: (self?.imageView.intrinsicContentSize)!) {
+        self?.imageView.image = image
+      }
+      self?.post.type = PostType.photo
+    })
   }
 
-  func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-    imagePicker.dismiss(animated: true, completion: {
-      self.selectedImages = images
+  func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+    controller.dismiss(animated: true, completion: {
+      let editor = VideoEditor()
+      editor.edit(video: video) { (_, tempPath: URL?) in
+        DispatchQueue.main.async { [weak self] in
+          if let tempPath = tempPath {
+            self?.post.video = tempPath
+            self?.post.type = PostType.video
+          }
+        }
+      }
 
-      self.postChanged()
+      video.fetchThumbnail(completion: { [weak self] image in
+        DispatchQueue.main.async {
+          self?.post.image = image
+        }
+      })
+
     })
+  }
+
+  func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) { }
+
+  func galleryControllerDidCancel(_ controller: GalleryController) {
+    controller.dismiss(animated: true, completion: nil)
   }
 }
