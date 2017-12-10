@@ -13,6 +13,8 @@ extension UIColor {
 
   // UI Colors
   static let PilotBlue = UIColor.fromRGB(red: 1.0, green: 126.0, blue: 185.0)
+  static let PilotLightBlue = UIColor.fromRGB(red: 1.0, green: 150.0, blue: 220.0)
+  static let PilotDarkBlue = UIColor.fromRGB(red: 1.0, green: 103.0, blue: 151.0)
 
   // Button Colors
   static let ButtonRed = UIColor.fromRGB(red: 215, green: 46, blue: 46)
@@ -25,6 +27,9 @@ extension UIColor {
   static let TextWhite = UIColor.fromRGB(red: 255, green: 255, blue: 255)
   static let TextBlack = UIColor.fromRGB(red: 0, green: 0, blue: 0)
 
+  // Layout Colors
+  static let LayoutLightGray = UIColor.fromRGB(red: 220, green: 220, blue: 220)
+
   // Returns color instance from RGB values (0-255)
   static func fromRGB(red: Double, green: Double, blue: Double, alpha: Double = 100.0) -> UIColor {
     let rgbRed = CGFloat(red/255)
@@ -34,5 +39,4 @@ extension UIColor {
 
     return UIColor(red: rgbRed, green: rgbGreen, blue: rgbBlue, alpha: rgbAlpha)
   }
-
 }

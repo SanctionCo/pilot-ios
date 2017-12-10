@@ -5,8 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,58 +13,33 @@
         <scene sceneID="IxN-SD-KyX">
             <objects>
                 <viewController storyboardIdentifier="ComposeViewController" id="8P8-8v-TsI" customClass="ComposeViewController" customModule="pilot" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FOC-dS-7h1">
+                    <view key="view" contentMode="scaleToFill" id="FOC-dS-7h1" userLabel="view">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ve-Iy-4oB">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ye2-af-I67">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcb-P5-BlZ" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="436"/>
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Write your text here!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2RM-Zo-x2K">
-                                                <rect key="frame" x="8" y="8" width="359" height="45"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bCJ-XL-D9Z">
-                                                <rect key="frame" x="0.0" y="61" width="375" height="375"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="bCJ-XL-D9Z" secondAttribute="height" multiplier="1:1" id="23e-Pu-vFw"/>
-                                                    <constraint firstAttribute="width" constant="375" id="Rt0-C4-V7N"/>
-                                                    <constraint firstAttribute="height" constant="375" id="dJu-4R-LA1"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" text="Write your post here..." translatesAutoresizingMaskIntoConstraints="NO" id="gXD-T6-dOa">
+                                        <rect key="frame" x="8" y="16" width="359" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="2RM-Zo-x2K" firstAttribute="leading" secondItem="Xcb-P5-BlZ" secondAttribute="leadingMargin" id="6T0-qd-pZP"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="2RM-Zo-x2K" secondAttribute="trailing" id="Ieb-uo-qlM"/>
-                                            <constraint firstAttribute="bottom" secondItem="bCJ-XL-D9Z" secondAttribute="bottom" id="YUa-fM-BFo"/>
-                                            <constraint firstAttribute="trailing" secondItem="bCJ-XL-D9Z" secondAttribute="trailing" id="m7y-0l-swp"/>
-                                            <constraint firstItem="bCJ-XL-D9Z" firstAttribute="top" secondItem="2RM-Zo-x2K" secondAttribute="bottom" constant="8" id="mOb-su-vjI"/>
-                                            <constraint firstItem="bCJ-XL-D9Z" firstAttribute="leading" secondItem="Xcb-P5-BlZ" secondAttribute="leading" id="r4s-CY-Xd7"/>
-                                            <constraint firstItem="2RM-Zo-x2K" firstAttribute="top" secondItem="Xcb-P5-BlZ" secondAttribute="topMargin" id="vVz-wZ-77M"/>
-                                        </constraints>
-                                    </view>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgZ-G4-0wB">
+                                        <rect key="frame" x="8" y="88" width="359" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="Xcb-P5-BlZ" firstAttribute="leading" secondItem="3Ve-Iy-4oB" secondAttribute="leading" id="DU1-AI-16N"/>
-                                    <constraint firstAttribute="trailing" secondItem="Xcb-P5-BlZ" secondAttribute="trailing" id="KwM-Au-koq"/>
-                                    <constraint firstItem="Xcb-P5-BlZ" firstAttribute="top" secondItem="3Ve-Iy-4oB" secondAttribute="top" id="SET-Wr-TtP"/>
-                                    <constraint firstItem="Xcb-P5-BlZ" firstAttribute="width" secondItem="3Ve-Iy-4oB" secondAttribute="width" id="pIm-vj-l58"/>
-                                    <constraint firstAttribute="bottom" secondItem="Xcb-P5-BlZ" secondAttribute="bottom" constant="167" id="wvn-VZ-djM"/>
-                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3Ve-Iy-4oB" firstAttribute="bottom" secondItem="Evt-NQ-psc" secondAttribute="bottom" id="45z-VH-wbI"/>
-                            <constraint firstItem="3Ve-Iy-4oB" firstAttribute="top" secondItem="Evt-NQ-psc" secondAttribute="top" id="Lwv-Dg-ijN"/>
-                            <constraint firstItem="3Ve-Iy-4oB" firstAttribute="leading" secondItem="Evt-NQ-psc" secondAttribute="leading" id="gzm-he-hbd"/>
-                            <constraint firstItem="3Ve-Iy-4oB" firstAttribute="trailing" secondItem="Evt-NQ-psc" secondAttribute="trailing" id="iT9-9g-hSU"/>
+                            <constraint firstItem="ye2-af-I67" firstAttribute="bottom" secondItem="Evt-NQ-psc" secondAttribute="bottom" id="8nr-qw-SL5"/>
+                            <constraint firstItem="ye2-af-I67" firstAttribute="trailing" secondItem="Evt-NQ-psc" secondAttribute="trailing" id="9tW-FA-biX"/>
+                            <constraint firstItem="ye2-af-I67" firstAttribute="leading" secondItem="Evt-NQ-psc" secondAttribute="leading" id="hLp-qZ-JV1"/>
+                            <constraint firstItem="ye2-af-I67" firstAttribute="top" secondItem="Evt-NQ-psc" secondAttribute="top" id="oUe-Lc-6Gg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Evt-NQ-psc"/>
                     </view>
@@ -83,9 +56,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageView" destination="bCJ-XL-D9Z" id="D58-aV-b05"/>
+                        <outlet property="contentView" destination="FOC-dS-7h1" id="9bz-1K-bLw"/>
                         <outlet property="postButton" destination="tPg-nV-ALd" id="XMW-vq-bpQ"/>
-                        <outlet property="textView" destination="2RM-Zo-x2K" id="cw3-xn-FaC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ed-lD-wah" userLabel="First Responder" sceneMemberID="firstResponder"/>

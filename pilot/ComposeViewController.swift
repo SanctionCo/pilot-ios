@@ -11,9 +11,13 @@ import UIKit
 
 class ComposeViewController: UIViewController {
 
+  @IBOutlet var contentView: UIView!
+  @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
   @IBOutlet weak var textView: UITextView!
   @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var imageViewHeight: NSLayoutConstraint!
   @IBOutlet weak var postButton: UIBarButtonItem!
+  @IBOutlet weak var scrollView: UIScrollView!
 
   internal var post = Post() // Post object to publish
 
@@ -49,6 +53,10 @@ class ComposeViewController: UIViewController {
     // Set up the placeholder text for the textView
     textView.text = "Write your post here!"
     textView.textColor = UIColor.TextGray
+
+    scrollView.keyboardDismissMode = .interactive
+
+    imageView.contentMode = UIViewContentMode.center
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +88,7 @@ class ComposeViewController: UIViewController {
   }
 }
 
+// -- COMPOSE VIEW CONTROLLER DELEGATE --
 extension ComposeViewController: ComposeViewControllerDelegate {
   func didUpdateText(text: String) { }
 
@@ -91,8 +100,10 @@ extension ComposeViewController: ComposeViewControllerDelegate {
   func didUpdateType(type: PostType) { }
 }
 
+// -- TOOLBAR DELEGATE --
 extension ComposeViewController: UIToolbarDelegate { }
 
+// -- TEXT VIEW DELEGATE --
 extension ComposeViewController: UITextViewDelegate {
   func textViewDidChange(_ textView: UITextView) {
     self.postChanged()
@@ -114,35 +125,45 @@ extension ComposeViewController: UITextViewDelegate {
   }
 }
 
+// -- GALLERY CONTROLLER DELEGATE --
 extension ComposeViewController: GalleryControllerDelegate {
   func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
     controller.dismiss(animated: true, completion: { [weak self] in
-      if let image = images[0].uiImage(ofSize: (self?.imageView.intrinsicContentSize)!) {
-        self?.imageView.image = image
+      let imageContainerSize = self?.imageView.bounds.size
+      if let image = images[0].uiImage(ofSize: imageContainerSize!) {
+
+        // Resize the image to the imageView width
+        let newImage = UIImage.resizeImageWithWidth(image: image, width: (self?.imageView.bounds.width)!)
+
+        // Resize the imageView height contraint to match that of the resized image
+        self?.imageViewHeight.constant = newImage.size.height
+        self?.imageView.layoutIfNeeded()
+        self?.imageView.image = newImage
       }
+
       self?.post.type = PostType.photo
     })
   }
 
   func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
-    controller.dismiss(animated: true, completion: {
-      let editor = VideoEditor()
-      editor.edit(video: video) { (_, tempPath: URL?) in
-        DispatchQueue.main.async { [weak self] in
-          if let tempPath = tempPath {
-            self?.post.video = tempPath
-            self?.post.type = PostType.video
-          }
-        }
-      }
-
-      video.fetchThumbnail(completion: { [weak self] image in
-        DispatchQueue.main.async {
-          self?.post.image = image
-        }
-      })
-
-    })
+//    controller.dismiss(animated: true, completion: {
+//      let editor = VideoEditor()
+//      editor.edit(video: video) { (_, tempPath: URL?) in
+//        DispatchQueue.main.async { [weak self] in
+//          if let tempPath = tempPath {
+//            self?.post.video = tempPath
+//            self?.post.type = PostType.video
+//          }
+//        }
+//      }
+//
+//      video.fetchThumbnail(completion: { [weak self] image in
+//        DispatchQueue.main.async {
+//          self?.post.image = image
+//        }
+//      })
+//
+//    })
   }
 
   func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) { }

@@ -11,9 +11,9 @@ import UIKit
 
 protocol ComposeViewControllerDelegate {
 
-  func didUpdateText(text: String) -> Void
-  func didUpdateImage(image: UIImage) -> Void
-  func didUpdateVideo(video: URL) -> Void
-  func didUpdateType(type: PostType) -> Void
+  func didUpdateText(text: String)
+  func didUpdateImage(image: UIImage)
+  func didUpdateVideo(video: URL)
+  func didUpdateType(type: PostType)
 
 }
