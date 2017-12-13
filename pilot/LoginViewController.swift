@@ -87,7 +87,7 @@ class LoginViewController: UIViewController {
     button.layer.cornerRadius = 5
     button.layer.masksToBounds = true
 
-    button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+    button.addTarget(self, action: #selector(handleButtonAction), for: .touchUpInside)
     return button
   }()
 
@@ -115,12 +115,12 @@ class LoginViewController: UIViewController {
     NotificationCenter.default.removeObserver(self)
   }
 
-  @objc private func handleLogin() {
-    // Login code here
-  }
+  @objc private func handleButtonAction() {
+    if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
 
-  private func handleRegister() {
-    // Handle register here
+    } else {
+      // Register state
+    }
   }
 
   var activeKeyboardHeight: CGFloat = 180.0

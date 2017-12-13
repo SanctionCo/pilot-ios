@@ -44,7 +44,6 @@
 		9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9460CDDE1F807A0500D8E910 /* OAuthManager.swift */; };
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
-		948A551C1FC69FB300AD77B2 /* loginToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 948A551B1FC69FB300AD77B2 /* loginToolbar.xib */; };
 		948A552B1FC95A4800AD77B2 /* ComposeToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 948A552A1FC95A4800AD77B2 /* ComposeToolbarView.xib */; };
 		948A552D1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */; };
 		948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21E81F78AE61001D5897 /* SettingsViewController.swift */; };
@@ -63,7 +62,6 @@
 		94E8F8491F2A5D1800B3D43C /* HomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */; };
 		94E94C711FCA5D4B005736FD /* HistoryEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E94C701FCA5D4B005736FD /* HistoryEmptyView.swift */; };
 		94EBBB641F7C410E003DA5E3 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBBB631F7C410E003DA5E3 /* UserManager.swift */; };
-		94EF7F2E1FCBBA7500103738 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94EF7F2D1FCBBA7500103738 /* LoginView.storyboard */; };
 		94F9AE6F1F841B0C0026FA78 /* AccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */; };
 		94FDA5B61F9422BC005C6B8F /* OAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FDA5B51F9422BC005C6B8F /* OAuthRequest.swift */; };
 		94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF17AF1F7F49D400C1C1F2 /* ProfileViewController.swift */; };
@@ -133,7 +131,6 @@
 		9460CDDE1F807A0500D8E910 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
-		948A551B1FC69FB300AD77B2 /* loginToolbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = loginToolbar.xib; sourceTree = "<group>"; };
 		948A552A1FC95A4800AD77B2 /* ComposeToolbarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComposeToolbarView.xib; sourceTree = "<group>"; };
 		948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewControllerDelegate.swift; sourceTree = "<group>"; };
 		948D21E81F78AE61001D5897 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -152,7 +149,6 @@
 		94E8F8481F2A5D1800B3D43C /* HomeView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeView.storyboard; sourceTree = "<group>"; };
 		94E94C701FCA5D4B005736FD /* HistoryEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEmptyView.swift; sourceTree = "<group>"; };
 		94EBBB631F7C410E003DA5E3 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		94EF7F2D1FCBBA7500103738 /* LoginView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginView.storyboard; sourceTree = "<group>"; };
 		94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewController.swift; sourceTree = "<group>"; };
 		94FDA5B51F9422BC005C6B8F /* OAuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRequest.swift; sourceTree = "<group>"; };
 		94FF17AF1F7F49D400C1C1F2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -418,8 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				94AF20F11F270698009A1484 /* LoginViewController.swift */,
-				94EF7F2D1FCBBA7500103738 /* LoginView.storyboard */,
-				948A551B1FC69FB300AD77B2 /* loginToolbar.xib */,
 			);
 			name = LoginView;
 			sourceTree = "<group>";
@@ -581,7 +575,6 @@
 				943551441FC53A9C007E984B /* HistoryEmptyView.xib in Resources */,
 				941A43791F1F0AE600D35777 /* LaunchScreen.storyboard in Resources */,
 				9430AF221FC251E200D134F0 /* PasswordVerificationView.storyboard in Resources */,
-				948A551C1FC69FB300AD77B2 /* loginToolbar.xib in Resources */,
 				9430AF201FC251C300D134F0 /* HistoryView.storyboard in Resources */,
 				9429513F1F57C468000EF278 /* CreateView.storyboard in Resources */,
 				94E8F8491F2A5D1800B3D43C /* HomeView.storyboard in Resources */,
@@ -592,7 +585,6 @@
 				941A43761F1F0AE600D35777 /* Assets.xcassets in Resources */,
 				9430AF1E1FC251AE00D134F0 /* ComposeView.storyboard in Resources */,
 				9460CDDB1F7F658200D8E910 /* CustomTableHeaderView.xib in Resources */,
-				94EF7F2E1FCBBA7500103738 /* LoginView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
