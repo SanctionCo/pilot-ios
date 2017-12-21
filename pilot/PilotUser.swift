@@ -28,7 +28,6 @@ struct PilotUser: Fetchable, Uploadable, Deletable, Mappable {
   }
 
   init?(map: Map) {
-
     if (map.JSON["facebookAccessToken"] as? String) != nil {
       availablePlatforms.append(Platform(type: .facebook, isConnected: true))
     } else {
@@ -40,7 +39,6 @@ struct PilotUser: Fetchable, Uploadable, Deletable, Mappable {
     } else {
       availablePlatforms.append(Platform(type: .twitter, isConnected: false))
     }
-
   }
 
   mutating func mapping(map: Map) {

@@ -52,12 +52,10 @@ extension Publishable {
           let percentage = progress.fractionCompleted
           onProgress(percentage)
           }.responseJSON { response in
-            debugPrint(response)
             switch response.result {
             case .success:
               onSuccess()
             case .failure(let error):
-              debugPrint(error)
               onError(error)
             }
         }
@@ -66,7 +64,5 @@ extension Publishable {
         onError(encodingError)
       }
     })
-
   }
-
 }

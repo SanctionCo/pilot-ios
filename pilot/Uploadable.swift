@@ -28,7 +28,6 @@ extension Uploadable where Self: Mappable {
 
     NetworkManager.sharedInstance.request(request).responseObject { (response: DataResponse<Self>) in
 
-      debugPrint(response)
       switch response.result {
       case .success:
         if let responseObject: Self = response.result.value {
@@ -38,7 +37,5 @@ extension Uploadable where Self: Mappable {
         onError(error)
       }
     }
-
   }
-
 }

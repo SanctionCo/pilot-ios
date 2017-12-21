@@ -28,7 +28,6 @@ class CreateViewController: UIViewController {
     // Button Style Properties
     signUpButton.layer.cornerRadius = 4
     signUpButton.layer.backgroundColor = UIColor.ButtonBlue.cgColor
-
   }
 
   @IBAction func signUp(_ sender: UIButton) {

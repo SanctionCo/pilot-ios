@@ -15,15 +15,19 @@ class HomeTabBarController: UITabBarController {
   }
 
   override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-    
-  }
+    let historyViewController = HistoryViewController()
+    historyViewController.tabBarItem = UITabBarItem(title: "History", image: UIImage(named: "Clock"), selectedImage: UIImage(named: "ClockFilled"))
 
+    let settingsViewController = SettingsViewController()
+    settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Menu"), selectedImage: UIImage(named: "Menu"))
+
+    // Place the viewControllers in a list for the tabBarController to access
+    let viewControllerList = [historyViewController, settingsViewController]
+
+    self.tabBarController?.viewControllers = viewControllerList
+  }
 }
 
 extension HomeTabBarController: UITabBarControllerDelegate {
-
-  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-    // TabBar item was selected with a viewController
-  }
 
 }

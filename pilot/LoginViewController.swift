@@ -44,6 +44,11 @@ class LoginViewController: UIViewController {
     let textField = UITextField()
     textField.placeholder = "Email"
     textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+
+    textField.text = "n.eckert70@gmail.com"
+
     return textField
   }()
 
@@ -52,6 +57,9 @@ class LoginViewController: UIViewController {
     textField.placeholder = "Password"
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.isSecureTextEntry = true
+
+    textField.text = "password"
+
     return textField
   }()
 
@@ -91,6 +99,12 @@ class LoginViewController: UIViewController {
     return button
   }()
 
+  let activitySpinner: UIActivityIndicatorView = {
+    let spinner = UIActivityIndicatorView()
+    spinner.hidesWhenStopped = true
+    return spinner
+  }()
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -101,14 +115,19 @@ class LoginViewController: UIViewController {
     view.addSubview(loginRegisterSegmentedControl)
     view.addSubview(inputsContainerView)
     view.addSubview(loginRegisterButton)
+    view.addSubview(activitySpinner)
 
     setupProfileImageView()
     setupLoginRegisterSegmentedControl()
     setupInputsContainerView()
     setupLoginRegisterButton()
+    setupActivitySpinner()
 
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
+
+    // Set a request adapter for future network calls
+    NetworkManager.sharedInstance.adapter = AuthAdapter()
   }
 
   deinit {
@@ -117,23 +136,88 @@ class LoginViewController: UIViewController {
 
   @objc private func handleButtonAction() {
     if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-
+      login()
     } else {
-      // Register state
+      register()
     }
   }
 
-  var activeKeyboardHeight: CGFloat = 180.0
+  private func login() {
+    if let error = LoginValidationForm(email: emailTextField.text, password: passwordTextField.text).validate() {
+      let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+      present(alert, animated: true, completion: nil)
+      return
+    }
+
+    let hashedPassword = MD5(passwordTextField.text!).lowercased()
+
+    self.activitySpinner.startAnimating()
+    self.loginRegisterButton.isEnabled = false
+
+    PilotUser.fetch(with: ThunderRouter.login(emailTextField.text!, hashedPassword), onSuccess: { pilotUser in
+      UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
+
+      // Setup the tabBarController
+      let homeTabBarController = HomeTabBarController()
+
+      // Set the platform list in the PlatformManager class
+      PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)
+      DispatchQueue.main.async { [weak self] in
+        self?.activitySpinner.stopAnimating()
+        self?.loginRegisterButton.isEnabled = true
+        self?.present(homeTabBarController, animated: true, completion: nil)
+      }
+    }, onError: { error in
+      DispatchQueue.main.async { [weak self] in
+        self?.activitySpinner.stopAnimating()
+        self?.loginRegisterButton.isEnabled = true
+      }
+    })
+  }
+
+  private func register() {
+    if let error = RegisterValidationForm(email: emailTextField.text,
+                                          password: passwordTextField.text,
+                                          confirmPassword: confirmPasswordTextField.text).validate() {
+      let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+      present(alert, animated: true, completion: nil)
+      return
+    }
+
+    self.activitySpinner.startAnimating()
+    self.loginRegisterButton.isEnabled = false
+
+    let pilotUser = PilotUser(email: emailTextField.text!, password: passwordTextField.text!)
+    PilotUser.upload(with: ThunderRouter.createPilotUser(pilotUser), onSuccess: { _ in
+      DispatchQueue.main.async { [weak self] in
+        self?.activitySpinner.stopAnimating()
+        self?.loginRegisterButton.isEnabled = true
+        self?.navigationController?.popViewController(animated: true)
+      }
+    }, onError: { _ in
+      DispatchQueue.main.async { [weak self] in
+        self?.activitySpinner.stopAnimating()
+        self?.loginRegisterButton.isEnabled = true
+      }
+    })
+  }
+
+  //var activeKeyboardHeight: CGFloat = 0.0
 
   @objc private func keyboardWillShow(_ notification: NSNotification) {
-//    if let newKeyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-//
-//      // Ensure the login button is always the keyboard height + 10px up from the top of the keyboard
-//
-//
-//      // Use the active keyboard height and the new keyboard height to calculate offsets in case new keyboard accessory
-//      // view come in to place.
-//
+    if let activeKeyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+      let targetHeight = -(view.frame.height - (activeKeyboardHeight + 15))
+      let targetOffset = (loginRegisterButton.frame.origin.y - loginRegisterButton.frame.height) + targetHeight
+
+      print("Active keyboard height: \(activeKeyboardHeight)")
+      print("Target height: \(targetHeight)")
+      print("Target offset: \(targetOffset)")
+      
+      // Calculate the new keyboard height
 //      var difference: CGFloat = 0.0
 //      if newKeyboardHeight > activeKeyboardHeight {
 //        difference = -(newKeyboardHeight - activeKeyboardHeight)
@@ -142,13 +226,13 @@ class LoginViewController: UIViewController {
 //      }
 //
 //      activeKeyboardHeight -= difference
-//
-//      UIView.beginAnimations("Move", context: nil)
-//      UIView.setAnimationBeginsFromCurrentState(true)
-//      UIView.setAnimationDuration(0.3)
-//      self.view.frame = self.view.frame.offsetBy(dx: 0, dy: difference)
-//      UIView.commitAnimations()
-//    }
+
+      UIView.beginAnimations("Move", context: nil)
+      UIView.setAnimationBeginsFromCurrentState(true)
+      UIView.setAnimationDuration(0.3)
+      self.view.frame = self.view.frame.offsetBy(dx: 0, dy: targetOffset)
+      UIView.commitAnimations()
+    }
   }
 
   @objc private func keyboardWillHide(_ notification: NSNotification) {
@@ -199,6 +283,9 @@ class LoginViewController: UIViewController {
     passwordTextFieldHeight = passwordTextField.heightAnchor
       .constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
     passwordTextFieldHeight?.isActive = true
+
+    // Clear the second password field
+    confirmPasswordTextField.text = ""
 
     // Rename button to "Register"
     loginRegisterButton.setTitle(loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "Login": "Register", for: .normal)
@@ -282,5 +369,10 @@ class LoginViewController: UIViewController {
     loginRegisterButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
     loginRegisterButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
     loginRegisterButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+  }
+
+  private func setupActivitySpinner() {
+    activitySpinner.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 20).isActive = true
+    activitySpinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
   }
 }
