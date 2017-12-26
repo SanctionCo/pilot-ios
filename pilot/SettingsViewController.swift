@@ -11,7 +11,7 @@ import UIKit
 class SettingsViewController: UIViewController {
 
   var settingsTableView: UITableView = {
-    let tableView = UITableView()
+    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
@@ -39,7 +39,7 @@ class SettingsViewController: UIViewController {
 
     view.addSubview(settingsTableView)
 
-    setupSettingTableView()
+    setupSettingsTableView()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -54,9 +54,11 @@ class SettingsViewController: UIViewController {
     }
   }
 
-  func setupSettingTableView() {
+  func setupSettingsTableView() {
     settingsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     settingsTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    settingsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    settingsTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
   }
 }
 
