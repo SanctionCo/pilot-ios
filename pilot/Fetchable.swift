@@ -26,7 +26,6 @@ extension Fetchable where Self: Mappable {
                     onError: @escaping ErrorHandler) {
 
     NetworkManager.sharedInstance.request(request).responseObject { (response: DataResponse<Self>) in
-      debugPrint(response)
       switch response.result {
       case .success:
         if let responseObject: Self = response.result.value {
@@ -35,8 +34,6 @@ extension Fetchable where Self: Mappable {
       case .failure(let error):
         onError(error)
       }
-
     }
-
   }
 }

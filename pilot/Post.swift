@@ -13,15 +13,39 @@ import UIKit
 // Represents data that a user wishes to upload to a platform
 struct Post: Equatable, Publishable {
 
-  var text = ""                    // Default empty string
-  var thumbNailImage: UIImage?     // Image displayed to the user that will be uploaded
-  var fileURL: URL?                // URL of the image or video to be uploaded
-  var postType = PostType.text     // Type of data being uploaded (photo or video). Default text unless image is chosen.
+  var delegate: ComposeViewControllerDelegate?
 
+  var text: String?                // Text associated with the post.
+  var image: UIImage?              // Image associated with the post.
+  var video: URL?                  // URL of the video to be uploaded.
+  var type = PostType.text         // Type of data being uploaded (photo or video). Default text unless image is chosen.
+
+  mutating func updateText(text: String) {
+    self.text = text
+
+    delegate?.didUpdateText(text: text)
+  }
+
+  mutating func updateImage(image: UIImage) {
+    self.image = image
+
+    delegate?.didUpdateImage(image: image)
+  }
+
+  mutating func updateVideo(video: URL) {
+    self.video = video
+
+    delegate?.didUpdateVideo(video: video)
+  }
+
+  mutating func updateType(type: PostType) {
+    self.type = type
+
+    delegate?.didUpdateType(type: type)
+  }
 }
 
 func == (left: Post, right: Post) -> Bool {
-  return left.text.hashValue
-    == right.text.hashValue && left.thumbNailImage?.hashValue
-    == right.thumbNailImage?.hashValue
+  return left.text?.hashValue == right.text?.hashValue
+      && left.image?.hashValue == right.image?.hashValue
 }

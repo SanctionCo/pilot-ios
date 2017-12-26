@@ -36,5 +36,4 @@ struct PilotConfiguration {
     static let twitterTokenParamKey = "oauth_token"
     static let twitterVerifierParamKey = "oauth_verifier"
   }
-
 }
