@@ -159,7 +159,6 @@ class LoginViewController: UIViewController {
     PilotUser.fetch(with: ThunderRouter.login(emailTextField.text!, hashedPassword), onSuccess: { pilotUser in
       UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
 
-      // Setup the tabBarController
       let homeTabBarController = HomeTabBarController()
 
       // Set the platform list in the PlatformManager class
@@ -196,7 +195,6 @@ class LoginViewController: UIViewController {
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
         self?.loginRegisterButton.isEnabled = true
-        self?.navigationController?.popViewController(animated: true)
       }
     }, onError: { _ in
       DispatchQueue.main.async { [weak self] in
@@ -209,15 +207,15 @@ class LoginViewController: UIViewController {
   //var activeKeyboardHeight: CGFloat = 0.0
 
   @objc private func keyboardWillShow(_ notification: NSNotification) {
-    if let activeKeyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-      let targetHeight = -(view.frame.height - (activeKeyboardHeight + 15))
-      let targetOffset = (loginRegisterButton.frame.origin.y - loginRegisterButton.frame.height) + targetHeight
-
-      print("Active keyboard height: \(activeKeyboardHeight)")
-      print("Target height: \(targetHeight)")
-      print("Target offset: \(targetOffset)")
-      
-      // Calculate the new keyboard height
+//    if let activeKeyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+//      let targetHeight = -(view.frame.height - (activeKeyboardHeight + 15))
+//      let targetOffset = (loginRegisterButton.frame.origin.y - loginRegisterButton.frame.height) + targetHeight
+//
+//      print("Active keyboard height: \(activeKeyboardHeight)")
+//      print("Target height: \(targetHeight)")
+//      print("Target offset: \(targetOffset)")
+//
+//      // Calculate the new keyboard height
 //      var difference: CGFloat = 0.0
 //      if newKeyboardHeight > activeKeyboardHeight {
 //        difference = -(newKeyboardHeight - activeKeyboardHeight)
@@ -226,13 +224,13 @@ class LoginViewController: UIViewController {
 //      }
 //
 //      activeKeyboardHeight -= difference
-
-      UIView.beginAnimations("Move", context: nil)
-      UIView.setAnimationBeginsFromCurrentState(true)
-      UIView.setAnimationDuration(0.3)
-      self.view.frame = self.view.frame.offsetBy(dx: 0, dy: targetOffset)
-      UIView.commitAnimations()
-    }
+//
+//      UIView.beginAnimations("Move", context: nil)
+//      UIView.setAnimationBeginsFromCurrentState(true)
+//      UIView.setAnimationDuration(0.3)
+//      self.view.frame = self.view.frame.offsetBy(dx: 0, dy: targetOffset)
+//      UIView.commitAnimations()
+//    }
   }
 
   @objc private func keyboardWillHide(_ notification: NSNotification) {

@@ -8,26 +8,24 @@
 
 import UIKit
 
-class HomeTabBarController: UITabBarController {
+class HomeTabBarController: UITabBarController, UITabBarControllerDelegate {
 
   override func viewDidLoad() {
     self.delegate = self
   }
 
-  override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
     let historyViewController = HistoryViewController()
     historyViewController.tabBarItem = UITabBarItem(title: "History", image: UIImage(named: "Clock"), selectedImage: UIImage(named: "ClockFilled"))
+    let historyNavigationController = UINavigationController(rootViewController: historyViewController)
 
     let settingsViewController = SettingsViewController()
     settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Menu"), selectedImage: UIImage(named: "Menu"))
+    let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
 
     // Place the viewControllers in a list for the tabBarController to access
-    let viewControllerList = [historyViewController, settingsViewController]
-
-    self.tabBarController?.viewControllers = viewControllerList
+    self.viewControllers = [historyNavigationController, settingsNavigationController]
   }
-}
-
-extension HomeTabBarController: UITabBarControllerDelegate {
-
 }

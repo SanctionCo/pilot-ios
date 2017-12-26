@@ -11,20 +11,27 @@ import UIKit
 
 class PasswordVerificationTableViewController: UITableViewController {
 
-  @IBOutlet weak var passwordField: UITextField!
-  @IBOutlet weak var done: UIBarButtonItem!
+  var passwordField: UITextField = {
+    let field = UITextField()
+    field.translatesAutoresizingMaskIntoConstraints = false
+    return field
+  }()
+
+  var doneButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
+  }()
 
   override func viewDidLoad() {
       super.viewDidLoad()
-
   }
 
-  @IBAction func cancel(_ sender: UIBarButtonItem) {
+  func cancel(_ sender: UIBarButtonItem) {
     self.dismiss(animated: true, completion: nil)
   }
 
-  @IBAction func done(_ sender: UIBarButtonItem) {
-
+  func done(_ sender: UIBarButtonItem) {
     guard let passwordFieldText = passwordField.text else {
       return
     }
@@ -44,6 +51,5 @@ class PasswordVerificationTableViewController: UITableViewController {
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
       present(alert, animated: true, completion: nil)
     }
-
   }
 }

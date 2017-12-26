@@ -10,16 +10,23 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
 
+  var tableHeader: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+
+  var profileTable: UITableView = {
+    let table = UITableView()
+    table.translatesAutoresizingMaskIntoConstraints = false
+    return table
+  }()
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.navigationItem.largeTitleDisplayMode = .never
-
-    if let customHeaderView =
-      Bundle.main.loadNibNamed("CustomTableHeaderView", owner: self, options: nil)?.first as? UIView {
-
-      self.tableView.tableHeaderView = customHeaderView
-    }
+    self.profileTable.tableHeaderView = tableHeader
   }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

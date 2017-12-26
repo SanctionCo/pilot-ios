@@ -10,42 +10,53 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-  @IBOutlet weak var tableView: UITableView!
+  var settingsTableView: UITableView = {
+    let tableView = UITableView()
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    return tableView
+  }()
 
-  var pilotUser: PilotUser =
-    PilotUser(email: UserManager.sharedInstance!.getEmail(), password: UserManager.sharedInstance!.getPassword())
   var connectedPlatforms: [Platform] = []
   var unconnectedPlatforms: [Platform] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.settingsTableView.register(ConnectionTableViewCell.self, forCellReuseIdentifier: "ConnectionTableViewCell")
+    self.settingsTableView.register(AccountTableViewCell.self, forCellReuseIdentifier: "AccountTableViewCell")
+    self.settingsTableView.delegate = self
+    self.settingsTableView.dataSource = self
+
+    self.navigationController?.navigationBar.isTranslucent = false
+    self.navigationController?.navigationBar.shadowImage = UIImage()
+
+    self.navigationController?.navigationBar.topItem?.title = "Settings"
+    self.navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController?.navigationItem.largeTitleDisplayMode = .never
 
-    styleUI()
-    loadUI()
+    connectedPlatforms = PlatformManager.sharedInstance.fetchConnectedPlatforms()
+    unconnectedPlatforms = PlatformManager.sharedInstance.fetchUnconnectedPlatforms()
+
+    view.addSubview(settingsTableView)
+
+    setupSettingTableView()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.tableView.reloadData()
+    self.settingsTableView.reloadData()
   }
 
-  func styleUI() {
-    self.navigationController?.navigationBar.isTranslucent = false
-    self.navigationController?.navigationBar.shadowImage = UIImage()
-  }
-
-  func loadUI() {
-    connectedPlatforms = PlatformManager.sharedInstance.fetchConnectedPlatforms()
-    unconnectedPlatforms = PlatformManager.sharedInstance.fetchUnconnectedPlatforms()
-  }
-
-  @IBAction func compose(_ sender: UIBarButtonItem) {
+  func compose(_ sender: UIBarButtonItem) {
     if let composeNavigationController = UIStoryboard.init(name: "ComposeView", bundle: nil)
       .instantiateViewController(withIdentifier: "ComposeNavigationController") as? UINavigationController {
       self.present(composeNavigationController, animated: true, completion: nil)
     }
+  }
+
+  func setupSettingTableView() {
+    settingsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    settingsTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
   }
 }
 
@@ -54,21 +65,15 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
   // MARK: UITableViewDataSource
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    // swiftlint:disable force_cast
+
     if indexPath.section == 0 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "AccountTableViewCell") as! AccountTableViewCell
 
-      // swiftlint:disable force_cast
-      let cell =
-        tableView.dequeueReusableCell(withIdentifier: "AccountTableViewCell", for: indexPath) as! AccountTableViewCell
-      // swiftlint:enable force_cast
-
-      cell.pilotUser = pilotUser
+      //cell.pilotUser = pilotUser
       return cell
     } else if indexPath.section == 1 {
-
-      // swiftlint:disable force_cast
-      let cell = tableView
-        .dequeueReusableCell(withIdentifier: "ConnectionTableViewCell", for: indexPath) as! ConnectionTableViewCell
-      // swiftlint:enable force_cast
+      let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
 
       if connectedPlatforms.count != 0 {
         cell.platform = connectedPlatforms[indexPath.row]
@@ -78,15 +83,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
       return cell
     } else {
-
-      // swiftlint:disable force_cast
-      let cell = tableView
-        .dequeueReusableCell(withIdentifier: "ConnectionTableViewCell", for: indexPath) as! ConnectionTableViewCell
-      // swiftlint:enable force_cast
+      let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
 
       cell.platform = unconnectedPlatforms[indexPath.row]
       return cell
     }
+
+    // swiftlint:enable force_cast
   }
 
   // MARK: UITableViewDelegate
@@ -133,28 +136,17 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
     if indexPath.section == 0 {
-
-      // swiftlint:disable force_cast
-      let profileViewController =
-        storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-      // swiftlint:enable force_cast
+      let profileViewController = ProfileViewController()
 
       self.navigationController?.pushViewController(profileViewController, animated: true)
     } else if indexPath.section == 1 && connectedPlatforms.count != 0 {
-
-      // swiftlint:disable force_cast
-      let accountViewController = storyboard?
-        .instantiateViewController(withIdentifier: "AccountTableViewController") as! AccountTableViewController
-      // swiftlint:enable force_cast
-
+      let accountViewController = AccountTableViewController()
       accountViewController.platform = connectedPlatforms[indexPath.row]
 
       self.navigationController?.pushViewController(accountViewController, animated: true)
     } else {
       let platform = unconnectedPlatforms[indexPath.row]
-
       OAuthManager.authorizeService(platform: platform, onSuccess: {
         PlatformManager.sharedInstance.reload()
 
@@ -162,9 +154,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       }, onError: { error in
         debugPrint(error)
       })
-
     }
-
   }
-
 }

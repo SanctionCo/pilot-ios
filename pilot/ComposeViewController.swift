@@ -11,15 +11,37 @@ import UIKit
 
 class ComposeViewController: UIViewController {
 
-  @IBOutlet var contentView: UIView!
-  @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
-  @IBOutlet weak var textView: UITextView!
-  @IBOutlet weak var imageView: UIImageView!
-  @IBOutlet weak var imageViewHeight: NSLayoutConstraint!
-  @IBOutlet weak var postButton: UIBarButtonItem!
-  @IBOutlet weak var scrollView: UIScrollView!
-
   internal var post = Post() // Post object to publish
+
+  var contentView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+
+  var textView: UITextView = {
+    let view = UITextView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+
+  var imageView: UIImageView = {
+    let view = UIImageView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+
+  var postButton: UIBarButtonItem = {
+    let barButton = UIBarButtonItem()
+
+    return barButton
+  }()
+
+  var scrollView: UIScrollView = {
+    let view = UIScrollView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
 
   // Post attributes
   private var selectedPlatforms = [Platform]()
@@ -65,15 +87,15 @@ class ComposeViewController: UIViewController {
     self.becomeFirstResponder()
   }
 
-  @IBAction func photoPicker(_ sender: UIBarButtonItem) {
+  func photoPicker(_ sender: UIBarButtonItem) {
     self.present(gallery, animated: true, completion: nil)
   }
 
-  @IBAction func post(_ sender: UIBarButtonItem) {
+  func post(_ sender: UIBarButtonItem) {
 
   }
 
-  @IBAction func cancel(_ sender: UIBarButtonItem) {
+  func cancel(_ sender: UIBarButtonItem) {
     self.textView.resignFirstResponder()
     self.resignFirstResponder()
     self.dismiss(animated: true, completion: nil)
@@ -136,7 +158,7 @@ extension ComposeViewController: GalleryControllerDelegate {
         let newImage = UIImage.resizeImageWithWidth(image: image, width: (self?.imageView.bounds.width)!)
 
         // Resize the imageView height contraint to match that of the resized image
-        self?.imageViewHeight.constant = newImage.size.height
+        //self?.imageViewHeight.constant = newImage.size.height
         self?.imageView.layoutIfNeeded()
         self?.imageView.image = newImage
       }

@@ -10,9 +10,23 @@ import UIKit
 
 class ConnectionTableViewCell: UITableViewCell {
 
-  @IBOutlet weak var platformImage: UIImageView!
-  @IBOutlet weak var platformName: UILabel!
-  @IBOutlet weak var disclosureMessage: UILabel!
+  var platformImage: UIImageView = {
+    let image = UIImageView()
+    image.translatesAutoresizingMaskIntoConstraints = false
+    return image
+  }()
+
+  var platformName: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+
+  var disclosureMessage: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
 
   var platform: Platform? {
     didSet {
@@ -28,15 +42,39 @@ class ConnectionTableViewCell: UITableViewCell {
     }
   }
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
+  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+    contentView.addSubview(platformImage)
+    contentView.addSubview(platformName)
+    contentView.addSubview(disclosureMessage)
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+
+    setupPlatformImage()
+    setupPlatformName()
+    setupDisclosureMessage()
+  }
+
+  func setupPlatformImage() {
+    platformImage.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+    platformImage.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+    platformImage.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+  }
+
+  func setupPlatformName() {
+    platformName.leftAnchor.constraint(equalTo: platformImage.rightAnchor).isActive = true
+    platformName.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
 
   }
 
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-
-    // Configure the view for the selected state
+  func setupDisclosureMessage() {
+    
   }
-
 }
