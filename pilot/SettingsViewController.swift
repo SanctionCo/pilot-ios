@@ -9,7 +9,6 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
   var settingsTableView: UITableView = {
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,8 +70,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
     if indexPath.section == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "AccountTableViewCell") as! AccountTableViewCell
+      cell.email = UserManager.sharedInstance?.getEmail()
 
-      //cell.pilotUser = pilotUser
       return cell
     } else if indexPath.section == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
@@ -101,7 +100,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       return ""
     } else if section == 1 {
       if connectedPlatforms.count != 0 {
-        return "ConnectedAccounts"
+        return "Connected Accounts"
       } else {
         return "Available Platforms"
       }
@@ -143,6 +142,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
       self.navigationController?.pushViewController(profileViewController, animated: true)
     } else if indexPath.section == 1 && connectedPlatforms.count != 0 {
+
       let accountViewController = AccountTableViewController()
       accountViewController.platform = connectedPlatforms[indexPath.row]
 

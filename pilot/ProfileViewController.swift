@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UITableViewController {
+class ProfileViewController: UIViewController {
 
   var tableHeader: UIView = {
     let view = UIView()
@@ -17,7 +17,7 @@ class ProfileViewController: UITableViewController {
   }()
 
   var profileTable: UITableView = {
-    let table = UITableView()
+    let table = UITableView(frame: CGRect.zero, style: .grouped)
     table.translatesAutoresizingMaskIntoConstraints = false
     return table
   }()
@@ -25,20 +25,65 @@ class ProfileViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.profileTable.delegate = self
+    self.profileTable.dataSource = self
+
+    self.profileTable.register(ProfilePasswordResetCell.self, forCellReuseIdentifier: "ProfilePasswordResetCell")
+    self.profileTable.register(ProfileSignoutCell.self, forCellReuseIdentifier: "ProfileSignoutCell")
+    self.profileTable.register(ProfileDeleteAccountCell.self, forCellReuseIdentifier: "ProfileDeleteAccountCell")
+
     self.navigationItem.largeTitleDisplayMode = .never
-    self.profileTable.tableHeaderView = tableHeader
+
+    self.view.addSubview(profileTable)
+
+    setupProfileTable()
   }
 
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  func setupProfileTable() {
+
+    self.profileTable.addSubview(tableHeader)
+
+    self.profileTable.tableHeaderView = tableHeader
+    self.profileTable.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    self.profileTable.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    self.profileTable.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    self.profileTable.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+  }
+}
+
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+
+  // MARK: TableViewDataSource
+
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 3
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 1
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    switch indexPath.section {
+    case 0: return ProfilePasswordResetCell()
+    case 1: return ProfileSignoutCell()
+    case 2: return ProfileDeleteAccountCell()
+    default: fatalError("Unknown Section")
+    }
+  }
+
+  // MARK: TableViewDelegate
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     // Change password
     if indexPath.section == 0 {
       if indexPath.row == 0 {
-        if let navVerificationController =
-          storyboard?.instantiateViewController(withIdentifier: "PasswordVerificationNavigationController")
-            as? UINavigationController {
-          self.present(navVerificationController, animated: true, completion: nil)
-        }
+        let passwordVerificationController = PasswordVerificationTableViewController()
+        let passwordVerificationNavigationController
+          = UINavigationController(rootViewController: passwordVerificationController)
+
+        self.present(passwordVerificationNavigationController, animated: true, completion: nil)
       }
     }
 

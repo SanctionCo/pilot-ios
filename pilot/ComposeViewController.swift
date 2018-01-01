@@ -52,7 +52,7 @@ class ComposeViewController: UIViewController {
   }
   private let gallery = GalleryController()
 
-  override var inputAccessoryView: UIView? { get { return self.composeToolBar }}
+  override var inputAccessoryView: UIView? { return self.composeToolBar }
   override var canBecomeFirstResponder: Bool { return true }
 
   // swiftlint:disable force_cast

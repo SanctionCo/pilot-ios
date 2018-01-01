@@ -101,6 +101,7 @@ class LoginViewController: UIViewController {
 
   let activitySpinner: UIActivityIndicatorView = {
     let spinner = UIActivityIndicatorView()
+    spinner.translatesAutoresizingMaskIntoConstraints = false
     spinner.hidesWhenStopped = true
     return spinner
   }()
@@ -123,10 +124,6 @@ class LoginViewController: UIViewController {
     setupLoginRegisterButton()
     setupActivitySpinner()
 
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
-
-    // Set a request adapter for future network calls
     NetworkManager.sharedInstance.adapter = AuthAdapter()
   }
 
@@ -168,7 +165,7 @@ class LoginViewController: UIViewController {
         self?.loginRegisterButton.isEnabled = true
         self?.present(homeTabBarController, animated: true, completion: nil)
       }
-    }, onError: { error in
+    }, onError: { _ in
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
         self?.loginRegisterButton.isEnabled = true
@@ -204,55 +201,6 @@ class LoginViewController: UIViewController {
     })
   }
 
-  //var activeKeyboardHeight: CGFloat = 0.0
-
-  @objc private func keyboardWillShow(_ notification: NSNotification) {
-//    if let activeKeyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-//      let targetHeight = -(view.frame.height - (activeKeyboardHeight + 15))
-//      let targetOffset = (loginRegisterButton.frame.origin.y - loginRegisterButton.frame.height) + targetHeight
-//
-//      print("Active keyboard height: \(activeKeyboardHeight)")
-//      print("Target height: \(targetHeight)")
-//      print("Target offset: \(targetOffset)")
-//
-//      // Calculate the new keyboard height
-//      var difference: CGFloat = 0.0
-//      if newKeyboardHeight > activeKeyboardHeight {
-//        difference = -(newKeyboardHeight - activeKeyboardHeight)
-//      } else {
-//        difference = activeKeyboardHeight - newKeyboardHeight
-//      }
-//
-//      activeKeyboardHeight -= difference
-//
-//      UIView.beginAnimations("Move", context: nil)
-//      UIView.setAnimationBeginsFromCurrentState(true)
-//      UIView.setAnimationDuration(0.3)
-//      self.view.frame = self.view.frame.offsetBy(dx: 0, dy: targetOffset)
-//      UIView.commitAnimations()
-//    }
-  }
-
-  @objc private func keyboardWillHide(_ notification: NSNotification) {
-//    if let keyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-//
-//      // Move the inputsView back to it's origional position
-//      UIView.beginAnimations("MoveOrigional", context: nil)
-//      UIView.setAnimationBeginsFromCurrentState(true)
-//      UIView.setAnimationDuration(0.3)
-//
-//      // Calculate the displacement needed to move the view back to the origional origin (x: 0, y: 0)
-//      var verticalDisplacement: CGFloat = self.view.frame.height * -1
-//
-//      // Move the view back to the default 0 origin
-//      self.view.frame = self.view.frame.offsetBy(dx: 0, dy: verticalDisplacement)
-//      UIView.commitAnimations()
-//
-//      // Set the active height back to 0.0 incase it shows again later
-//      activeKeyboardHeight = 0.0
-//    }
-  }
-
   @objc private func updateLoginRegisterView() {
 
     // Change height of inputsContainerView
@@ -267,42 +215,48 @@ class LoginViewController: UIViewController {
     // Change height of the confirmPasswordTextField
     confirmPasswordTextFieldHeight?.isActive = false
     confirmPasswordTextFieldHeight = confirmPasswordTextField.heightAnchor
-      .constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+      .constraint(equalTo: inputsContainerView.heightAnchor,
+                  multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
     confirmPasswordTextFieldHeight?.isActive = true
 
     // Change the height of the emailTextField
     emailTextFieldHeight?.isActive = false
-    emailTextFieldHeight = emailTextField.heightAnchor
-      .constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+    emailTextFieldHeight =
+      emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor,
+                  multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
     emailTextFieldHeight?.isActive = true
 
     // Change the height of the passwordTextField
     passwordTextFieldHeight?.isActive = false
-    passwordTextFieldHeight = passwordTextField.heightAnchor
-      .constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+    passwordTextFieldHeight = passwordTextField
+      .heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor,
+                              multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
     passwordTextFieldHeight?.isActive = true
 
     // Clear the second password field
     confirmPasswordTextField.text = ""
 
     // Rename button to "Register"
-    loginRegisterButton.setTitle(loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "Login": "Register", for: .normal)
+    loginRegisterButton
+      .setTitle(loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "Login": "Register", for: .normal)
 
     view.layoutIfNeeded()
   }
 
   private func setupProfileImageView() {
     profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    profileImageView.bottomAnchor.constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -50).isActive = true
     profileImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
     profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor, multiplier: 21/50).isActive = true
+    profileImageView.bottomAnchor
+      .constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -50).isActive = true
   }
 
   private func setupLoginRegisterSegmentedControl() {
-    loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -12).isActive = true
+    loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor).isActive = true
     loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
     loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 36).isActive = true
+    loginRegisterSegmentedControl.bottomAnchor
+      .constraint(equalTo: inputsContainerView.topAnchor, constant: -12).isActive = true
   }
 
   var inputsContainerViewHeight: NSLayoutConstraint?
@@ -331,7 +285,8 @@ class LoginViewController: UIViewController {
     emailTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
     emailTextField.topAnchor.constraint(equalTo: inputsContainerView.topAnchor).isActive = true
     emailTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-    emailTextFieldHeight = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/2)
+    emailTextFieldHeight =
+      emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/2)
     emailTextFieldHeight?.isActive = true
 
     // Add constraints to the emailSeperatorView
@@ -344,7 +299,8 @@ class LoginViewController: UIViewController {
     passwordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
     passwordTextField.topAnchor.constraint(equalTo: emailSeparatorView.bottomAnchor).isActive = true
     passwordTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-    passwordTextFieldHeight = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/2)
+    passwordTextFieldHeight =
+      passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/2)
     passwordTextFieldHeight?.isActive = true
 
     // Add constraints to passwordSeperatorView
@@ -355,10 +311,12 @@ class LoginViewController: UIViewController {
     passwordSeperatorViewHeight?.isActive = true
 
     // Add constraints to confirmPasswordTextField
-    confirmPasswordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
+    confirmPasswordTextField
+      .leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
     confirmPasswordTextField.topAnchor.constraint(equalTo: passwordSeparatorView.bottomAnchor).isActive = true
     confirmPasswordTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-    confirmPasswordTextFieldHeight = confirmPasswordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 0)
+    confirmPasswordTextFieldHeight =
+      confirmPasswordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 0)
     confirmPasswordTextFieldHeight?.isActive = true
   }
 
@@ -370,7 +328,9 @@ class LoginViewController: UIViewController {
   }
 
   private func setupActivitySpinner() {
-    activitySpinner.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 20).isActive = true
     activitySpinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    activitySpinner.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 20).isActive = true
+    activitySpinner.widthAnchor.constraint(equalToConstant: 10).isActive = true
+    activitySpinner.heightAnchor.constraint(equalToConstant: 10).isActive = true
   }
 }

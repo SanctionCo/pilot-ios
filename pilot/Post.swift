@@ -13,7 +13,7 @@ import UIKit
 // Represents data that a user wishes to upload to a platform
 struct Post: Equatable, Publishable {
 
-  var delegate: ComposeViewControllerDelegate?
+  weak var delegate: ComposeViewControllerDelegate?
 
   var text: String?                // Text associated with the post.
   var image: UIImage?              // Image associated with the post.

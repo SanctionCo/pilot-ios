@@ -24,26 +24,32 @@ class PasswordVerificationTableViewController: UITableViewController {
   }()
 
   override func viewDidLoad() {
-      super.viewDidLoad()
+    super.viewDidLoad()
+
+    let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancel))
+    let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(self.done))
+
+    self.navigationItem.rightBarButtonItem = nextButton
+    self.navigationItem.leftBarButtonItem = cancelButton
+
+    self.view.addSubview(passwordField)
+
+    setupPasswordField()
   }
 
-  func cancel(_ sender: UIBarButtonItem) {
+  @objc func cancel(_ sender: UIBarButtonItem) {
     self.dismiss(animated: true, completion: nil)
   }
 
-  func done(_ sender: UIBarButtonItem) {
+  @objc func done(_ sender: UIBarButtonItem) {
     guard let passwordFieldText = passwordField.text else {
       return
     }
 
     let hashedPassword = MD5(passwordFieldText).lowercased()
     if hashedPassword == UserManager.sharedInstance?.getPassword() {
-      if let navNewPasswordController =
-        self.storyboard?.instantiateViewController(withIdentifier: "NewPasswordTableViewController")
-          as? NewPasswordTableViewController {
-
-        self.navigationController?.pushViewController(navNewPasswordController, animated: true)
-      }
+      let newPasswordController = NewPasswordTableViewController()
+      self.navigationController?.pushViewController(newPasswordController, animated: true)
     } else {
       let alert = UIAlertController(title: "Incorrect password",
                                     message: "The password you entered was incorrect, please try again.",
@@ -51,5 +57,10 @@ class PasswordVerificationTableViewController: UITableViewController {
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
       present(alert, animated: true, completion: nil)
     }
+  }
+
+  func setupPasswordField() {
+    passwordField.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
+    passwordField.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
   }
 }

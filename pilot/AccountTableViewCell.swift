@@ -10,15 +10,15 @@ import UIKit
 
 class AccountTableViewCell: UITableViewCell {
 
-  var accountEmail: UILabel = {
+  private var accountEmail: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
 
-  var pilotUser: PilotUser? {
+  var email: String? {
     didSet {
-      accountEmail.text = pilotUser?.email
+      accountEmail.text = email
     }
   }
 
@@ -39,6 +39,7 @@ class AccountTableViewCell: UITableViewCell {
   }
 
   private func setupAccountEmail() {
-    
+    accountEmail.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
+    accountEmail.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
   }
 }
