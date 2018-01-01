@@ -35,6 +35,12 @@
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
 		948A552D1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */; };
+		948B79451FF80F5C0087D247 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */; };
+		948B79471FF835F80087D247 /* AccountDisconnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */; };
+		948B79491FF8394F0087D247 /* AccountStatisticsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79481FF8394F0087D247 /* AccountStatisticsCell.swift */; };
+		948B794B1FF83BB70087D247 /* ProfilePasswordResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794A1FF83BB70087D247 /* ProfilePasswordResetCell.swift */; };
+		948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */; };
+		948B794F1FF83BD80087D247 /* ProfileDeleteAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794E1FF83BD80087D247 /* ProfileDeleteAccountCell.swift */; };
 		948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21E81F78AE61001D5897 /* SettingsViewController.swift */; };
 		948D21ED1F78B071001D5897 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */; };
 		948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */; };
@@ -112,6 +118,12 @@
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
 		948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewControllerDelegate.swift; sourceTree = "<group>"; };
+		948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDisconnectionCell.swift; sourceTree = "<group>"; };
+		948B79481FF8394F0087D247 /* AccountStatisticsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatisticsCell.swift; sourceTree = "<group>"; };
+		948B794A1FF83BB70087D247 /* ProfilePasswordResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePasswordResetCell.swift; sourceTree = "<group>"; };
+		948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSingoutCell.swift; sourceTree = "<group>"; };
+		948B794E1FF83BD80087D247 /* ProfileDeleteAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeleteAccountCell.swift; sourceTree = "<group>"; };
 		948D21E81F78AE61001D5897 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -249,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */,
+				948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */,
 			);
 			name = HistoryView;
 			sourceTree = "<group>";
@@ -257,6 +270,9 @@
 			isa = PBXGroup;
 			children = (
 				94FF17AF1F7F49D400C1C1F2 /* ProfileViewController.swift */,
+				948B794A1FF83BB70087D247 /* ProfilePasswordResetCell.swift */,
+				948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */,
+				948B794E1FF83BD80087D247 /* ProfileDeleteAccountCell.swift */,
 			);
 			name = ProfileView;
 			sourceTree = "<group>";
@@ -266,6 +282,8 @@
 			children = (
 				94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */,
 				948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */,
+				948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */,
+				948B79481FF8394F0087D247 /* AccountStatisticsCell.swift */,
 			);
 			name = ServiceView;
 			sourceTree = "<group>";
@@ -754,6 +772,7 @@
 				9429514B1F591160000EF278 /* Uploadable.swift in Sources */,
 				946890271F295A67007E46DD /* Platform.swift in Sources */,
 				948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */,
+				948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */,
 				942A9B5B1FCA9C1400AB09AD /* UIIMage+Pilot.swift in Sources */,
 				94CD01B21F76045D0045BB45 /* URL+Params.swift in Sources */,
 				949588D71F76FFFC003C9C88 /* PlatformManager.swift in Sources */,
@@ -771,17 +790,22 @@
 				946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */,
 				94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */,
 				9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */,
+				948B79451FF80F5C0087D247 /* HistoryTableViewCell.swift in Sources */,
 				949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */,
 				94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */,
 				948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */,
 				941F142A1F9B1ACF00086262 /* OAuthResult.swift in Sources */,
 				942951491F591160000EF278 /* NetworkManager.swift in Sources */,
+				948B794B1FF83BB70087D247 /* ProfilePasswordResetCell.swift in Sources */,
+				948B79491FF8394F0087D247 /* AccountStatisticsCell.swift in Sources */,
 				9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */,
 				9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */,
 				94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */,
 				941A436F1F1F0AE600D35777 /* AppDelegate.swift in Sources */,
 				948D21ED1F78B071001D5897 /* AccountTableViewCell.swift in Sources */,
 				944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */,
+				948B79471FF835F80087D247 /* AccountDisconnectionCell.swift in Sources */,
+				948B794F1FF83BD80087D247 /* ProfileDeleteAccountCell.swift in Sources */,
 				9430AF121FC23F5A00D134F0 /* HistoryViewController.swift in Sources */,
 				942951481F591160000EF278 /* Fetchable.swift in Sources */,
 				94AF6D251FE0F5B5008DED2C /* ValidationError.swift in Sources */,

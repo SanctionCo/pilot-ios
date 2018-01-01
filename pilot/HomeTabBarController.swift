@@ -18,12 +18,15 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate {
     super.viewWillAppear(animated)
 
     let historyViewController = HistoryViewController()
-    historyViewController.tabBarItem = UITabBarItem(title: "History", image: UIImage(named: "Clock"), selectedImage: UIImage(named: "ClockFilled"))
+    historyViewController.tabBarItem =
+      UITabBarItem(title: "History", image: UIImage(named: "Clock"), selectedImage: UIImage(named: "ClockFilled"))
     let historyNavigationController = UINavigationController(rootViewController: historyViewController)
 
     let settingsViewController = SettingsViewController()
-    settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Menu"), selectedImage: UIImage(named: "Menu"))
-    let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
+    settingsViewController.tabBarItem =
+      UITabBarItem(title: "Settings", image: UIImage(named: "Menu"), selectedImage: UIImage(named: "Menu"))
+    let settingsNavigationController =
+      UINavigationController(rootViewController: settingsViewController)
 
     // Place the viewControllers in a list for the tabBarController to access
     self.viewControllers = [historyNavigationController, settingsNavigationController]

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol ComposeViewControllerDelegate {
+protocol ComposeViewControllerDelegate: NSObjectProtocol {
 
   func didUpdateText(text: String)
   func didUpdateImage(image: UIImage)

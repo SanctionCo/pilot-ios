@@ -47,6 +47,8 @@ class HistoryViewController: UIViewController {
     self.navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController?.navigationItem.largeTitleDisplayMode = .never
 
+    self.historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
+
     self.view.addSubview(historyTableView)
 
     setupHistoryTableView()
@@ -87,29 +89,33 @@ class HistoryViewController: UIViewController {
   }
 }
 
-//extension HistoryViewController: UITableViewDataSource {
-//  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    return history.count
-//  }
-//
-//  func numberOfSections(in tableView: UITableView) -> Int {
-//    if history.count == 0 {
-//      // Hide the tableView to reveal the empty talbeView custom view
-//      tableView.isHidden = true
-//
-//      return 0
-//    }
-//
-//    // Display the tableView to show it's cells and hide the empty tableView custom view
-//    tableView.isHidden = false
-//    return 1
-//  }
-//
-//  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as! HistoryTableViewCell
-//
-//    // Initialize cell state here
-//
-//    return cell
-//  }
-//}
+extension HistoryViewController: UITableViewDataSource {
+  // swiftlint:disable force_cast
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return history.count
+  }
+
+  func numberOfSections(in tableView: UITableView) -> Int {
+    if history.count == 0 {
+      // Hide the tableView to reveal the empty talbeView custom view
+      tableView.isHidden = true
+
+      return 0
+    }
+
+    // Display the tableView to show it's cells and hide the empty tableView custom view
+    tableView.isHidden = false
+    return 1
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as! HistoryTableViewCell
+
+    // Initialize cell state here
+
+    return cell
+  }
+
+  // swiftlint:enable force_cast
+}
