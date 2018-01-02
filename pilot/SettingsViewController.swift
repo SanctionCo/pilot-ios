@@ -23,8 +23,13 @@ class SettingsViewController: UIViewController {
 
     self.settingsTableView.register(ConnectionTableViewCell.self, forCellReuseIdentifier: "ConnectionTableViewCell")
     self.settingsTableView.register(AccountTableViewCell.self, forCellReuseIdentifier: "AccountTableViewCell")
+
     self.settingsTableView.delegate = self
     self.settingsTableView.dataSource = self
+
+    // Set the right bar button item to a plus image
+    let composeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(self.compose))
+    self.navigationItem.rightBarButtonItem = composeButton
 
     self.navigationController?.navigationBar.isTranslucent = false
     self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -46,11 +51,10 @@ class SettingsViewController: UIViewController {
     self.settingsTableView.reloadData()
   }
 
-  func compose(_ sender: UIBarButtonItem) {
-    if let composeNavigationController = UIStoryboard.init(name: "ComposeView", bundle: nil)
-      .instantiateViewController(withIdentifier: "ComposeNavigationController") as? UINavigationController {
-      self.present(composeNavigationController, animated: true, completion: nil)
-    }
+  @objc func compose(_ sender: UIBarButtonItem) {
+    let composeViewController = ComposeViewController()
+    let composeNavigationController = UINavigationController(rootViewController: composeViewController)
+    self.present(composeNavigationController, animated: true, completion: nil)
   }
 
   func setupSettingsTableView() {
