@@ -112,6 +112,7 @@ class LoginViewController: UIViewController {
     navigationController?.navigationBar.isHidden = true
 
     view.backgroundColor = UIColor.PilotLightBlue
+
     view.addSubview(profileImageView)
     view.addSubview(loginRegisterSegmentedControl)
     view.addSubview(inputsContainerView)

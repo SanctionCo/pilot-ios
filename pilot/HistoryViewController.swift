@@ -40,6 +40,10 @@ class HistoryViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    // Set the right bar button item to a plus image
+    let composeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(self.compose))
+    self.navigationItem.rightBarButtonItem = composeButton
+
     self.navigationController?.navigationBar.isTranslucent = false
     self.navigationController?.navigationBar.shadowImage = UIImage()
 
@@ -52,6 +56,12 @@ class HistoryViewController: UIViewController {
     self.view.addSubview(historyTableView)
 
     setupHistoryTableView()
+  }
+
+  @objc func compose(_ sender: UIBarButtonItem) {
+    let composeViewController = ComposeViewController()
+    let composeNavigationController = UINavigationController(rootViewController: composeViewController)
+    self.present(composeNavigationController, animated: true, completion: nil)
   }
 
   func setupHistoryTableView() {

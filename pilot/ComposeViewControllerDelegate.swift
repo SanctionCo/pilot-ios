@@ -10,10 +10,8 @@ import Foundation
 import UIKit
 
 protocol ComposeViewControllerDelegate: NSObjectProtocol {
-
   func didUpdateText(text: String)
   func didUpdateImage(image: UIImage)
   func didUpdateVideo(video: URL)
   func didUpdateType(type: PostType)
-
 }

@@ -11,74 +11,79 @@ import UIKit
 
 class ComposeViewController: UIViewController {
 
-  internal var post = Post() // Post object to publish
+  private var postState = Post() // Post object to publish
 
-  var contentView: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-
-  var textView: UITextView = {
-    let view = UITextView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-
-  var imageView: UIImageView = {
-    let view = UIImageView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-
-  var postButton: UIBarButtonItem = {
-    let barButton = UIBarButtonItem()
-
-    return barButton
-  }()
-
-  var scrollView: UIScrollView = {
-    let view = UIScrollView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-
-  // Post attributes
   private var selectedPlatforms = [Platform]()
   private var selectedImages = [UIImage]() {
     didSet {
       self.imageView.image = selectedImages[0]
     }
   }
+
   private let gallery = GalleryController()
 
-  override var inputAccessoryView: UIView? { return self.composeToolBar }
-  override var canBecomeFirstResponder: Bool { return true }
-
-  // swiftlint:disable force_cast
-  lazy var composeToolBar: UIToolbar = {
-    return Bundle.main.loadNibNamed("ComposeToolbarView", owner: self, options: nil)?.first as! UIToolbar
+  var scrollView: UIScrollView = {
+    let scrollView = UIScrollView()
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.keyboardDismissMode = .interactive
+    scrollView.backgroundColor = UIColor.white
+    return scrollView
   }()
-  // swiftlint:enable force_cast
+
+  var textView: UITextView = {
+    let view = UITextView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.text = "Write your post here!"
+    view.textColor = UIColor.TextGray
+    return view
+  }()
+
+  var imageView: UIImageView = {
+    let view = UIImageView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.contentMode = UIViewContentMode.center
+    return view
+  }()
+
+  lazy var cancelBarButton: UIBarButtonItem = {
+    return UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancel))
+  }()
+
+  lazy var postBarButton: UIBarButtonItem = {
+    return UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(self.post))
+  }()
+
+  lazy var composeToolBar: UIToolbar = {
+    let toolbar = UIToolbar()
+    toolbar.translatesAutoresizingMaskIntoConstraints = false
+
+    let cameraButton = UIBarButtonItem(image: #imageLiteral(resourceName: "camera"), style: .plain, target: self, action: #selector(photoPicker))
+    toolbar.items = [cameraButton]
+
+    return toolbar
+  }()
+
+  override var inputAccessoryView: UIView? { get { return self.composeToolBar }}
+  override var canBecomeFirstResponder: Bool { return true }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    scrollView.frame = self.view.bounds
+
     // Delegates
     gallery.delegate = self
     textView.delegate = self
-    post.delegate = self
+    postState.delegate = self
 
-    // Post button is disabled until minimum requirnments are met (PostChanged)
-    postButton.isEnabled = false
+    navigationItem.leftBarButtonItem = cancelBarButton
+    navigationItem.rightBarButtonItem = postBarButton
 
-    // Set up the placeholder text for the textView
-    textView.text = "Write your post here!"
-    textView.textColor = UIColor.TextGray
+    postBarButton.isEnabled = false
 
-    scrollView.keyboardDismissMode = .interactive
+    self.view.addSubview(scrollView)
 
-    imageView.contentMode = UIViewContentMode.center
+    setupScrollView()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -87,26 +92,53 @@ class ComposeViewController: UIViewController {
     self.becomeFirstResponder()
   }
 
-  func photoPicker(_ sender: UIBarButtonItem) {
+  @objc func photoPicker(_ sender: UIBarButtonItem) {
     self.present(gallery, animated: true, completion: nil)
   }
 
-  func post(_ sender: UIBarButtonItem) {
-
-  }
-
-  func cancel(_ sender: UIBarButtonItem) {
+  @objc func cancel(_ sender: UIBarButtonItem) {
     self.textView.resignFirstResponder()
     self.resignFirstResponder()
     self.dismiss(animated: true, completion: nil)
   }
 
+  @objc func post(_ sender: UIBarButtonItem) {
+    // Send the post to Lightning
+  }
+
   func postChanged() {
     if self.textView.text != "" || self.selectedImages.count != 0 {
-      self.postButton.isEnabled = true
+      self.postBarButton.isEnabled = true
     } else {
-      self.postButton.isEnabled = false
+      self.postBarButton.isEnabled = false
     }
+  }
+
+  func setupScrollView() {
+    scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+
+    scrollView.addSubview(textView)
+    scrollView.addSubview(imageView)
+
+    setupTextView()
+    setupImageView()
+  }
+
+  func setupTextView() {
+    textView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
+    textView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20).isActive = true
+    textView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: 30).isActive = true
+    textView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+  }
+
+  func setupImageView() {
+    imageView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 20).isActive = true
+    imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
+    imageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
   }
 }
 
@@ -129,7 +161,7 @@ extension ComposeViewController: UIToolbarDelegate { }
 extension ComposeViewController: UITextViewDelegate {
   func textViewDidChange(_ textView: UITextView) {
     self.postChanged()
-    self.post.text = self.textView.text
+    self.postState.text = self.textView.text
   }
 
   func textViewDidBeginEditing(_ textView: UITextView) {
@@ -163,29 +195,29 @@ extension ComposeViewController: GalleryControllerDelegate {
         self?.imageView.image = newImage
       }
 
-      self?.post.type = PostType.photo
+      self?.postState.type = PostType.photo
     })
   }
 
   func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
-//    controller.dismiss(animated: true, completion: {
-//      let editor = VideoEditor()
-//      editor.edit(video: video) { (_, tempPath: URL?) in
-//        DispatchQueue.main.async { [weak self] in
-//          if let tempPath = tempPath {
-//            self?.post.video = tempPath
-//            self?.post.type = PostType.video
-//          }
-//        }
-//      }
-//
-//      video.fetchThumbnail(completion: { [weak self] image in
-//        DispatchQueue.main.async {
-//          self?.post.image = image
-//        }
-//      })
-//
-//    })
+    controller.dismiss(animated: true, completion: {
+      let editor = VideoEditor()
+      editor.edit(video: video) { (_, tempPath: URL?) in
+        DispatchQueue.main.async { [weak self] in
+          if let tempPath = tempPath {
+            self?.postState.video = tempPath
+            self?.postState.type = PostType.video
+          }
+        }
+      }
+
+      video.fetchThumbnail(completion: { [weak self] image in
+        DispatchQueue.main.async {
+          self?.postState.image = image
+        }
+      })
+
+    })
   }
 
   func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) { }

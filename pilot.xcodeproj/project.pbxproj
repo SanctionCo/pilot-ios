@@ -300,8 +300,8 @@
 		9430AF161FC24DCC00D134F0 /* ComposeView */ = {
 			isa = PBXGroup;
 			children = (
-				948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */,
 				9430AF171FC24E0700D134F0 /* ComposeViewController.swift */,
+				948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */,
 			);
 			name = ComposeView;
 			sourceTree = "<group>";
