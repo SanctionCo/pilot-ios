@@ -63,7 +63,7 @@ class ComposeViewController: UIViewController {
     return toolbar
   }()
 
-  override var inputAccessoryView: UIView? { get { return self.composeToolBar }}
+  override var inputAccessoryView: UIView? { return self.composeToolBar }
   override var canBecomeFirstResponder: Bool { return true }
 
   override func viewDidLoad() {
