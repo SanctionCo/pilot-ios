@@ -23,7 +23,7 @@
 		942951491F591160000EF278 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951451F591160000EF278 /* NetworkManager.swift */; };
 		9429514A1F591160000EF278 /* Publishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951461F591160000EF278 /* Publishable.swift */; };
 		9429514B1F591160000EF278 /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951471F591160000EF278 /* Uploadable.swift */; };
-		942A9B5B1FCA9C1400AB09AD /* UIIMage+Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942A9B5A1FCA9C1400AB09AD /* UIIMage+Pilot.swift */; };
+		942A9B5B1FCA9C1400AB09AD /* UIImage+Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942A9B5A1FCA9C1400AB09AD /* UIImage+Pilot.swift */; };
 		9430AF121FC23F5A00D134F0 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */; };
 		9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF171FC24E0700D134F0 /* ComposeViewController.swift */; };
 		9430AF1C1FC24E8200D134F0 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */; };
@@ -106,7 +106,7 @@
 		942951451F591160000EF278 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = pilot/NetworkManager.swift; sourceTree = "<group>"; };
 		942951461F591160000EF278 /* Publishable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Publishable.swift; path = pilot/Publishable.swift; sourceTree = "<group>"; };
 		942951471F591160000EF278 /* Uploadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Uploadable.swift; path = pilot/Uploadable.swift; sourceTree = "<group>"; };
-		942A9B5A1FCA9C1400AB09AD /* UIIMage+Pilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIIMage+Pilot.swift"; sourceTree = "<group>"; };
+		942A9B5A1FCA9C1400AB09AD /* UIImage+Pilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Pilot.swift"; sourceTree = "<group>"; };
 		9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9430AF171FC24E0700D134F0 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
@@ -376,7 +376,7 @@
 			children = (
 				949E5DCD1F2813C8009EE3EB /* UIColor+PilotColors.swift */,
 				94CD01B11F76045D0045BB45 /* URL+Params.swift */,
-				942A9B5A1FCA9C1400AB09AD /* UIIMage+Pilot.swift */,
+				942A9B5A1FCA9C1400AB09AD /* UIImage+Pilot.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -773,7 +773,7 @@
 				946890271F295A67007E46DD /* Platform.swift in Sources */,
 				948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */,
 				948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */,
-				942A9B5B1FCA9C1400AB09AD /* UIIMage+Pilot.swift in Sources */,
+				942A9B5B1FCA9C1400AB09AD /* UIImage+Pilot.swift in Sources */,
 				94CD01B21F76045D0045BB45 /* URL+Params.swift in Sources */,
 				949588D71F76FFFC003C9C88 /* PlatformManager.swift in Sources */,
 				94AF20F21F270698009A1484 /* LoginViewController.swift in Sources */,
