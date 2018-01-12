@@ -124,7 +124,6 @@ extension VideosController: PageAware {
   func pageDidShow() {
     once.run {
       library.reload {
-        self.gridView.loadingIndicator.stopAnimating()
         self.items = self.library.items
         self.gridView.collectionView.reloadData()
         self.gridView.emptyView.isHidden = !self.items.isEmpty

@@ -9,7 +9,7 @@ target 'pilot' do
   pod 'HTTPStatusCodes', '~> 3.1.2'
   pod 'Locksmith', '~> 4.0.0'
   pod 'ImagePicker', '~> 3.0.0'
-  pod 'Gallery', '~> 2.0.6'
+  pod 'Gallery', '2.0.3'
 
   target 'pilotTests' do
     inherit! :search_paths

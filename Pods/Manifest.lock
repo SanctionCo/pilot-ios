@@ -3,7 +3,7 @@ PODS:
   - AlamofireObjectMapper (5.0.0):
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 3.0)
-  - Gallery (2.0.6)
+  - Gallery (2.0.3)
   - HTTPStatusCodes (3.1.2)
   - ImagePicker (3.0.0)
   - Locksmith (4.0.0)
@@ -15,7 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.5.0)
   - AlamofireObjectMapper (~> 5.0.0)
-  - Gallery (~> 2.0.6)
+  - Gallery (= 2.0.3)
   - HTTPStatusCodes (~> 3.1.2)
   - ImagePicker (~> 3.0.0)
   - Locksmith (~> 4.0.0)
@@ -36,7 +36,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AlamofireObjectMapper: 5fafc816351cbbc0d486611aaeba7461c0cbad49
-  Gallery: 5489ae11d8010a3cc163030f6e92d618afbdf4df
+  Gallery: 360dc4677b6ac1049efa47f13263866d7521b1d4
   HTTPStatusCodes: 88155ba36826366a898a7b4f34d311f49083d546
   ImagePicker: 973953c25960fe04729a7082a56194321c6762d2
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
@@ -45,6 +45,6 @@ SPEC CHECKSUMS:
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   SwiftHash: 62691a0d6b09b958d21ab1ea0014b83d56f58e8f
 
-PODFILE CHECKSUM: a1c5a4c1fb1144bb6d126cb0469411481cc42d8d
+PODFILE CHECKSUM: 2da74eed6125283e11ff5bed2f1caba41209916b
 
 COCOAPODS: 1.3.1

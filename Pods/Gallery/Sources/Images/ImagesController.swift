@@ -142,7 +142,6 @@ extension ImagesController: PageAware {
   func pageDidShow() {
     once.run {
       library.reload {
-        self.gridView.loadingIndicator.stopAnimating()
         self.dropdownController.albums = self.library.albums
         self.dropdownController.tableView.reloadData()
 
@@ -224,9 +223,9 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
     if cart.images.contains(item) {
       cart.remove(item)
     } else {
-      if Config.Camera.imageLimit == 0 || Config.Camera.imageLimit > cart.images.count{
-        cart.add(item)
-      }
+        if Config.Camera.imageLimit == 0 || Config.Camera.imageLimit > cart.images.count{
+            cart.add(item)
+        }
     }
 
     configureFrameViews()
