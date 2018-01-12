@@ -203,7 +203,6 @@ class LoginViewController: UIViewController {
   }
 
   @objc private func updateLoginRegisterView() {
-
     // Change height of inputsContainerView
     inputsContainerViewHeight?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 80 : 120
 
