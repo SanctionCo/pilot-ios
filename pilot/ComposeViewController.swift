@@ -123,18 +123,13 @@ class ComposeViewController: UIViewController {
     scrollView.addSubview(textView)
     scrollView.addSubview(imageView)
 
-    setupTextView()
-    setupImageView()
-  }
-
-  func setupTextView() {
+    // Position the textView
     textView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
     textView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20).isActive = true
     textView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: 30).isActive = true
     textView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-  }
 
-  func setupImageView() {
+    // Position the imageView
     imageView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 20).isActive = true
     imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
     imageView.widthAnchor.constraint(equalToConstant: 50).isActive = true

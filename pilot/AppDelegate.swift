@@ -6,6 +6,7 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
+import CoreData
 import SafariServices
 import UIKit
 
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
     self.window = UIWindow(frame: UIScreen.main.bounds)
 
     let loginViewController = LoginViewController()
