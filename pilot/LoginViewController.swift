@@ -8,10 +8,13 @@
 
 import Alamofire
 import HTTPStatusCodes
+import Locksmith
 import SwiftHash
 import UIKit
 
 class LoginViewController: UIViewController {
+
+  let authenticationHelper = AuthenticationHelper()
 
   let profileImageView: UIImageView = {
     let imageView = UIImageView()
@@ -47,8 +50,6 @@ class LoginViewController: UIViewController {
     textField.autocapitalizationType = .none
     textField.autocorrectionType = .no
 
-    textField.text = "n.eckert70@gmail.com"
-
     return textField
   }()
 
@@ -57,8 +58,6 @@ class LoginViewController: UIViewController {
     textField.placeholder = "Password"
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.isSecureTextEntry = true
-
-    textField.text = "password"
 
     return textField
   }()
@@ -126,6 +125,8 @@ class LoginViewController: UIViewController {
     setupActivitySpinner()
 
     NetworkManager.sharedInstance.adapter = AuthAdapter()
+
+    attemptAutomaticLogin()
   }
 
   deinit {
@@ -134,13 +135,47 @@ class LoginViewController: UIViewController {
 
   @objc private func handleButtonAction() {
     if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-      login()
+      performTextLogin()
     } else {
       register()
     }
   }
 
-  private func login() {
+  private func attemptAutomaticLogin() {
+    // If this is the first login, no saved settings will exist
+    guard UserDefaults.standard.contains(key: "biometrics") else {
+      return
+    }
+
+    // If the user has declined to set up Biometrics, attempt to fill from keychain
+    guard UserDefaults.standard.bool(forKey: "biometrics") else {
+      self.fillFromKeychain()
+      return
+    }
+
+    // Otherwise, Biometrics should be enabled and we can prompt for authentication
+    authenticationHelper.authenticationWithTouchID(onSuccess: {
+      self.performBiometricLogin()
+    }, onFailure: { message in
+      let alert = UIAlertController(title: self.authenticationHelper.biometricType().rawValue + " Error",
+                                    message: message,
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+        self.fillFromKeychain()
+      }))
+
+      self.present(alert, animated: true, completion: nil)
+    })
+  }
+
+  private func performBiometricLogin() {
+    if let (email, password) = authenticationHelper.getFromKeychain() {
+      let hashedPassword = MD5(password).lowercased()
+      login(email: email, password: hashedPassword)
+    }
+  }
+
+  private func performTextLogin() {
     if let error = LoginValidationForm(email: emailTextField.text, password: passwordTextField.text).validate() {
       let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -150,22 +185,29 @@ class LoginViewController: UIViewController {
     }
 
     let hashedPassword = MD5(passwordTextField.text!).lowercased()
+    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: passwordTextField.text!)
 
+    login(email: emailTextField.text!, password: hashedPassword)
+  }
+
+  private func login(email: String, password: String) {
     self.activitySpinner.startAnimating()
     self.loginRegisterButton.isEnabled = false
 
-    PilotUser.fetch(with: ThunderRouter.login(emailTextField.text!, hashedPassword), onSuccess: { pilotUser in
+    PilotUser.fetch(with: ThunderRouter.login(email, password), onSuccess: { pilotUser in
       UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
 
-      let homeTabBarController = HomeTabBarController()
+      self.setUpBiometrics(success: {
+        let homeTabBarController = HomeTabBarController()
 
-      // Set the platform list in the PlatformManager class
-      PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)
-      DispatchQueue.main.async { [weak self] in
-        self?.activitySpinner.stopAnimating()
-        self?.loginRegisterButton.isEnabled = true
-        self?.present(homeTabBarController, animated: true, completion: nil)
-      }
+        // Set the platform list in the PlatformManager class
+        PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)
+        DispatchQueue.main.async { [weak self] in
+          self?.activitySpinner.stopAnimating()
+          self?.loginRegisterButton.isEnabled = true
+          self?.present(homeTabBarController, animated: true, completion: nil)
+        }
+      })
     }, onError: { _ in
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
@@ -183,10 +225,13 @@ class LoginViewController: UIViewController {
       return
     }
 
+    let hashedPassword = MD5(passwordTextField.text!).lowercased()
+    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: passwordTextField.text!)
+
     self.activitySpinner.startAnimating()
     self.loginRegisterButton.isEnabled = false
 
-    let pilotUser = PilotUser(email: emailTextField.text!, password: passwordTextField.text!)
+    let pilotUser = PilotUser(email: emailTextField.text!, password: hashedPassword)
     PilotUser.upload(with: ThunderRouter.createPilotUser(pilotUser), onSuccess: { _ in
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
@@ -198,6 +243,38 @@ class LoginViewController: UIViewController {
         self?.loginRegisterButton.isEnabled = true
       }
     })
+  }
+
+  private func setUpBiometrics(success: @escaping () -> Void) {
+    // Only set up if the user has not been asked before
+    guard !UserDefaults.standard.contains(key: "biometrics") else {
+      success()
+      return
+    }
+
+    let biometricType = self.authenticationHelper.biometricType().rawValue
+
+    let alert = UIAlertController(title: "Enable " + biometricType,
+                                  message: "Do you want to enable " + biometricType + " login?",
+                                  preferredStyle: .alert)
+
+    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+      UserDefaults.standard.set(true, forKey: "biometrics")
+      success()
+    }))
+    alert.addAction(UIAlertAction(title: "No", style: .default, handler: { _ in
+      UserDefaults.standard.set(false, forKey: "biometrics")
+      success()
+    }))
+
+    present(alert, animated: true, completion: nil)
+  }
+
+  private func fillFromKeychain() {
+    if let (email, password) = authenticationHelper.getFromKeychain() {
+      emailTextField.text = email
+      passwordTextField.text = password
+    }
   }
 
   @objc private func updateLoginRegisterView() {
