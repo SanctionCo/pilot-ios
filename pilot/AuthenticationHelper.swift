@@ -12,6 +12,7 @@ import Locksmith
 
 struct AuthenticationHelper {
   let context = LAContext()
+  let authenticationReasonString = "Sign in to Pilot"
 
   /// Saves the given email and password to keychain for the account "Pilot".
   func saveToKeychain(email: String, password: String) {
@@ -39,7 +40,7 @@ struct AuthenticationHelper {
   }
 
   /// Determines which biometric type is available on the device.
-  /// Returns the type: either none, TouchID, or FaceID
+  /// Returns the type. Either none, TouchID, or FaceID
   func biometricType() -> BiometricType {
     _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     switch context.biometryType {
@@ -52,94 +53,110 @@ struct AuthenticationHelper {
     }
   }
 
-  func authenticationWithTouchID(onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
+  /// Returns true if the device can use biometrics, false otherwise
+  func canUseBiometrics() -> Bool {
+    return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+  }
+
+  /// Attempts to authenticate using biometrics
+  /// If successfully authenticates, calls the onSuccess method on the main thread (DispatchQueue.main)
+  /// If a failure occurs, calls onFailure method with the reason for failure in a String
+  func authenticationWithBiometrics(onSuccess: @escaping () -> Void,
+                                    onFailure: @escaping (FallbackType, String) -> Void) {
     context.localizedFallbackTitle = "Use Password"
 
     var authError: NSError?
-    let reasonString = "Sign in to Pilot"
 
     if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
       context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
-                             localizedReason: reasonString) {success, evaluateError in
+                             localizedReason: authenticationReasonString) {success, evaluateError in
         if success {
+          // Successful authentication
           DispatchQueue.main.async {
             onSuccess()
           }
         } else {
-          //TODO: User did not authenticate successfully, look at error and take appropriate action
-          guard let error = evaluateError else {
-            onFailure("An unknown error occurred. Please login with your credentials.")
-            return
+          // User did not authenticate successfully
+          DispatchQueue.main.async {
+            guard let error = evaluateError else {
+              onFailure(.fallbackWithError, "An unknown error occurred. Please login with your credentials.")
+              return
+            }
+
+            let (fallbackType, reason) = self.evaluateAuthenticationError(errorCode: error._code)
+            onFailure(fallbackType, reason)
           }
-
-          let reason = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
-
-          //TODO: If you have choosen the 'Fallback authentication mechanism selected' (LAError.userFallback). Handle gracefully
-          print(reason)
-          onFailure(reason)
         }
       }
     } else {
+      // Authentication is either locked out or not available on device
       guard let error = authError else {
-        onFailure("An unknown error occurred. Please login with your credentials.")
+        onFailure(.fallbackWithError, "An unknown error occurred. Please login with your credentials.")
         return
       }
 
-      //TODO: Show appropriate alert if biometry/TouchID/FaceID is lockout or not enrolled
-      let reason = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code)
-
-      print(reason)
-      onFailure(reason)
+      let (fallbackType, reason) = self.evaluateAuthenticationPolicyError(errorCode: error.code)
+      onFailure(fallbackType, reason)
     }
   }
 
-  private func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
-    switch errorCode {
-    case LAError.biometryNotAvailable.rawValue:
-      return "Authentication could not start because the device does not support biometric authentication."
-
-    case LAError.biometryLockout.rawValue:
-      return "The user has been locked out of biometric authentication, due to failing authentication too many times."
-
-    case LAError.biometryNotEnrolled.rawValue:
-      return "Authentication could not start because the user has not enrolled in biometric authentication."
-
-    default:
-      return "Did not find error code on LAError object"
-    }
-  }
-
-  private func evaluateAuthenticationPolicyMessageForLA(errorCode: Int) -> String {
+  /// Determines the authentication error. Use this method when checking error
+  /// after user has attempted to authenticate
+  private func evaluateAuthenticationError(errorCode: Int) -> (FallbackType, String) {
     switch errorCode {
     case LAError.authenticationFailed.rawValue:
-      return "The user failed to provide valid credentials"
+      return (.fallbackWithError, "Too many incorrect attempts. Please use your password.")
 
     case LAError.appCancel.rawValue:
-      return "Authentication was cancelled by application"
+      return (.fallbackWithoutError, "Authentication was cancelled by application")
 
     case LAError.invalidContext.rawValue:
-      return "The context is invalid"
+      return (.fallbackWithoutError, "The context is invalid")
 
     case LAError.notInteractive.rawValue:
-      return "Not interactive"
+      return (.fallbackWithoutError, "Not interactive")
 
     case LAError.passcodeNotSet.rawValue:
-      return "Passcode is not set on the device"
+      return (.fallbackWithoutError, "Passcode is not set on the device")
 
     case LAError.systemCancel.rawValue:
-      return "Authentication was cancelled by the system"
+      return (.fallbackWithoutError, "Authentication was cancelled by the system")
 
     case LAError.userCancel.rawValue:
-      return "The user did cancel"
+      return (.fallbackWithoutError, "The user did cancel")
 
     case LAError.userFallback.rawValue:
-      return "The user chose to use the fallback"
+      return (.fallbackWithoutError, "The user chose to use the fallback")
 
     default:
-      return evaluatePolicyFailErrorMessageForLA(errorCode: errorCode)
+      return (.fallbackWithError, "An unknown error occurred. Please login with your credentials.")
     }
   }
 
+  /// Determines the authentication policy error. Use this method when checking error
+  /// given before authentication could even take place
+  private func evaluateAuthenticationPolicyError(errorCode: Int) -> (FallbackType, String) {
+    switch errorCode {
+    case LAError.biometryNotAvailable.rawValue:
+      return (.fallbackWithoutError,
+              "Authentication could not start because the device does not support biometric authentication.")
+
+    case LAError.biometryLockout.rawValue:
+      return (.fallbackWithoutError,
+              "The user has been locked out of biometric authentication, due to failing authentication too many times.")
+
+    case LAError.biometryNotEnrolled.rawValue:
+      return (.fallbackWithoutError,
+              "Authentication could not start because the user has not enrolled in biometric authentication.")
+
+    // Fall back to other method to continue checking error code
+    default:
+      return evaluateAuthenticationError(errorCode: errorCode)
+    }
+  }
+
+  /// Check if the given email and password are different from the ones stored in keychain
+  /// If different, this returns true. If they are the same, this returns false.
   private func isNewValue(email: String, password: String) -> Bool {
     if let result = getFromKeychain() {
       let existingEmail = result.0
@@ -156,4 +173,9 @@ enum BiometricType: String {
   case none
   case touchID = "TouchID"
   case faceID = "FaceID"
+}
+
+enum FallbackType: String {
+  case fallbackWithError
+  case fallbackWithoutError
 }

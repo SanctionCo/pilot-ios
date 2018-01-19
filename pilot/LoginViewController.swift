@@ -142,36 +142,33 @@ class LoginViewController: UIViewController {
   }
 
   private func attemptAutomaticLogin() {
-    // If this is the first login, no saved settings will exist
-    guard UserDefaults.standard.contains(key: "biometrics") else {
-      return
-    }
+    self.fillFromKeychain()
 
-    // If the user has declined to set up Biometrics, attempt to fill from keychain
-    guard UserDefaults.standard.bool(forKey: "biometrics") else {
-      self.fillFromKeychain()
+    // If this is the first login or the user has declined to set up Biometrics, attempt to fill from keychain
+    guard UserDefaults.standard.contains(key: "biometrics"),
+          UserDefaults.standard.bool(forKey: "biometrics") else {
       return
     }
 
     // Otherwise, Biometrics should be enabled and we can prompt for authentication
-    authenticationHelper.authenticationWithTouchID(onSuccess: {
+    authenticationHelper.authenticationWithBiometrics(onSuccess: {
       self.performBiometricLogin()
-    }, onFailure: { message in
-      let alert = UIAlertController(title: self.authenticationHelper.biometricType().rawValue + " Error",
-                                    message: message,
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-        self.fillFromKeychain()
-      }))
+    }, onFailure: { fallbackType, message in
+      // If failure is called with fallback type fallbackWithError, show an alert
+      if fallbackType == .fallbackWithError {
+        let alert = UIAlertController(title: self.authenticationHelper.biometricType().rawValue + " Error",
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
-      self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
+      }
     })
   }
 
   private func performBiometricLogin() {
     if let (email, password) = authenticationHelper.getFromKeychain() {
-      let hashedPassword = MD5(password).lowercased()
-      login(email: email, password: hashedPassword)
+      login(email: email, password: password)
     }
   }
 
@@ -185,7 +182,7 @@ class LoginViewController: UIViewController {
     }
 
     let hashedPassword = MD5(passwordTextField.text!).lowercased()
-    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: passwordTextField.text!)
+    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: hashedPassword)
 
     login(email: emailTextField.text!, password: hashedPassword)
   }
@@ -197,7 +194,7 @@ class LoginViewController: UIViewController {
     PilotUser.fetch(with: ThunderRouter.login(email, password), onSuccess: { pilotUser in
       UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
 
-      self.setUpBiometrics(success: {
+      self.setUpBiometrics(completion: {
         let homeTabBarController = HomeTabBarController()
 
         // Set the platform list in the PlatformManager class
@@ -226,7 +223,7 @@ class LoginViewController: UIViewController {
     }
 
     let hashedPassword = MD5(passwordTextField.text!).lowercased()
-    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: passwordTextField.text!)
+    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: hashedPassword)
 
     self.activitySpinner.startAnimating()
     self.loginRegisterButton.isEnabled = false
@@ -245,10 +242,16 @@ class LoginViewController: UIViewController {
     })
   }
 
-  private func setUpBiometrics(success: @escaping () -> Void) {
+  private func setUpBiometrics(completion: @escaping () -> Void) {
     // Only set up if the user has not been asked before
     guard !UserDefaults.standard.contains(key: "biometrics") else {
-      success()
+      completion()
+      return
+    }
+
+    // Only set up if the user can use biometrics
+    guard authenticationHelper.canUseBiometrics() else {
+      completion()
       return
     }
 
@@ -260,20 +263,19 @@ class LoginViewController: UIViewController {
 
     alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
       UserDefaults.standard.set(true, forKey: "biometrics")
-      success()
+      completion()
     }))
     alert.addAction(UIAlertAction(title: "No", style: .default, handler: { _ in
       UserDefaults.standard.set(false, forKey: "biometrics")
-      success()
+      completion()
     }))
 
     present(alert, animated: true, completion: nil)
   }
 
   private func fillFromKeychain() {
-    if let (email, password) = authenticationHelper.getFromKeychain() {
+    if let (email, _) = authenticationHelper.getFromKeychain() {
       emailTextField.text = email
-      passwordTextField.text = password
     }
   }
 

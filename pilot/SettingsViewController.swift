@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController {
 
     self.settingsTableView.register(ConnectionTableViewCell.self, forCellReuseIdentifier: "ConnectionTableViewCell")
     self.settingsTableView.register(AccountTableViewCell.self, forCellReuseIdentifier: "AccountTableViewCell")
+    self.settingsTableView.register(BiometricToggleTableViewCell.self, forCellReuseIdentifier: "BiometricsTableViewCell")
 
     self.settingsTableView.delegate = self
     self.settingsTableView.dataSource = self
@@ -78,6 +79,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
       return cell
     } else if indexPath.section == 1 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "BiometricsTableViewCell") as! BiometricToggleTableViewCell
+
+      return cell
+    } else if indexPath.section == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
 
       if connectedPlatforms.count != 0 {
@@ -103,6 +108,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     if section == 0 {
       return ""
     } else if section == 1 {
+      return AuthenticationHelper().biometricType().rawValue
+    } else if section == 2 {
       if connectedPlatforms.count != 0 {
         return "Connected Accounts"
       } else {
@@ -118,18 +125,18 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     let unconnectedCount = unconnectedPlatforms.count
 
     if connectedCount == 0 && unconnectedCount == 0 {
-      return 1
-    } else if connectedCount != 0 && unconnectedCount != 0 {
-      return 3
-    } else {
       return 2
+    } else if connectedCount != 0 && unconnectedCount != 0 {
+      return 4
+    } else {
+      return 3
     }
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if section == 0 {
+    if section == 0 || section == 1 {
       return 1
-    } else if section == 1 {
+    } else if section == 2 {
       if connectedPlatforms.count != 0 {
         return connectedPlatforms.count
       } else {
@@ -145,7 +152,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       let profileViewController = ProfileViewController()
 
       self.navigationController?.pushViewController(profileViewController, animated: true)
-    } else if indexPath.section == 1 && connectedPlatforms.count != 0 {
+    } else if indexPath.section == 1 {
+      // Biometrics toggle - do nothing
+    } else if indexPath.section == 2 && connectedPlatforms.count != 0 {
 
       let accountViewController = AccountTableViewController()
       accountViewController.platform = connectedPlatforms[indexPath.row]
