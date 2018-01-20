@@ -166,12 +166,14 @@ class LoginViewController: UIViewController {
     })
   }
 
+  /// Perform a login that the user completed from biometrics
   private func performBiometricLogin() {
     if let (email, password) = authenticationHelper.getFromKeychain() {
       login(email: email, password: password)
     }
   }
 
+  /// Perform a login that the user completed from the text boxes
   private func performTextLogin() {
     if let error = LoginValidationForm(email: emailTextField.text, password: passwordTextField.text).validate() {
       let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
@@ -187,6 +189,7 @@ class LoginViewController: UIViewController {
     login(email: emailTextField.text!, password: hashedPassword)
   }
 
+  /// Perform the login by getting the user from Thunder
   private func login(email: String, password: String) {
     self.activitySpinner.startAnimating()
     self.loginRegisterButton.isEnabled = false
@@ -194,6 +197,7 @@ class LoginViewController: UIViewController {
     PilotUser.fetch(with: ThunderRouter.login(email, password), onSuccess: { pilotUser in
       UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
 
+      // Attempt to set up biometrics if this is the first time logging in
       self.setUpBiometrics(completion: {
         let homeTabBarController = HomeTabBarController()
 
@@ -213,6 +217,7 @@ class LoginViewController: UIViewController {
     })
   }
 
+  /// Register a new user in Thunder
   private func register() {
     if let error = RegisterValidationForm(email: emailTextField.text, password: passwordTextField.text, confirmPassword: confirmPasswordTextField.text).validate() {
       let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
@@ -242,6 +247,7 @@ class LoginViewController: UIViewController {
     })
   }
 
+  /// Prompt the user to set up biometrics for the first time
   private func setUpBiometrics(completion: @escaping () -> Void) {
     // Only set up if the user has not been asked before
     guard !UserDefaults.standard.contains(key: "biometrics") else {
@@ -273,6 +279,7 @@ class LoginViewController: UIViewController {
     present(alert, animated: true, completion: nil)
   }
 
+  /// Fill the email text field from the keychain
   private func fillFromKeychain() {
     if let (email, _) = authenticationHelper.getFromKeychain() {
       emailTextField.text = email

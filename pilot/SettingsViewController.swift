@@ -17,17 +17,17 @@ class SettingsViewController: UIViewController {
     return tableView
   }()
 
-  var toggle: UISwitch = {
-    let toggle = UISwitch()
-    toggle.addTarget(self, action: #selector(handleSwitchAction), for: .valueChanged)
+  var biometricsSwitch: UISwitch = {
+    let biometricsSwitch = UISwitch()
+    biometricsSwitch.addTarget(self, action: #selector(handleSwitchAction), for: .valueChanged)
 
     if UserDefaults.standard.bool(forKey: "biometrics") {
-      toggle.setOn(true, animated: false)
+      biometricsSwitch.setOn(true, animated: false)
     } else {
-      toggle.setOn(false, animated: false)
+      biometricsSwitch.setOn(false, animated: false)
     }
 
-    return toggle
+    return biometricsSwitch
   }()
 
   var connectedPlatforms: [Platform] = []
@@ -74,11 +74,9 @@ class SettingsViewController: UIViewController {
   }
 
   @objc private func handleSwitchAction() {
-    if toggle.isOn {
-      print("turning on biometrics")
+    if biometricsSwitch.isOn {
       UserDefaults.standard.set(true, forKey: "biometrics")
     } else {
-      print("turning off biometrics")
       UserDefaults.standard.set(false, forKey: "biometrics")
     }
   }
@@ -104,15 +102,29 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
       return cell
     } else if indexPath.section == 1 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "BiometricsTableViewCell")!
-      cell.textLabel?.text = "Login with " + authenticationHelper.biometricType().rawValue
-      cell.accessoryView = toggle
+      if authenticationHelper.canUseBiometrics() {
+        // Add biometrics section if the device can use it
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BiometricsTableViewCell")!
+        cell.textLabel?.text = "Login with " + authenticationHelper.biometricType().rawValue
+        cell.accessoryView = biometricsSwitch
 
-      return cell
+        return cell
+      } else {
+        // Otherwise add the appropriate platform section
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
+
+        if connectedPlatforms.count != 0 {
+          cell.platform = connectedPlatforms[indexPath.row]
+        } else {
+          cell.platform = unconnectedPlatforms[indexPath.row]
+        }
+
+        return cell
+      }
     } else if indexPath.section == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
 
-      if connectedPlatforms.count != 0 {
+      if authenticationHelper.canUseBiometrics() && connectedPlatforms.count != 0 {
         cell.platform = connectedPlatforms[indexPath.row]
       } else {
         cell.platform = unconnectedPlatforms[indexPath.row]
@@ -132,10 +144,18 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
   // MARK: UITableViewDelegate
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if section == 0 || section == 1 {
+    if section == 0 {
       return ""
+    } else if section == 1 {
+      if authenticationHelper.canUseBiometrics() {
+        return ""
+      } else if connectedPlatforms.count != 0 {
+        return "Connected Accounts"
+      } else {
+        return "Available Platforms"
+      }
     } else if section == 2 {
-      if connectedPlatforms.count != 0 {
+      if authenticationHelper.canUseBiometrics() && connectedPlatforms.count != 0 {
         return "Connected Accounts"
       } else {
         return "Available Platforms"
@@ -149,20 +169,30 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     let connectedCount = connectedPlatforms.count
     let unconnectedCount = unconnectedPlatforms.count
 
-    if connectedCount == 0 && unconnectedCount == 0 {
+    if connectedCount == 0 && unconnectedCount == 0 && !authenticationHelper.canUseBiometrics() {
+      return 1
+    } else if connectedCount == 0 && unconnectedCount == 0 && authenticationHelper.canUseBiometrics() {
       return 2
-    } else if connectedCount != 0 && unconnectedCount != 0 {
-      return 4
-    } else {
+    } else if connectedCount != 0 && unconnectedCount != 0 && !authenticationHelper.canUseBiometrics() {
       return 3
+    } else {
+      return 4
     }
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if section == 0 || section == 1 {
+    if section == 0 {
       return 1
+    } else if section == 1 {
+      if authenticationHelper.canUseBiometrics() {
+        return 1
+      } else if connectedPlatforms.count != 0 {
+        return connectedPlatforms.count
+      } else {
+        return unconnectedPlatforms.count
+      }
     } else if section == 2 {
-      if connectedPlatforms.count != 0 {
+      if authenticationHelper.canUseBiometrics() && connectedPlatforms.count != 0 {
         return connectedPlatforms.count
       } else {
         return unconnectedPlatforms.count
@@ -177,10 +207,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       let profileViewController = ProfileViewController()
 
       self.navigationController?.pushViewController(profileViewController, animated: true)
-    } else if indexPath.section == 1 {
-      // Biometrics toggle - do nothing
-    } else if indexPath.section == 2 && connectedPlatforms.count != 0 {
-
+    } else if indexPath.section == 1 && authenticationHelper.canUseBiometrics() {
+      // Biometrics switch - do nothing
+    } else if (indexPath.section == 1 && !authenticationHelper.canUseBiometrics() && connectedPlatforms.count != 0)
+              || (indexPath.section == 2 && authenticationHelper.canUseBiometrics() && connectedPlatforms.count != 0) {
       let accountViewController = AccountTableViewController()
       accountViewController.platform = connectedPlatforms[indexPath.row]
 
