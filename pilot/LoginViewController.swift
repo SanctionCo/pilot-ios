@@ -175,9 +175,7 @@ class LoginViewController: UIViewController {
   }
 
   private func register() {
-    if let error = RegisterValidationForm(email: emailTextField.text,
-                                          password: passwordTextField.text,
-                                          confirmPassword: confirmPasswordTextField.text).validate() {
+    if let error = RegisterValidationForm(email: emailTextField.text, password: passwordTextField.text, confirmPassword: confirmPasswordTextField.text).validate() {
       let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
