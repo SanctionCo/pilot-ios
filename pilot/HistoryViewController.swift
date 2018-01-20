@@ -6,11 +6,13 @@
 //  Copyright © 2017 sanction. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class HistoryViewController: UIViewController {
 
-  let history = [Post]() // Historical posts to display in the historyTableView
+  var fetchedResultsController: NSFetchedResultsController!
+  var history: [Post] = [Post]()
 
   let historyTableView: UITableView = {
     let tableView = UITableView()
@@ -40,6 +42,9 @@ class HistoryViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    // Initialize a FetchResultsController for fetching posts
+    setupFetchResultsController()
+
     // Set the right bar button item to a plus image
     let composeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(self.compose))
     self.navigationItem.rightBarButtonItem = composeButton
@@ -54,8 +59,11 @@ class HistoryViewController: UIViewController {
     self.historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
 
     self.view.addSubview(historyTableView)
+    self.view.addSubview(historyEmptyView)
+    self.view.sendSubview(toBack: historyEmptyView)
 
     setupHistoryTableView()
+    setupHistoryEmptyView()
   }
 
   @objc func compose(_ sender: UIBarButtonItem) {
@@ -64,27 +72,27 @@ class HistoryViewController: UIViewController {
     self.present(composeNavigationController, animated: true, completion: nil)
   }
 
-  func setupHistoryTableView() {
-    historyTableView.addSubview(historyEmptyView)
+  func setupFetchResultsController() {
+//    let request = NSFetchRequest(entityName: "")
+  }
 
-    // Constrain table to all corners of the screen
+  func setupHistoryTableView() {
     historyTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
     historyTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     historyTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-
-    //setupHistoryEmptyView()
   }
 
   func setupHistoryEmptyView() {
-    historyEmptyView.addSubview(historyEmptyImage)
-    historyEmptyView.addSubview(historyEmptyMessage)
 
     // Constrain the historyEmptyView to the center of historyTableView
-    historyEmptyView.centerXAnchor.constraint(equalTo: historyTableView.centerXAnchor).isActive = true
-    historyEmptyView.centerYAnchor.constraint(equalTo: historyTableView.centerYAnchor).isActive = true
+    historyEmptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    historyEmptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     historyEmptyView.widthAnchor.constraint(equalToConstant: 50).isActive = true
     historyEmptyView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+    historyEmptyView.addSubview(historyEmptyImage)
+    historyEmptyView.addSubview(historyEmptyMessage)
 
     // Position the history empty image
     historyEmptyImage.topAnchor.constraint(equalTo: historyEmptyView.topAnchor).isActive = true
@@ -99,8 +107,10 @@ class HistoryViewController: UIViewController {
   }
 }
 
-extension HistoryViewController: UITableViewDataSource {
+extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
   // swiftlint:disable force_cast
+
+  // MARK: HistoryTableViewDataSource
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return history.count
@@ -120,12 +130,15 @@ extension HistoryViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as! HistoryTableViewCell
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as? HistoryTableViewCell else {
+      fatalError("Wrong cell type dequed!")
+    }
+
+
 
     // Initialize cell state here
 
     return cell
   }
-
   // swiftlint:enable force_cast
 }

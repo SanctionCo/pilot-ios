@@ -29,6 +29,7 @@
 		9430AF1C1FC24E8200D134F0 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */; };
 		9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */; };
 		9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */; };
+		944031021FFDF53F00C5B81A /* PilotModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 944031001FFDF53F00C5B81A /* PilotModel.xcdatamodeld */; };
 		944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944679071F4AC4A3000C0D66 /* AuthToken.swift */; };
 		945E67C11F47414200E07290 /* LightningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C01F47414200E07290 /* LightningRouter.swift */; };
 		945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C21F475ACD00E07290 /* AuthAdapter.swift */; };
@@ -112,6 +113,7 @@
 		9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationTableViewController.swift; sourceTree = "<group>"; };
 		9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
+		944031011FFDF53F00C5B81A /* PilotModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PilotModel.xcdatamodel; sourceTree = "<group>"; };
 		944679071F4AC4A3000C0D66 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
 		945E67C01F47414200E07290 /* LightningRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LightningRouter.swift; path = pilot/LightningRouter.swift; sourceTree = "<group>"; };
 		945E67C21F475ACD00E07290 /* AuthAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthAdapter.swift; path = pilot/AuthAdapter.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				949E5DD31F281EEE009EE3EB /* PilotConfiguration.swift */,
 				941A43771F1F0AE600D35777 /* LaunchScreen.storyboard */,
 				941A437A1F1F0AE600D35777 /* Info.plist */,
+				944031001FFDF53F00C5B81A /* PilotModel.xcdatamodeld */,
 				941A43751F1F0AE600D35777 /* Assets.xcassets */,
 				94AF20DB1F26EB56009A1484 /* Model */,
 				94AF20DA1F26EB4E009A1484 /* View */,
@@ -771,6 +774,7 @@
 				94F9AE6F1F841B0C0026FA78 /* AccountTableViewController.swift in Sources */,
 				94EBBB641F7C410E003DA5E3 /* UserManager.swift in Sources */,
 				948A552D1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift in Sources */,
+				944031021FFDF53F00C5B81A /* PilotModel.xcdatamodeld in Sources */,
 				9429514B1F591160000EF278 /* Uploadable.swift in Sources */,
 				946890271F295A67007E46DD /* Platform.swift in Sources */,
 				948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */,
@@ -1096,6 +1100,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		944031001FFDF53F00C5B81A /* PilotModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				944031011FFDF53F00C5B81A /* PilotModel.xcdatamodel */,
+			);
+			currentVersion = 944031011FFDF53F00C5B81A /* PilotModel.xcdatamodel */;
+			path = PilotModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 941A43631F1F0AE600D35777 /* Project object */;
 }
