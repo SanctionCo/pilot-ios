@@ -8,7 +8,6 @@
 
 import Alamofire
 import HTTPStatusCodes
-import Locksmith
 import SwiftHash
 import UIKit
 
