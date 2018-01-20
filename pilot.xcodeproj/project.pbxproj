@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		14054A731FFAEA7C00A2853E /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14054A721FFAEA7C00A2853E /* Deletable.swift */; };
-		1411B12A2011C480008F69E9 /* BiometricToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411B1292011C480008F69E9 /* BiometricToggleTableViewCell.swift */; };
 		146FB2B8200C5D3A00FB42A4 /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FB2B7200C5D3A00FB42A4 /* AuthenticationHelper.swift */; };
 		146FB2BA200D2BA200FB42A4 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146FB2B9200D2BA200FB42A4 /* LocalAuthentication.framework */; };
 		146FB2BC200F179500FB42A4 /* UserDefaults+Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FB2BB200F179500FB42A4 /* UserDefaults+Pilot.swift */; };
@@ -89,7 +88,6 @@
 /* Begin PBXFileReference section */
 		00168322916B949822B6D07E /* Pods-pilotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pilotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-pilotTests/Pods-pilotTests.release.xcconfig"; sourceTree = "<group>"; };
 		14054A721FFAEA7C00A2853E /* Deletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Deletable.swift; path = pilot/Deletable.swift; sourceTree = "<group>"; };
-		1411B1292011C480008F69E9 /* BiometricToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricToggleTableViewCell.swift; sourceTree = "<group>"; };
 		146FB2B7200C5D3A00FB42A4 /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
 		146FB2B9200D2BA200FB42A4 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		146FB2BB200F179500FB42A4 /* UserDefaults+Pilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Pilot.swift"; sourceTree = "<group>"; };
@@ -352,7 +350,6 @@
 				9430AF131FC24C5D00D134F0 /* ProfileView */,
 				948D21E81F78AE61001D5897 /* SettingsViewController.swift */,
 				948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */,
-				1411B1292011C480008F69E9 /* BiometricToggleTableViewCell.swift */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -793,7 +790,6 @@
 				948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */,
 				948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */,
 				942A9B5B1FCA9C1400AB09AD /* UIImage+Pilot.swift in Sources */,
-				1411B12A2011C480008F69E9 /* BiometricToggleTableViewCell.swift in Sources */,
 				94CD01B21F76045D0045BB45 /* URL+Params.swift in Sources */,
 				146FB2B8200C5D3A00FB42A4 /* AuthenticationHelper.swift in Sources */,
 				146FB2BC200F179500FB42A4 /* UserDefaults+Pilot.swift in Sources */,

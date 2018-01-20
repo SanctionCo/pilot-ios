@@ -9,10 +9,25 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+  let authenticationHelper = AuthenticationHelper()
+
   var settingsTableView: UITableView = {
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
+  }()
+
+  var toggle: UISwitch = {
+    let toggle = UISwitch()
+    toggle.addTarget(self, action: #selector(handleSwitchAction), for: .valueChanged)
+
+    if UserDefaults.standard.bool(forKey: "biometrics") {
+      toggle.setOn(true, animated: false)
+    } else {
+      toggle.setOn(false, animated: false)
+    }
+
+    return toggle
   }()
 
   var connectedPlatforms: [Platform] = []
@@ -23,7 +38,7 @@ class SettingsViewController: UIViewController {
 
     self.settingsTableView.register(ConnectionTableViewCell.self, forCellReuseIdentifier: "ConnectionTableViewCell")
     self.settingsTableView.register(AccountTableViewCell.self, forCellReuseIdentifier: "AccountTableViewCell")
-    self.settingsTableView.register(BiometricToggleTableViewCell.self, forCellReuseIdentifier: "BiometricsTableViewCell")
+    self.settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "BiometricsTableViewCell")
 
     self.settingsTableView.delegate = self
     self.settingsTableView.dataSource = self
@@ -58,6 +73,16 @@ class SettingsViewController: UIViewController {
     self.present(composeNavigationController, animated: true, completion: nil)
   }
 
+  @objc private func handleSwitchAction() {
+    if toggle.isOn {
+      print("turning on biometrics")
+      UserDefaults.standard.set(true, forKey: "biometrics")
+    } else {
+      print("turning off biometrics")
+      UserDefaults.standard.set(false, forKey: "biometrics")
+    }
+  }
+
   func setupSettingsTableView() {
     settingsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     settingsTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -79,7 +104,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
       return cell
     } else if indexPath.section == 1 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "BiometricsTableViewCell") as! BiometricToggleTableViewCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "BiometricsTableViewCell")!
+      cell.textLabel?.text = "Login with " + authenticationHelper.biometricType().rawValue
+      cell.accessoryView = toggle
 
       return cell
     } else if indexPath.section == 2 {
@@ -105,10 +132,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
   // MARK: UITableViewDelegate
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if section == 0 {
+    if section == 0 || section == 1 {
       return ""
-    } else if section == 1 {
-      return AuthenticationHelper().biometricType().rawValue
     } else if section == 2 {
       if connectedPlatforms.count != 0 {
         return "Connected Accounts"
