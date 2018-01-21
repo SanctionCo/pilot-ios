@@ -11,8 +11,19 @@ import UIKit
 
 class ProfileDeleteAccountCell: UITableViewCell {
 
+  var deleteAccountMessage: UILabel = {
+    let message = UILabel()
+    message.translatesAutoresizingMaskIntoConstraints = false
+    message.text = "Delete Account"
+    message.textColor = UIColor.TextWhite
+    return message
+  }()
+
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+    contentView.backgroundColor = UIColor.ButtonRed
+    contentView.addSubview(deleteAccountMessage)
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -21,5 +32,12 @@ class ProfileDeleteAccountCell: UITableViewCell {
 
   override func layoutSubviews() {
     super.layoutSubviews()
+
+    setupDeleteAccountMessage()
+  }
+
+  func setupDeleteAccountMessage() {
+    deleteAccountMessage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    deleteAccountMessage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
   }
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+
   var settingsTableView: UITableView = {
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +23,7 @@ class SettingsViewController: UIViewController {
     super.viewDidLoad()
 
     self.settingsTableView.register(ConnectionTableViewCell.self, forCellReuseIdentifier: "ConnectionTableViewCell")
-    self.settingsTableView.register(AccountTableViewCell.self, forCellReuseIdentifier: "AccountTableViewCell")
+    self.settingsTableView.register(SettingsProfileCell.self, forCellReuseIdentifier: "SettingsProfileCell")
 
     self.settingsTableView.delegate = self
     self.settingsTableView.dataSource = self
@@ -31,12 +32,8 @@ class SettingsViewController: UIViewController {
     let composeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(self.compose))
     self.navigationItem.rightBarButtonItem = composeButton
 
-    self.navigationController?.navigationBar.isTranslucent = false
-    self.navigationController?.navigationBar.shadowImage = UIImage()
-
     self.navigationController?.navigationBar.topItem?.title = "Settings"
     self.navigationController?.navigationBar.prefersLargeTitles = true
-    self.navigationController?.navigationItem.largeTitleDisplayMode = .never
 
     connectedPlatforms = PlatformManager.sharedInstance.fetchConnectedPlatforms()
     unconnectedPlatforms = PlatformManager.sharedInstance.fetchUnconnectedPlatforms()
@@ -73,8 +70,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     // swiftlint:disable force_cast
 
     if indexPath.section == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "AccountTableViewCell") as! AccountTableViewCell
-      cell.email = UserManager.sharedInstance?.getEmail()
+      let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsProfileCell") as! SettingsProfileCell
+      cell.cellProfileImage = #imageLiteral(resourceName: "LightningLogo")
+      cell.cellProfileEmail = UserManager.sharedInstance?.getEmail()
+      cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
 
       return cell
     } else if indexPath.section == 1 {
@@ -82,6 +81,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
       if connectedPlatforms.count != 0 {
         cell.platform = connectedPlatforms[indexPath.row]
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
       } else {
         cell.platform = unconnectedPlatforms[indexPath.row]
       }
@@ -98,6 +98,14 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   // MARK: UITableViewDelegate
+
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if indexPath.section == 0 {
+      return CGFloat(70.0)
+    }
+
+    return CGFloat(44.0)
+  }
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     if section == 0 {

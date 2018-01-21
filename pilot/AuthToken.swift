@@ -20,5 +20,4 @@ struct AuthToken {
     self.email = email
     self.password = password
   }
-
 }

@@ -14,6 +14,7 @@ class ProfilePasswordResetCell: UITableViewCell {
   var resetMessage: UILabel = {
     let message = UILabel()
     message.translatesAutoresizingMaskIntoConstraints = false
+    message.text = "Password Reset"
     return message
   }()
 
@@ -34,10 +35,7 @@ class ProfilePasswordResetCell: UITableViewCell {
   }
 
   func setupResetMessage() {
-    resetMessage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-    resetMessage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+    resetMessage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     resetMessage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    resetMessage.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    resetMessage.widthAnchor.constraint(equalToConstant: 80).isActive = true
   }
 }
