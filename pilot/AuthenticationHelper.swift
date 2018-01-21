@@ -42,7 +42,6 @@ struct AuthenticationHelper {
   /// Determines which biometric type is available on the device.
   /// Returns the type. Either none, TouchID, or FaceID
   func biometricType() -> BiometricType {
-    _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     switch context.biometryType {
     case .none:
       return .none
@@ -72,20 +71,16 @@ struct AuthenticationHelper {
                              localizedReason: authenticationReasonString) {success, evaluateError in
         if success {
           // Successful authentication
-          DispatchQueue.main.async {
-            onSuccess()
-          }
+          onSuccess()
         } else {
           // User did not authenticate successfully
-          DispatchQueue.main.async {
-            guard let error = evaluateError else {
-              onFailure(.fallbackWithError, "An unknown error occurred. Please login with your credentials.")
-              return
-            }
-
-            let (fallbackType, reason) = self.evaluateAuthenticationError(errorCode: error._code)
-            onFailure(fallbackType, reason)
+          guard let error = evaluateError else {
+            onFailure(.fallbackWithError, "An unknown error occurred. Please login with your credentials.")
+            return
           }
+
+          let (fallbackType, reason) = self.evaluateAuthenticationError(errorCode: error._code)
+          onFailure(fallbackType, reason)
         }
       }
     } else {

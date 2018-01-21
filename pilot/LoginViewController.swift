@@ -143,7 +143,7 @@ class LoginViewController: UIViewController {
   private func attemptAutomaticLogin() {
     self.fillFromKeychain()
 
-    // If this is the first login or the user has declined to set up Biometrics, attempt to fill from keychain
+    // If this is the first login or the user has declined to set up Biometrics, we can't use biometrics
     guard UserDefaults.standard.contains(key: "biometrics"),
           UserDefaults.standard.bool(forKey: "biometrics") else {
       return
@@ -151,16 +151,20 @@ class LoginViewController: UIViewController {
 
     // Otherwise, Biometrics should be enabled and we can prompt for authentication
     authenticationHelper.authenticationWithBiometrics(onSuccess: {
-      self.performBiometricLogin()
+      DispatchQueue.main.async {
+        self.performBiometricLogin()
+      }
     }, onFailure: { fallbackType, message in
       // If failure is called with fallback type fallbackWithError, show an alert
       if fallbackType == .fallbackWithError {
-        let alert = UIAlertController(title: self.authenticationHelper.biometricType().rawValue + " Error",
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        DispatchQueue.main.async {
+          let alert = UIAlertController(title: self.authenticationHelper.biometricType().rawValue + " Error",
+                                        message: message,
+                                        preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
-        self.present(alert, animated: true, completion: nil)
+          self.present(alert, animated: true, completion: nil)
+        }
       }
     })
   }
@@ -218,7 +222,9 @@ class LoginViewController: UIViewController {
 
   /// Register a new user in Thunder
   private func register() {
-    if let error = RegisterValidationForm(email: emailTextField.text, password: passwordTextField.text, confirmPassword: confirmPasswordTextField.text).validate() {
+    if let error = RegisterValidationForm(email: emailTextField.text,
+                                          password: passwordTextField.text,
+                                          confirmPassword: confirmPasswordTextField.text).validate() {
       let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
@@ -256,6 +262,7 @@ class LoginViewController: UIViewController {
 
     // Only set up if the user can use biometrics
     guard authenticationHelper.canUseBiometrics() else {
+      UserDefaults.standard.set(false, forKey: "biometrics")
       completion()
       return
     }
