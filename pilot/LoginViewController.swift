@@ -13,6 +13,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+  let authenticationHelper = AuthenticationHelper()
+
   let profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "ProfileImage")
@@ -47,8 +49,6 @@ class LoginViewController: UIViewController {
     textField.autocapitalizationType = .none
     textField.autocorrectionType = .no
 
-    textField.text = "n.eckert70@gmail.com"
-
     return textField
   }()
 
@@ -57,8 +57,6 @@ class LoginViewController: UIViewController {
     textField.placeholder = "Password"
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.isSecureTextEntry = true
-
-    textField.text = "password"
 
     return textField
   }()
@@ -126,6 +124,8 @@ class LoginViewController: UIViewController {
     setupActivitySpinner()
 
     NetworkManager.sharedInstance.adapter = AuthAdapter()
+
+    attemptAutomaticLogin()
   }
 
   deinit {
@@ -134,13 +134,50 @@ class LoginViewController: UIViewController {
 
   @objc private func handleButtonAction() {
     if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-      login()
+      performTextLogin()
     } else {
       register()
     }
   }
 
-  private func login() {
+  private func attemptAutomaticLogin() {
+    self.fillFromKeychain()
+
+    // If this is the first login or the user has declined to set up Biometrics, we can't use biometrics
+    guard UserDefaults.standard.contains(key: "biometrics"),
+          UserDefaults.standard.bool(forKey: "biometrics") else {
+      return
+    }
+
+    // Otherwise, Biometrics should be enabled and we can prompt for authentication
+    authenticationHelper.authenticationWithBiometrics(onSuccess: {
+      DispatchQueue.main.async {
+        self.performBiometricLogin()
+      }
+    }, onFailure: { fallbackType, message in
+      // If failure is called with fallback type fallbackWithError, show an alert
+      if fallbackType == .fallbackWithError {
+        DispatchQueue.main.async {
+          let alert = UIAlertController(title: self.authenticationHelper.biometricType().rawValue + " Error",
+                                        message: message,
+                                        preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+          self.present(alert, animated: true, completion: nil)
+        }
+      }
+    })
+  }
+
+  /// Perform a login that the user completed from biometrics
+  private func performBiometricLogin() {
+    if let (email, password) = authenticationHelper.getFromKeychain() {
+      login(email: email, password: password)
+    }
+  }
+
+  /// Perform a login that the user completed from the text boxes
+  private func performTextLogin() {
     if let error = LoginValidationForm(email: emailTextField.text, password: passwordTextField.text).validate() {
       let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -150,22 +187,31 @@ class LoginViewController: UIViewController {
     }
 
     let hashedPassword = MD5(passwordTextField.text!).lowercased()
+    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: hashedPassword)
 
+    login(email: emailTextField.text!, password: hashedPassword)
+  }
+
+  /// Perform the login by getting the user from Thunder
+  private func login(email: String, password: String) {
     self.activitySpinner.startAnimating()
     self.loginRegisterButton.isEnabled = false
 
-    PilotUser.fetch(with: ThunderRouter.login(emailTextField.text!, hashedPassword), onSuccess: { pilotUser in
+    PilotUser.fetch(with: ThunderRouter.login(email, password), onSuccess: { pilotUser in
       UserManager.sharedInstance = UserManager(pilotUser: pilotUser)
 
-      let homeTabBarController = HomeTabBarController()
+      // Attempt to set up biometrics if this is the first time logging in
+      self.setUpBiometrics(completion: {
+        let homeTabBarController = HomeTabBarController()
 
-      // Set the platform list in the PlatformManager class
-      PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)
-      DispatchQueue.main.async { [weak self] in
-        self?.activitySpinner.stopAnimating()
-        self?.loginRegisterButton.isEnabled = true
-        self?.present(homeTabBarController, animated: true, completion: nil)
-      }
+        // Set the platform list in the PlatformManager class
+        PlatformManager.sharedInstance.setPlatforms(platforms: pilotUser.availablePlatforms)
+        DispatchQueue.main.async { [weak self] in
+          self?.activitySpinner.stopAnimating()
+          self?.loginRegisterButton.isEnabled = true
+          self?.present(homeTabBarController, animated: true, completion: nil)
+        }
+      })
     }, onError: { _ in
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
@@ -174,8 +220,11 @@ class LoginViewController: UIViewController {
     })
   }
 
+  /// Register a new user in Thunder
   private func register() {
-    if let error = RegisterValidationForm(email: emailTextField.text, password: passwordTextField.text, confirmPassword: confirmPasswordTextField.text).validate() {
+    if let error = RegisterValidationForm(email: emailTextField.text,
+                                          password: passwordTextField.text,
+                                          confirmPassword: confirmPasswordTextField.text).validate() {
       let alert = UIAlertController(title: "Invalid Input", message: error.errorString, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
@@ -183,10 +232,13 @@ class LoginViewController: UIViewController {
       return
     }
 
+    let hashedPassword = MD5(passwordTextField.text!).lowercased()
+    authenticationHelper.saveToKeychain(email: emailTextField.text!, password: hashedPassword)
+
     self.activitySpinner.startAnimating()
     self.loginRegisterButton.isEnabled = false
 
-    let pilotUser = PilotUser(email: emailTextField.text!, password: passwordTextField.text!)
+    let pilotUser = PilotUser(email: emailTextField.text!, password: hashedPassword)
     PilotUser.upload(with: ThunderRouter.createPilotUser(pilotUser), onSuccess: { _ in
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
@@ -198,6 +250,46 @@ class LoginViewController: UIViewController {
         self?.loginRegisterButton.isEnabled = true
       }
     })
+  }
+
+  /// Prompt the user to set up biometrics for the first time
+  private func setUpBiometrics(completion: @escaping () -> Void) {
+    // Only set up if the user has not been asked before
+    guard !UserDefaults.standard.contains(key: "biometrics") else {
+      completion()
+      return
+    }
+
+    // Only set up if the user can use biometrics
+    guard authenticationHelper.canUseBiometrics() else {
+      UserDefaults.standard.set(false, forKey: "biometrics")
+      completion()
+      return
+    }
+
+    let biometricType = self.authenticationHelper.biometricType().rawValue
+
+    let alert = UIAlertController(title: "Enable " + biometricType,
+                                  message: "Do you want to enable " + biometricType + " login?",
+                                  preferredStyle: .alert)
+
+    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+      UserDefaults.standard.set(true, forKey: "biometrics")
+      completion()
+    }))
+    alert.addAction(UIAlertAction(title: "No", style: .default, handler: { _ in
+      UserDefaults.standard.set(false, forKey: "biometrics")
+      completion()
+    }))
+
+    present(alert, animated: true, completion: nil)
+  }
+
+  /// Fill the email text field from the keychain
+  private func fillFromKeychain() {
+    if let (email, _) = authenticationHelper.getFromKeychain() {
+      emailTextField.text = email
+    }
   }
 
   @objc private func updateLoginRegisterView() {

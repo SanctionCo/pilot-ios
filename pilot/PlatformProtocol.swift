@@ -11,8 +11,8 @@ import Foundation
 import HTTPStatusCodes
 
 enum PlatformType: String {
-  case twitter
-  case facebook
+  case twitter = "Twitter"
+  case facebook = "Facebook"
 }
 
 protocol PlatformProtocol {
