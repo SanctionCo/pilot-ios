@@ -5,7 +5,7 @@ xcode_scheme: pilot
 xcode_sdk: iphonesimulator11.0
 
 # Use xcodebuild with xcpretty
-script: set -o pipefail && xcodebuild test -workspace pilot.xcworkspace -scheme pilot -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty
+script: set -o pipefail && xcodebuild test -workspace pilot.xcworkspace -scheme pilot -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0.1' | xcpretty
 
 # Restrict branch builds to master
 branches:
