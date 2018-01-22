@@ -1,11 +1,11 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode9.2
 xcode_workspace: pilot.xcworkspace
 xcode_scheme: pilot
 xcode_sdk: iphonesimulator11.0
 
 # Use xcodebuild with xcpretty
-script: set -o pipefail && xcodebuild test -workspace pilot.xcworkspace -scheme pilot -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.0' | xcpretty
+script: set -o pipefail && xcodebuild test -workspace pilot.xcworkspace -scheme pilot -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty
 
 # Restrict branch builds to master
 branches:
