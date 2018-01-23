@@ -10,10 +10,18 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-  var tableHeader: UIView = {
+  var profileTableHeader: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
+  }()
+
+  var profileTableHeaderLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.text = UserManager.sharedInstance?.getEmail()
+    label.font = UIFont.boldSystemFont(ofSize: 30)
+    return label
   }()
 
   var profileTable: UITableView = {
@@ -33,6 +41,7 @@ class ProfileViewController: UIViewController {
     self.profileTable.register(ProfileDeleteAccountCell.self, forCellReuseIdentifier: "ProfileDeleteAccountCell")
 
     self.navigationItem.largeTitleDisplayMode = .never
+    self.navigationItem.title = "Profile"
 
     self.view.addSubview(profileTable)
 
@@ -40,10 +49,8 @@ class ProfileViewController: UIViewController {
   }
 
   func setupProfileTable() {
+    self.profileTable.tableHeaderView = profileTableHeader
 
-    self.profileTable.addSubview(tableHeader)
-
-    self.profileTable.tableHeaderView = tableHeader
     self.profileTable.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
     self.profileTable.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     self.profileTable.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
@@ -79,7 +86,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     // Change password
     if indexPath.section == 0 {
       if indexPath.row == 0 {
-        let passwordVerificationController = PasswordVerificationTableViewController()
+        let passwordVerificationController = PasswordVerificationController()
         let passwordVerificationNavigationController
           = UINavigationController(rootViewController: passwordVerificationController)
 

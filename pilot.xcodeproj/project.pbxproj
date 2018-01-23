@@ -30,13 +30,13 @@
 		9430AF121FC23F5A00D134F0 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */; };
 		9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF171FC24E0700D134F0 /* ComposeViewController.swift */; };
 		9430AF1C1FC24E8200D134F0 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */; };
-		9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */; };
-		9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */; };
-		944031021FFDF53F00C5B81A /* PilotModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 944031001FFDF53F00C5B81A /* PilotModel.xcdatamodeld */; };
+		9436CA3A1F89F5AA00177F28 /* PasswordVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationController.swift */; };
+		9436CA3C1F89F5B900177F28 /* NewPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA3B1F89F5B900177F28 /* NewPasswordController.swift */; };
 		944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944679071F4AC4A3000C0D66 /* AuthToken.swift */; };
 		945E67C11F47414200E07290 /* LightningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C01F47414200E07290 /* LightningRouter.swift */; };
 		945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C21F475ACD00E07290 /* AuthAdapter.swift */; };
 		9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9460CDDE1F807A0500D8E910 /* OAuthManager.swift */; };
+		946594452013E651003049F8 /* SettingsProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946594442013E651003049F8 /* SettingsProfileCell.swift */; };
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
 		948A552D1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */; };
@@ -47,8 +47,7 @@
 		948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */; };
 		948B794F1FF83BD80087D247 /* ProfileDeleteAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794E1FF83BD80087D247 /* ProfileDeleteAccountCell.swift */; };
 		948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21E81F78AE61001D5897 /* SettingsViewController.swift */; };
-		948D21ED1F78B071001D5897 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */; };
-		948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */; };
+		948D21EF1F78B080001D5897 /* SettingsConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948D21EE1F78B080001D5897 /* SettingsConnectionCell.swift */; };
 		949588D71F76FFFC003C9C88 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949588D61F76FFFC003C9C88 /* PlatformManager.swift */; };
 		949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E5DCD1F2813C8009EE3EB /* UIColor+PilotColors.swift */; };
 		949E5DD41F281EEE009EE3EB /* PilotConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E5DD31F281EEE009EE3EB /* PilotConfiguration.swift */; };
@@ -117,13 +116,13 @@
 		9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9430AF171FC24E0700D134F0 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
-		9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationTableViewController.swift; sourceTree = "<group>"; };
-		9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
-		944031011FFDF53F00C5B81A /* PilotModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PilotModel.xcdatamodel; sourceTree = "<group>"; };
+		9436CA391F89F5AA00177F28 /* PasswordVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationController.swift; sourceTree = "<group>"; };
+		9436CA3B1F89F5B900177F28 /* NewPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordController.swift; sourceTree = "<group>"; };
 		944679071F4AC4A3000C0D66 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
 		945E67C01F47414200E07290 /* LightningRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LightningRouter.swift; path = pilot/LightningRouter.swift; sourceTree = "<group>"; };
 		945E67C21F475ACD00E07290 /* AuthAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthAdapter.swift; path = pilot/AuthAdapter.swift; sourceTree = "<group>"; };
 		9460CDDE1F807A0500D8E910 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
+		946594442013E651003049F8 /* SettingsProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfileCell.swift; sourceTree = "<group>"; };
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
 		948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -134,8 +133,7 @@
 		948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSingoutCell.swift; sourceTree = "<group>"; };
 		948B794E1FF83BD80087D247 /* ProfileDeleteAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeleteAccountCell.swift; sourceTree = "<group>"; };
 		948D21E81F78AE61001D5897 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
-		948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTableViewCell.swift; sourceTree = "<group>"; };
+		948D21EE1F78B080001D5897 /* SettingsConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsConnectionCell.swift; sourceTree = "<group>"; };
 		949588D61F76FFFC003C9C88 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
 		949E5DCD1F2813C8009EE3EB /* UIColor+PilotColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+PilotColors.swift"; sourceTree = "<group>"; };
 		949E5DD31F281EEE009EE3EB /* PilotConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PilotConfiguration.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 				949E5DD31F281EEE009EE3EB /* PilotConfiguration.swift */,
 				941A43771F1F0AE600D35777 /* LaunchScreen.storyboard */,
 				941A437A1F1F0AE600D35777 /* Info.plist */,
-				944031001FFDF53F00C5B81A /* PilotModel.xcdatamodeld */,
 				941A43751F1F0AE600D35777 /* Assets.xcassets */,
 				94AF20DB1F26EB56009A1484 /* Model */,
 				94AF20DA1F26EB4E009A1484 /* View */,
@@ -293,9 +290,8 @@
 			isa = PBXGroup;
 			children = (
 				94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */,
-				948D21EC1F78B071001D5897 /* AccountTableViewCell.swift */,
-				948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */,
 				948B79481FF8394F0087D247 /* AccountStatisticsCell.swift */,
+				948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */,
 			);
 			name = ServiceView;
 			sourceTree = "<group>";
@@ -303,8 +299,8 @@
 		9430AF151FC24C9500D134F0 /* PasswordVerificationView */ = {
 			isa = PBXGroup;
 			children = (
-				9436CA391F89F5AA00177F28 /* PasswordVerificationTableViewController.swift */,
-				9436CA3B1F89F5B900177F28 /* NewPasswordTableViewController.swift */,
+				9436CA391F89F5AA00177F28 /* PasswordVerificationController.swift */,
+				9436CA3B1F89F5B900177F28 /* NewPasswordController.swift */,
 			);
 			name = PasswordVerificationView;
 			sourceTree = "<group>";
@@ -349,7 +345,8 @@
 				9430AF141FC24C6800D134F0 /* ServiceView */,
 				9430AF131FC24C5D00D134F0 /* ProfileView */,
 				948D21E81F78AE61001D5897 /* SettingsViewController.swift */,
-				948D21EE1F78B080001D5897 /* ConnectionTableViewCell.swift */,
+				948D21EE1F78B080001D5897 /* SettingsConnectionCell.swift */,
+				946594442013E651003049F8 /* SettingsProfileCell.swift */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -784,10 +781,9 @@
 				94F9AE6F1F841B0C0026FA78 /* AccountTableViewController.swift in Sources */,
 				94EBBB641F7C410E003DA5E3 /* UserManager.swift in Sources */,
 				948A552D1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift in Sources */,
-				944031021FFDF53F00C5B81A /* PilotModel.xcdatamodeld in Sources */,
 				9429514B1F591160000EF278 /* Uploadable.swift in Sources */,
 				946890271F295A67007E46DD /* Platform.swift in Sources */,
-				948D21EF1F78B080001D5897 /* ConnectionTableViewCell.swift in Sources */,
+				948D21EF1F78B080001D5897 /* SettingsConnectionCell.swift in Sources */,
 				948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */,
 				942A9B5B1FCA9C1400AB09AD /* UIImage+Pilot.swift in Sources */,
 				94CD01B21F76045D0045BB45 /* URL+Params.swift in Sources */,
@@ -799,18 +795,19 @@
 				949E5DD41F281EEE009EE3EB /* PilotConfiguration.swift in Sources */,
 				945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */,
 				94AF6D271FE0F78C008DED2C /* ValidationForm.swift in Sources */,
-				9436CA3A1F89F5AA00177F28 /* PasswordVerificationTableViewController.swift in Sources */,
+				9436CA3A1F89F5AA00177F28 /* PasswordVerificationController.swift in Sources */,
 				9430AF1C1FC24E8200D134F0 /* HomeTabBarController.swift in Sources */,
 				941BA4F31F3B5F4800227C60 /* Post.swift in Sources */,
 				945E67C11F47414200E07290 /* LightningRouter.swift in Sources */,
 				94AF20EA1F26F8EA009A1484 /* PilotUser.swift in Sources */,
 				946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */,
 				94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */,
-				9436CA3C1F89F5B900177F28 /* NewPasswordTableViewController.swift in Sources */,
+				9436CA3C1F89F5B900177F28 /* NewPasswordController.swift in Sources */,
 				948B79451FF80F5C0087D247 /* HistoryTableViewCell.swift in Sources */,
 				949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */,
 				14054A731FFAEA7C00A2853E /* Deletable.swift in Sources */,
 				94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */,
+				946594452013E651003049F8 /* SettingsProfileCell.swift in Sources */,
 				948D21E91F78AE61001D5897 /* SettingsViewController.swift in Sources */,
 				941F142A1F9B1ACF00086262 /* OAuthResult.swift in Sources */,
 				942951491F591160000EF278 /* NetworkManager.swift in Sources */,
@@ -820,7 +817,6 @@
 				9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */,
 				94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */,
 				941A436F1F1F0AE600D35777 /* AppDelegate.swift in Sources */,
-				948D21ED1F78B071001D5897 /* AccountTableViewCell.swift in Sources */,
 				944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */,
 				948B79471FF835F80087D247 /* AccountDisconnectionCell.swift in Sources */,
 				948B794F1FF83BD80087D247 /* ProfileDeleteAccountCell.swift in Sources */,
@@ -1112,19 +1108,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		944031001FFDF53F00C5B81A /* PilotModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				944031011FFDF53F00C5B81A /* PilotModel.xcdatamodel */,
-			);
-			currentVersion = 944031011FFDF53F00C5B81A /* PilotModel.xcdatamodel */;
-			path = PilotModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 941A43631F1F0AE600D35777 /* Project object */;
 }

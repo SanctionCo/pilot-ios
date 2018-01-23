@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">
-        <attribute name="image" optional="YES" syncable="YES"/>
-        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" syncable="YES"/>
-        <attribute name="video" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <elements>
-        <element name="Post" positionX="-6480" positionY="-108" width="128" height="105"/>
-    </elements>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C205" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <elements/>
 </model>

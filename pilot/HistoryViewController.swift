@@ -11,7 +11,6 @@ import UIKit
 
 class HistoryViewController: UIViewController {
 
-  var fetchedResultsController: NSFetchedResultsController!
   var history: [Post] = [Post]()
 
   let historyTableView: UITableView = {
@@ -108,7 +107,6 @@ class HistoryViewController: UIViewController {
 }
 
 extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
-  // swiftlint:disable force_cast
 
   // MARK: HistoryTableViewDataSource
 
@@ -134,11 +132,6 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
       fatalError("Wrong cell type dequed!")
     }
 
-
-
-    // Initialize cell state here
-
     return cell
   }
-  // swiftlint:enable force_cast
 }

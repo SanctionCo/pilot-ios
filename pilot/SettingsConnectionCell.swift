@@ -65,8 +65,8 @@ class ConnectionTableViewCell: UITableViewCell {
 
   func setupPlatformImage() {
     platformImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-    platformImage.heightAnchor.constraint(equalTo: platformName.heightAnchor).isActive = true
-    platformImage.widthAnchor.constraint(equalTo: platformName.heightAnchor).isActive = true
+    platformImage.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    platformImage.widthAnchor.constraint(equalToConstant: 35).isActive = true
     platformImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
   }
 

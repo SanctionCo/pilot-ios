@@ -11,8 +11,17 @@ import UIKit
 
 class ProfileSignoutCell: UITableViewCell {
 
+  var signoutMessage: UILabel = {
+    let message = UILabel()
+    message.translatesAutoresizingMaskIntoConstraints = false
+    message.text = "Signout"
+    return message
+  }()
+
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+    contentView.addSubview(signoutMessage)
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -21,5 +30,12 @@ class ProfileSignoutCell: UITableViewCell {
 
   override func layoutSubviews() {
     super.layoutSubviews()
+
+    setupSignoutMessage()
+  }
+
+  func setupSignoutMessage() {
+    signoutMessage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    signoutMessage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
   }
 }
