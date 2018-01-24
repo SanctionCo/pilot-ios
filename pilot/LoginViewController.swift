@@ -262,7 +262,6 @@ class LoginViewController: UIViewController {
 
     // Only set up if the user can use biometrics
     guard authenticationHelper.canUseBiometrics() else {
-      UserDefaults.standard.set(false, forKey: "biometrics")
       completion()
       return
     }
