@@ -42,11 +42,9 @@ class PlatformManager {
 
   // Update the platform list using the local pilotUser stored in UserManager
   func reload() {
-
     if let manager = UserManager.sharedInstance {
       self.platforms = manager.getAvailablePlatforms()
     }
-
   }
 
   typealias SuccessHandler = () -> Void

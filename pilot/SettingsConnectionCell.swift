@@ -34,11 +34,9 @@ class ConnectionTableViewCell: UITableViewCell {
       platformImage.image = platform?.image
       platformName.text = platform?.type.rawValue
 
-      if platform!.isConnected {
-        disclosureMessage.textColor = UIColor.TextRed
-        disclosureMessage.text = "Disconnect"
-      } else {
+      if !platform!.isConnected {
         disclosureMessage.text = "Connect"
+        disclosureMessage.textColor = UIColor.TextGreen
       }
     }
   }

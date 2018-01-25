@@ -128,10 +128,6 @@ class LoginViewController: UIViewController {
     attemptAutomaticLogin()
   }
 
-  deinit {
-    NotificationCenter.default.removeObserver(self)
-  }
-
   @objc private func handleButtonAction() {
     if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
       performTextLogin()
@@ -209,6 +205,7 @@ class LoginViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
           self?.activitySpinner.stopAnimating()
           self?.loginRegisterButton.isEnabled = true
+
           self?.present(homeTabBarController, animated: true, completion: nil)
         }
       })
@@ -243,11 +240,26 @@ class LoginViewController: UIViewController {
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
         self?.loginRegisterButton.isEnabled = true
+
+        let alert = UIAlertController(title: "Account Created!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+          self?.loginRegisterSegmentedControl.selectedSegmentIndex = 0
+          self?.updateLoginRegisterView()
+        }))
+
+        self?.present(alert, animated: true, completion: nil)
       }
     }, onError: { _ in
       DispatchQueue.main.async { [weak self] in
         self?.activitySpinner.stopAnimating()
         self?.loginRegisterButton.isEnabled = true
+
+        let alert = UIAlertController(title: "Registration Error",
+                                      message: "There was a problem creating your account",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self?.present(alert, animated: true, completion: nil)
       }
     })
   }

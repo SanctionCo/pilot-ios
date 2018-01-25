@@ -27,35 +27,28 @@ class AccountTableViewController: UITableViewController {
   // MARK: - TableViewDataSource
 
   override func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
+    return 1
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
-    case 0: return 2
-    case 1: return 1
+    case 0: return 1
     default: fatalError("Unknown number of sections")
     }
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    switch indexPath.section {
-    case 0:
-      return AccountStatisticsCell()
-    case 1:
-      switch indexPath.row {
-      case 0:
-        return AccountDisconnectionCell()
-      default: fatalError("Unknown row in section 1")
-      }
-    default: fatalError("Unknown section")
+    guard indexPath.section == 0, indexPath.row == 0 else {
+      fatalError("Unknown section or row")
     }
+
+    return AccountDisconnectionCell()
   }
 
   // MARK: - TableViewDelegate
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if indexPath.section == 1 {
+    if indexPath.section == 0 {
       if indexPath.row == 0 {
         if let type = self.platform?.type {
           let actionSheet = UIAlertController(title: "Disconnect" + type.rawValue,

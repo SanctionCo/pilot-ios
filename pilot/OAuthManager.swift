@@ -59,7 +59,6 @@ class OAuthManager {
         }, onError: { error in
           onError(error)
         })
-
       }
 
       OAuthManager.authSession?.start()
