@@ -38,15 +38,11 @@ class AccountTableViewController: UITableViewController {
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    switch indexPath.section {
-    case 0:
-      switch indexPath.row {
-      case 0:
-        return AccountDisconnectionCell()
-      default: fatalError("Unknown row in section 1")
-      }
-    default: fatalError("Unknown section")
+    guard indexPath.section == 0, indexPath.row == 0 else {
+      fatalError("Unknown section or row")
     }
+
+    return AccountDisconnectionCell()
   }
 
   // MARK: - TableViewDelegate

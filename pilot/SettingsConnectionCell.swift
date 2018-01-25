@@ -35,7 +35,7 @@ class ConnectionTableViewCell: UITableViewCell {
       platformName.text = platform?.type.rawValue
 
       if !platform!.isConnected {
-        disclosureMessage.text = "connect"
+        disclosureMessage.text = "Connect"
         disclosureMessage.textColor = UIColor.TextGreen
       }
     }
