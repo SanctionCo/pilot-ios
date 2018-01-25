@@ -42,7 +42,6 @@
 		948A552D1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */; };
 		948B79451FF80F5C0087D247 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */; };
 		948B79471FF835F80087D247 /* AccountDisconnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */; };
-		948B79491FF8394F0087D247 /* AccountStatisticsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79481FF8394F0087D247 /* AccountStatisticsCell.swift */; };
 		948B794B1FF83BB70087D247 /* ProfilePasswordResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794A1FF83BB70087D247 /* ProfilePasswordResetCell.swift */; };
 		948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */; };
 		948B794F1FF83BD80087D247 /* ProfileDeleteAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794E1FF83BD80087D247 /* ProfileDeleteAccountCell.swift */; };
@@ -128,7 +127,6 @@
 		948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewControllerDelegate.swift; sourceTree = "<group>"; };
 		948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDisconnectionCell.swift; sourceTree = "<group>"; };
-		948B79481FF8394F0087D247 /* AccountStatisticsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatisticsCell.swift; sourceTree = "<group>"; };
 		948B794A1FF83BB70087D247 /* ProfilePasswordResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePasswordResetCell.swift; sourceTree = "<group>"; };
 		948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSingoutCell.swift; sourceTree = "<group>"; };
 		948B794E1FF83BD80087D247 /* ProfileDeleteAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeleteAccountCell.swift; sourceTree = "<group>"; };
@@ -290,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				94F9AE6E1F841B0C0026FA78 /* AccountTableViewController.swift */,
-				948B79481FF8394F0087D247 /* AccountStatisticsCell.swift */,
 				948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */,
 			);
 			name = ServiceView;
@@ -812,7 +809,6 @@
 				941F142A1F9B1ACF00086262 /* OAuthResult.swift in Sources */,
 				942951491F591160000EF278 /* NetworkManager.swift in Sources */,
 				948B794B1FF83BB70087D247 /* ProfilePasswordResetCell.swift in Sources */,
-				948B79491FF8394F0087D247 /* AccountStatisticsCell.swift in Sources */,
 				9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */,
 				9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */,
 				94A465ED1F4A470D004450D0 /* ThunderRouter.swift in Sources */,

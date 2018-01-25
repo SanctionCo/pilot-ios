@@ -104,13 +104,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         actionSheet.addAction(UIAlertAction(title: "Sign out", style: UIAlertActionStyle.default, handler: { _ in
           UserManager.sharedInstance?.invalidateUser()
 
-          let storyboard = UIStoryboard.init(name: "LoginViewController", bundle: nil)
-
-          if let loginViewController =
-            storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-
-            self.present(loginViewController, animated: false, completion: nil)
-          }
+          // Navigate back to the LoginViewController
+          let loginViewController = LoginViewController()
+          self.present(loginViewController, animated: false, completion: nil)
         }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
 
@@ -137,14 +133,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                                           message: "", preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+              UserManager.sharedInstance?.invalidateUser()
 
               // Navigate back to the LoginViewController
-              let storyboard = UIStoryboard.init(name: "LoginViewController", bundle: nil)
-              if let loginViewController =
-                storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-
-                self.present(loginViewController, animated: false, completion: nil)
-              }
+              let loginViewController = LoginViewController()
+              self.present(loginViewController, animated: false, completion: nil)
             })
 
             self.present(alert, animated: true, completion: nil)

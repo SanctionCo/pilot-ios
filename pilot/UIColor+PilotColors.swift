@@ -26,6 +26,7 @@ extension UIColor {
   static let TextGray = UIColor.fromRGB(red: 154, green: 154, blue: 154)
   static let TextWhite = UIColor.fromRGB(red: 255, green: 255, blue: 255)
   static let TextBlack = UIColor.fromRGB(red: 0, green: 0, blue: 0)
+  static let TextGreen = UIColor.fromRGB(red: 0, green: 128, blue: 0)
 
   // Layout Colors
   static let LayoutLightGray = UIColor.fromRGB(red: 220, green: 220, blue: 220)

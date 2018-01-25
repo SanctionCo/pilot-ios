@@ -127,6 +127,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
       } else {
         cell.platform = unconnectedPlatforms[indexPath.row]
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
       }
 
       return cell
@@ -134,6 +135,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
       let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
 
       cell.platform = unconnectedPlatforms[indexPath.row]
+      cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+
       return cell
     }
 
