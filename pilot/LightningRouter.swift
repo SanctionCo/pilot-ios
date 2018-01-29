@@ -13,7 +13,7 @@ import HTTPStatusCodes
 /// The router builds static content related to the URL such as parameters, headers, etc..
 enum LightningRouter: URLRequestConvertible {
 
-  case publish(PlatformType, [String: Any]?)
+  case publish(PlatformType, [String: String]?)
   case extendToken(PlatformType)
   case getOauthURL(PlatformType)
   case getAccessToken(PlatformType, [String: Any]?)
@@ -61,7 +61,7 @@ enum LightningRouter: URLRequestConvertible {
   // Paramers for the request
   var dynamicparameters: [String: Any]? {
     switch self {
-    case .publish( _, let parameters):
+    case .publish(_, let parameters):
       return parameters
     case.getAccessToken(_, let parameters):
       return parameters
@@ -120,5 +120,4 @@ enum LightningRouter: URLRequestConvertible {
 
     return try encoding.encode(urlRequest, with: dynamicparameters)
   }
-
 }

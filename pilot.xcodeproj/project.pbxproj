@@ -33,6 +33,8 @@
 		9436CA3A1F89F5AA00177F28 /* PasswordVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationController.swift */; };
 		9436CA3C1F89F5B900177F28 /* NewPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA3B1F89F5B900177F28 /* NewPasswordController.swift */; };
 		944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944679071F4AC4A3000C0D66 /* AuthToken.swift */; };
+		9451A5F8201BD8BA00C2A862 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9451A5F7201BD8BA00C2A862 /* SelectionViewController.swift */; };
+		9451A5FA201BE60300C2A862 /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9451A5F9201BE60300C2A862 /* SelectionCell.swift */; };
 		945E67C11F47414200E07290 /* LightningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C01F47414200E07290 /* LightningRouter.swift */; };
 		945E67C31F475ACD00E07290 /* AuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E67C21F475ACD00E07290 /* AuthAdapter.swift */; };
 		9460CDDF1F807A0500D8E910 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9460CDDE1F807A0500D8E910 /* OAuthManager.swift */; };
@@ -118,6 +120,8 @@
 		9436CA391F89F5AA00177F28 /* PasswordVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationController.swift; sourceTree = "<group>"; };
 		9436CA3B1F89F5B900177F28 /* NewPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordController.swift; sourceTree = "<group>"; };
 		944679071F4AC4A3000C0D66 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
+		9451A5F7201BD8BA00C2A862 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		9451A5F9201BE60300C2A862 /* SelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
 		945E67C01F47414200E07290 /* LightningRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LightningRouter.swift; path = pilot/LightningRouter.swift; sourceTree = "<group>"; };
 		945E67C21F475ACD00E07290 /* AuthAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthAdapter.swift; path = pilot/AuthAdapter.swift; sourceTree = "<group>"; };
 		9460CDDE1F807A0500D8E910 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 		9430AF161FC24DCC00D134F0 /* ComposeView */ = {
 			isa = PBXGroup;
 			children = (
+				9451A5F6201BD89200C2A862 /* SelectionView */,
 				9430AF171FC24E0700D134F0 /* ComposeViewController.swift */,
 				948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */,
 			);
@@ -325,6 +330,15 @@
 			);
 			name = Networking;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		9451A5F6201BD89200C2A862 /* SelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				9451A5F7201BD8BA00C2A862 /* SelectionViewController.swift */,
+				9451A5F9201BE60300C2A862 /* SelectionCell.swift */,
+			);
+			name = SelectionView;
 			sourceTree = "<group>";
 		};
 		946890301F29A167007E46DD /* HomeView */ = {
@@ -781,10 +795,12 @@
 				9429514B1F591160000EF278 /* Uploadable.swift in Sources */,
 				946890271F295A67007E46DD /* Platform.swift in Sources */,
 				948D21EF1F78B080001D5897 /* SettingsConnectionCell.swift in Sources */,
+				9451A5FA201BE60300C2A862 /* SelectionCell.swift in Sources */,
 				948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */,
 				942A9B5B1FCA9C1400AB09AD /* UIImage+Pilot.swift in Sources */,
 				94CD01B21F76045D0045BB45 /* URL+Params.swift in Sources */,
 				146FB2B8200C5D3A00FB42A4 /* AuthenticationHelper.swift in Sources */,
+				9451A5F8201BD8BA00C2A862 /* SelectionViewController.swift in Sources */,
 				146FB2BC200F179500FB42A4 /* UserDefaults+Pilot.swift in Sources */,
 				949588D71F76FFFC003C9C88 /* PlatformManager.swift in Sources */,
 				94AF20F21F270698009A1484 /* LoginViewController.swift in Sources */,
