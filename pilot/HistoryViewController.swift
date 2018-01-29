@@ -13,25 +13,32 @@ class HistoryViewController: UIViewController {
 
   var history: [Post] = [Post]()
 
-  let historyTableView: UITableView = {
+  var containerView: UIView = {
+    let container = UIView()
+    container.translatesAutoresizingMaskIntoConstraints = false
+    container.backgroundColor = UIColor.white
+    return container
+  }()
+
+  var historyTableView: UITableView = {
     let tableView = UITableView()
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
 
-  let historyEmptyView: UIView = {
-    var emptyView = UIView()
+  var historyEmptyView: UIView = {
+    let emptyView = UIView()
     emptyView.translatesAutoresizingMaskIntoConstraints = false
     return emptyView
   }()
 
-  let historyEmptyImage: UIImageView = {
+  var historyEmptyImage: UIImageView = {
     let imageView = UIImageView(image: #imageLiteral(resourceName: "bulb"))
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
 
-  let historyEmptyMessage: UITextView = {
+  var historyEmptyMessage: UITextView = {
     let textView = UITextView()
     textView.translatesAutoresizingMaskIntoConstraints = false
     textView.text = "There is no history to show..."
@@ -40,9 +47,6 @@ class HistoryViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    // Initialize a FetchResultsController for fetching posts
-    setupFetchResultsController()
 
     // Set the right bar button item to a plus image
     let composeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(self.compose))
@@ -55,14 +59,14 @@ class HistoryViewController: UIViewController {
     self.navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController?.navigationItem.largeTitleDisplayMode = .never
 
+    self.historyTableView.delegate = self
+    self.historyTableView.dataSource = self
+
     self.historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
 
-    self.view.addSubview(historyTableView)
-    self.view.addSubview(historyEmptyView)
-    self.view.sendSubview(toBack: historyEmptyView)
+    self.view.addSubview(containerView)
 
-    setupHistoryTableView()
-    setupHistoryEmptyView()
+    setupContainerView()
   }
 
   @objc func compose(_ sender: UIBarButtonItem) {
@@ -71,22 +75,32 @@ class HistoryViewController: UIViewController {
     self.present(composeNavigationController, animated: true, completion: nil)
   }
 
-  func setupFetchResultsController() {
-//    let request = NSFetchRequest(entityName: "")
+  func setupContainerView() {
+    self.containerView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+    self.containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    self.containerView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+    self.containerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+
+//    self.containerView.addSubview(historyTableView)
+//    self.containerView.addSubview(historyEmptyView)
+//    self.containerView.sendSubview(toBack: historyEmptyView)
+//
+//    setupHistoryTableView()
+//    setupHistoryEmptyView()
   }
 
   func setupHistoryTableView() {
-    historyTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    historyTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-    historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    historyTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    historyTableView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+    historyTableView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+    historyTableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+    historyTableView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
   }
 
   func setupHistoryEmptyView() {
 
     // Constrain the historyEmptyView to the center of historyTableView
-    historyEmptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    historyEmptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    historyEmptyView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+    historyEmptyView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
     historyEmptyView.widthAnchor.constraint(equalToConstant: 50).isActive = true
     historyEmptyView.heightAnchor.constraint(equalToConstant: 30).isActive = true
 

@@ -46,11 +46,11 @@ class ComposeViewController: UIViewController {
   }()
 
   lazy var cancelBarButton: UIBarButtonItem = {
-    return UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancel))
+    return UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancelAction))
   }()
 
-  lazy var postBarButton: UIBarButtonItem = {
-    return UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(self.post))
+  lazy var nextBarButton: UIBarButtonItem = {
+    return UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(self.nextAction))
   }()
 
   lazy var composeToolBar: UIToolbar = {
@@ -77,9 +77,9 @@ class ComposeViewController: UIViewController {
     postState.delegate = self
 
     navigationItem.leftBarButtonItem = cancelBarButton
-    navigationItem.rightBarButtonItem = postBarButton
+    navigationItem.rightBarButtonItem = nextBarButton
 
-    postBarButton.isEnabled = false
+    nextBarButton.isEnabled = false
 
     self.view.addSubview(scrollView)
 
@@ -96,21 +96,25 @@ class ComposeViewController: UIViewController {
     self.present(gallery, animated: true, completion: nil)
   }
 
-  @objc func cancel(_ sender: UIBarButtonItem) {
+  @objc func cancelAction(_ sender: UIBarButtonItem) {
     self.textView.resignFirstResponder()
     self.resignFirstResponder()
     self.dismiss(animated: true, completion: nil)
   }
 
-  @objc func post(_ sender: UIBarButtonItem) {
-    // Send the post to Lightning
+  @objc func nextAction(_ sender: UIBarButtonItem) {
+    // Push the SelectionViewController onto the navigations stack
+    let selectionViewController = SelectionViewController()
+    selectionViewController.post = self.postState
+
+    self.navigationController?.pushViewController(selectionViewController, animated: true)
   }
 
   func postChanged() {
     if self.textView.text != "" || self.selectedImages.count != 0 {
-      self.postBarButton.isEnabled = true
+      self.nextBarButton.isEnabled = true
     } else {
-      self.postBarButton.isEnabled = false
+      self.nextBarButton.isEnabled = false
     }
   }
 

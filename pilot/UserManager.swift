@@ -10,7 +10,7 @@ import Foundation
 
 class UserManager {
 
-  static var sharedInstance: UserManager?
+  static var sharedInstance: UserManager!
 
   fileprivate var authenticationEmail: String?
   fileprivate var authenticationPassword: String?
@@ -91,26 +91,22 @@ class UserManager {
   typealias ErrorHandler = (Error) -> Void
 
   func updateUser(onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
-
     PilotUser.upload(with: ThunderRouter.updatePilotUser(pilotUser), onSuccess: { pilotUser in
       self.pilotUser = pilotUser
       self.authenticationEmail = pilotUser.email
       self.authenticationPassword = pilotUser.password
+
       onSuccess(pilotUser)
     }, onError: { error in
-      debugPrint(error)
       onError(error)
     })
-
   }
 
   func deleteUser(onSuccess: @escaping SuccessHandler, onError: @escaping ErrorHandler) {
-
     PilotUser.delete(with: ThunderRouter.deletePilotUser(), onSuccess: { pilotUser in
       onSuccess(pilotUser)
     }, onError: { error in
       onError(error)
     })
-
   }
 }
