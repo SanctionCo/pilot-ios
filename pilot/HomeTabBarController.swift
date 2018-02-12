@@ -19,10 +19,10 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     setupTabBar()
 
-    let historyViewController = HistoryViewController()
-    historyViewController.tabBarItem =
+    let postsViewController = PostsViewController()
+    postsViewController.tabBarItem =
       UITabBarItem(title: "Posts", image: #imageLiteral(resourceName: "PostcardGray"), selectedImage: #imageLiteral(resourceName: "PostcardPilotBlue"))
-    let historyNavigationController = UINavigationController(rootViewController: historyViewController)
+    let postsNavigationController = UINavigationController(rootViewController: postsViewController)
 
     let settingsViewController = SettingsViewController()
     settingsViewController.tabBarItem =
@@ -30,7 +30,7 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate {
     let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
 
     // Place the viewControllers in a list for the tabBarController to access
-    self.viewControllers = [historyNavigationController, settingsNavigationController]
+    self.viewControllers = [postsNavigationController, settingsNavigationController]
   }
 
   private func setupTabBar() {
