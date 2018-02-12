@@ -27,7 +27,7 @@
 		9429514A1F591160000EF278 /* Publishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951461F591160000EF278 /* Publishable.swift */; };
 		9429514B1F591160000EF278 /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942951471F591160000EF278 /* Uploadable.swift */; };
 		942A9B5B1FCA9C1400AB09AD /* UIImage+Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942A9B5A1FCA9C1400AB09AD /* UIImage+Pilot.swift */; };
-		9430AF121FC23F5A00D134F0 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */; };
+		9430AF121FC23F5A00D134F0 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF111FC23F5A00D134F0 /* PostsViewController.swift */; };
 		9430AF181FC24E0700D134F0 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF171FC24E0700D134F0 /* ComposeViewController.swift */; };
 		9430AF1C1FC24E8200D134F0 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */; };
 		9436CA3A1F89F5AA00177F28 /* PasswordVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436CA391F89F5AA00177F28 /* PasswordVerificationController.swift */; };
@@ -42,7 +42,7 @@
 		946890271F295A67007E46DD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890261F295A67007E46DD /* Platform.swift */; };
 		946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946890281F2960B9007E46DD /* PlatformProtocol.swift */; };
 		948A552D1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */; };
-		948B79451FF80F5C0087D247 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */; };
+		948B79451FF80F5C0087D247 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79441FF80F5C0087D247 /* PostsTableViewCell.swift */; };
 		948B79471FF835F80087D247 /* AccountDisconnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */; };
 		948B794B1FF83BB70087D247 /* ProfilePasswordResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794A1FF83BB70087D247 /* ProfilePasswordResetCell.swift */; };
 		948B794D1FF83BC30087D247 /* ProfileSingoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */; };
@@ -114,7 +114,7 @@
 		942951461F591160000EF278 /* Publishable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Publishable.swift; path = pilot/Publishable.swift; sourceTree = "<group>"; };
 		942951471F591160000EF278 /* Uploadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Uploadable.swift; path = pilot/Uploadable.swift; sourceTree = "<group>"; };
 		942A9B5A1FCA9C1400AB09AD /* UIImage+Pilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Pilot.swift"; sourceTree = "<group>"; };
-		9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		9430AF111FC23F5A00D134F0 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		9430AF171FC24E0700D134F0 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		9430AF1B1FC24E8200D134F0 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		9436CA391F89F5AA00177F28 /* PasswordVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerificationController.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		946890261F295A67007E46DD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		946890281F2960B9007E46DD /* PlatformProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformProtocol.swift; sourceTree = "<group>"; };
 		948A552C1FC9728000AD77B2 /* ComposeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewControllerDelegate.swift; sourceTree = "<group>"; };
-		948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		948B79441FF80F5C0087D247 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		948B79461FF835F80087D247 /* AccountDisconnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDisconnectionCell.swift; sourceTree = "<group>"; };
 		948B794A1FF83BB70087D247 /* ProfilePasswordResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePasswordResetCell.swift; sourceTree = "<group>"; };
 		948B794C1FF83BC30087D247 /* ProfileSingoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSingoutCell.swift; sourceTree = "<group>"; };
@@ -268,13 +268,13 @@
 			path = pilotUITests;
 			sourceTree = "<group>";
 		};
-		9430AF0F1FC23F1500D134F0 /* HistoryView */ = {
+		9430AF0F1FC23F1500D134F0 /* PostsView */ = {
 			isa = PBXGroup;
 			children = (
-				9430AF111FC23F5A00D134F0 /* HistoryViewController.swift */,
-				948B79441FF80F5C0087D247 /* HistoryTableViewCell.swift */,
+				9430AF111FC23F5A00D134F0 /* PostsViewController.swift */,
+				948B79441FF80F5C0087D247 /* PostsTableViewCell.swift */,
 			);
-			name = HistoryView;
+			name = PostsView;
 			sourceTree = "<group>";
 		};
 		9430AF131FC24C5D00D134F0 /* ProfileView */ = {
@@ -366,7 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				9430AF161FC24DCC00D134F0 /* ComposeView */,
-				9430AF0F1FC23F1500D134F0 /* HistoryView */,
+				9430AF0F1FC23F1500D134F0 /* PostsView */,
 				948D21E71F78AE3D001D5897 /* SettingsView */,
 				94AF20F51F270E4D009A1484 /* LoginView */,
 				946890301F29A167007E46DD /* HomeView */,
@@ -816,7 +816,7 @@
 				946890291F2960B9007E46DD /* PlatformProtocol.swift in Sources */,
 				94C092E61F3E427400BED0D4 /* PostProtocol.swift in Sources */,
 				9436CA3C1F89F5B900177F28 /* NewPasswordController.swift in Sources */,
-				948B79451FF80F5C0087D247 /* HistoryTableViewCell.swift in Sources */,
+				948B79451FF80F5C0087D247 /* PostsTableViewCell.swift in Sources */,
 				949E5DCE1F2813C8009EE3EB /* UIColor+PilotColors.swift in Sources */,
 				14054A731FFAEA7C00A2853E /* Deletable.swift in Sources */,
 				94FF17B01F7F49D400C1C1F2 /* ProfileViewController.swift in Sources */,
@@ -832,7 +832,7 @@
 				944679081F4AC4A3000C0D66 /* AuthToken.swift in Sources */,
 				948B79471FF835F80087D247 /* AccountDisconnectionCell.swift in Sources */,
 				948B794F1FF83BD80087D247 /* ProfileDeleteAccountCell.swift in Sources */,
-				9430AF121FC23F5A00D134F0 /* HistoryViewController.swift in Sources */,
+				9430AF121FC23F5A00D134F0 /* PostsViewController.swift in Sources */,
 				942951481F591160000EF278 /* Fetchable.swift in Sources */,
 				94AF6D251FE0F5B5008DED2C /* ValidationError.swift in Sources */,
 			);
